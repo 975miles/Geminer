@@ -1,0 +1,14 @@
+body {
+    background-color: #ff564a;
+}
+
+.navbar {
+    background-color: #d1271b;
+}
+
+code {
+    color: lime;
+    font-size: 1em;
+    background-color: black;
+    padding: 5px;
+}

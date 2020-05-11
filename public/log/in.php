@@ -7,7 +7,7 @@ if ($is_logged_in)
 
 function getLoginCode() { //Get a code from the identificator host.
     global $identificator_host;
-    redirect("$identificator_host/login?redirect_uri=" . (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]".preg_replace('/\?.*/', '', $_SERVER[REQUEST_URI]));
+    redirect("$identificator_host/login?redirect_uri=" . (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]".$_SERVER['REQUEST_URI']);
 } 
 if (!isset($_GET['code'])) //If there is no code in the url query,
     getLoginCode(); //get one.    
@@ -25,12 +25,20 @@ else { //If no code has been generated yet,
     }
 }
 
-$user_logging_in->id = strval($user_logging_in->id);
+$id = strval($user_logging_in->id);
 
-$user_found = get_user_by_id($user_logging_in->id);
-if (is_null($user_found))
-    $dbh->prepare("INSERT INTO users (id) VALUES (?)")->execute([$user_logging_in->id]);
+$sth = $dbh->prepare("SELECT * FROM users WHERE identificator_id = ?");
+$sth->execute([$id]);
+$results = $sth->fetchAll(PDO::FETCH_ASSOC);
+if (count($results) == 0) {
+    $dbh->prepare("INSERT INTO users (identificator_id) VALUES (?)")->execute([$id]);
 
-$_SESSION['user'] = $user_logging_in->id;
+    $sth = $dbh->prepare("SELECT id FROM users WHERE identificator_id = ?");
+    $sth->execute([$id]);
+    $user_found = $sth->fetchAll(PDO::FETCH_ASSOC)[0];
+} else
+    $user_found = $results[0];
+
+$_SESSION['user'] = $user_found['id'];
 
 redirect_back();

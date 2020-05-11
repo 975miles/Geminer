@@ -1,0 +1,105 @@
+[    
+    {
+        "id": 0,
+        "name": "ruby",
+        "colour": "ed0e0e",
+        "chance": 5,
+        "quantity": 100
+    },
+
+    {
+        "id": 1,
+        "name": "sapphire",
+        "colour": "1816b5",
+        "chance": 5,
+        "quantity": 100
+    },
+
+    {
+        "id": 2,
+        "name": "diamond",
+        "colour": "d0e8f2",
+        "chance": 1,
+        "quantity": 1
+    },
+
+    {
+        "id": 3,
+        "name": "amethyst",
+        "colour": "452a96",
+        "chance": 100,
+        "quantity": 2000
+    },
+
+    {
+        "id": 4,
+        "name": "peridot",
+        "colour": "6beb15",
+        "chance": 100,
+        "quantity": 2000
+    },
+
+    {
+        "id": 5,
+        "name": "onyx",
+        "colour": "161517",
+        "chance": 25,
+        "quantity": 500
+    },
+
+    {
+        "id": 6,
+        "name": "emerald",
+        "colour": "16a13b",
+        "chance": 5,
+        "quantity": 100
+    },
+
+    {
+        "id": 7,
+        "name": "chrysoberyl",
+        "colour": "c4be12",
+        "chance": 50,
+        "quantity": 1000
+    },
+
+    {
+        "id": 8,
+        "name": "citrine",
+        "colour": "fcb335",
+        "chance": 25,
+        "quantity": 250
+    },
+
+    {
+        "id": 9,
+        "name": "grey quartz",
+        "colour": "999999",
+        "chance": 100,
+        "quantity": 5000
+    },
+
+    {
+        "id": 10,
+        "name": "rubelite",
+        "colour": "e320af",
+        "chance": 25,
+        "quantity": 250
+    },
+
+    {
+        "id": 11,
+        "name": "kunzite",
+        "colour": "ff8ce0",
+        "chance": 15,
+        "quantity": 200
+    },
+
+    {
+        "id": 12,
+        "name": "pectolite",
+        "colour": "66e6ff",
+        "chance": 3,
+        "quantity": 150
+    }
+]

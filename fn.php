@@ -9,12 +9,25 @@ function require_auth() {
     if ($is_logged_in)
         return;
     else
-        redirect("/log/in?redirect_back_to=".$SERVER['REQUEST_URI']);
+        redirect("/log/in?redirect_back_to=".$_SERVER['REQUEST_URI']);
+}
+
+function restrict_to($group = "admin") {
+    global $dbh;
+    global $is_logged_in;
+    global $user;
+    if ($is_logged_in) {
+        if ($user["is_$group"])
+            return; //The user has access
+    }
+
+    require_once $_SERVER['DOCUMENT_ROOT']."/../pages/restricted.php";
+    die();
 }
 
 function redirect_back($fallback = "/") {
-    if (isset($GET['redirect_back_to']))
-        redirect($GET['redirect_back_to']);
+    if (isset($_GET['redirect_back_to']))
+        redirect($_GET['redirect_back_to']);
     else
         redirect($fallback);
 }
@@ -30,16 +43,26 @@ function get_user_by_id($user_id) {
         return $results[0];
 }
 
+function show_info($error="Unknown error occurred.", $title="Error!") {
+    ?>
+    <script>
+        $(document).ready(()=>showInfo("<?=$error?>", "<?=$title?>")); 
+    </script>
+    <?php
+}
+
 function gen_top($title = "GEMiner", $description = null) {
     global $is_logged_in;
     global $user;
+    global $repo_url;
     $page_info = Array (
         'title' => $title,
         'description' => $description,
     );
-    require_once $_SERVER['DOCUMENT_ROOT']."/../page/top.php";
+    require_once $_SERVER['DOCUMENT_ROOT']."/../template/top.php";
 }
 
 function gen_bottom() {
-    require_once $_SERVER['DOCUMENT_ROOT']."/../page/bottom.php";
+    require_once $_SERVER['DOCUMENT_ROOT']."/../template/bottom.php";
+    die();
 }
