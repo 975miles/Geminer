@@ -22,11 +22,9 @@ if ($is_logged_in) {
     $mine_amount_limit = ($user['is_premium'] ? 3000 : 100);
     if ($new_mine_amount > $mine_amount_limit)
         $new_mine_amount = $mine_amount_limit;
-    //set the user's last login time to the current time
-    $dbh->prepare("UPDATE users SET last_login = CURRENT_TIMESTAMP WHERE id = ?")
-        ->execute([$user['id']]);
+    //set the user's last login time to the current time (not just current_timestamp because timezone)
     //set the user's allowed amount of mines to the newly calculated number on the database and the script
-    $dbh->prepare("UPDATE users SET mines_left = ? WHERE id = ?")
+    $dbh->prepare("UPDATE users SET last_login = datetime(strftime('%s','now'), 'unixepoch', 'localtime'), mines_left = ? WHERE id = ?")
         ->execute([$new_mine_amount, $user['id']]);
     $user['mines_left'] = $new_mine_amount;
 }
