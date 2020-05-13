@@ -10,3 +10,5 @@ $issue_url = "$repo_url/issues";
 
 //The email of someone running the app, if any inquiries are needed o.O.
 $contact_email = "w@w.w";
+
+$valid_username_characters = "abcdefghijklmnopqrstuvwxyz0123456789";

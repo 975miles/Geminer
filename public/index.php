@@ -31,7 +31,7 @@ gen_top("GEMiner", "Mine digital gems for real distraction.");
                 var gemsInfo = await loadGems();
                 $.get(
                     {
-                        url: "/actions/mine.php",
+                        url: "/api/do/mine.php",
                         success: data => {
                             data = JSON.parse(data);
                             if (typeof data == "string")

@@ -24,8 +24,8 @@ if (isset($_POST) and isset($_POST['code'])) {
 }
 ?>
 
-<h1>Red</h1>
-<p>eem</p>
+<h1>Redeem</h1>
+<p>Don't have a code? Read about getting one <a class="btn btn-sm btn-primary" href="/premium">here</a>.</p>
 <form action="" method="post" autocomplete="off">
     <input type="text" name="code" class="form-control" placeholder="Enter your premium code here">
     <button type="submit" class="btn btn-lg btn-primary">Submit</button>

@@ -1,0 +1,1 @@
+The "get" part of the API includes scripts which have SELECT statements only.

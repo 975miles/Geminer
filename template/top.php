@@ -40,11 +40,13 @@
                 </ul>
                 <?php if ($is_logged_in) { ?>
                     <a class="btn btn-outline-dark dropdown-toggle" role="button" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <?=$user['id']?>
+                        <?=$user['name']?>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
+                        <?php if (!$user['is_premium']) { ?>
+                        <a class="dropdown-item" href="/premium">Upgrade to a premium account</a>
+                        <?php } ?>
+                        <a class="dropdown-item" href="/profile?user=<?=$user['name']?>">Profile</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/log/out.php">Logout</a>
                     </div>

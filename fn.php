@@ -43,6 +43,28 @@ function get_user_by_id($user_id) {
         return $results[0];
 }
 
+function valid_username($username) {
+    global $valid_username_characters;
+    foreach(str_split($username) as $username_character)
+        if(strpos($valid_username_characters, $username_character) === false)
+            return false;
+
+    return true;
+}
+
+function user_exists($username) {
+    global $dbh;
+    global $user;
+
+    $sth = $dbh->prepare("SELECT * FROM users WHERE name = ?");
+    $sth->execute([$username]);
+    $results = $sth->fetchAll(PDO::FETCH_ASSOC);
+    if (count($results) == 0)
+        return false;
+    else
+        return true;
+}
+
 function show_info($error="Unknown error occurred.", $title="Error!") {
     ?>
     <script>

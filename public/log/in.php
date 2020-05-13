@@ -31,7 +31,15 @@ $sth = $dbh->prepare("SELECT * FROM users WHERE identificator_id = ?");
 $sth->execute([$id]);
 $results = $sth->fetchAll(PDO::FETCH_ASSOC);
 if (count($results) == 0) {
-    $dbh->prepare("INSERT INTO users (identificator_id) VALUES (?)")->execute([$id]);
+    do {
+        $default_username_length = 6;
+        $name = "";
+        for ($i = 0; $i < $default_username_length; $i++) {
+            $name .= $valid_username_characters[mt_rand(0, mb_strlen($valid_username_characters) - 1)];
+        }
+    } while (user_exists($name));
+
+    $dbh->prepare("INSERT INTO users (identificator_id, name) VALUES (?, ?)")->execute([$id, $name]);
 
     $sth = $dbh->prepare("SELECT id FROM users WHERE identificator_id = ?");
     $sth->execute([$id]);
