@@ -39,7 +39,8 @@ if (count($results) == 0) {
         }
     } while (user_exists($name));
 
-    $dbh->prepare("INSERT INTO users (identificator_id, name) VALUES (?, ?)")->execute([$id, $name]);
+    $dbh->prepare("INSERT INTO users (identificator_id, name, date_signed_up, last_login) VALUES (?, ?, ?, ?)")
+        ->execute([$id, $name, time(), time()]);
 
     $sth = $dbh->prepare("SELECT id FROM users WHERE identificator_id = ?");
     $sth->execute([$id]);

@@ -21,7 +21,7 @@ gen_top("GEMiner", "Mine digital gems for real distraction.");
                 $("#gems").html("");
                 for (i of Object.keys(user)) {
                     if (!isNaN(Number(i))) {
-                        let gem_amount_p = $(`<p>${gemsInfo[i].name}: <span id="gem_${gemsInfo[i].id}_amount">${user[i]}</span>mP</p>"`);
+                        let gem_amount_p = $(`<p>${gemsInfo[i].name}: <span id="gem_${gemsInfo[i].id}_amount">${user[i]}</span><span id="gem_${gemsInfo[i].id}_unit">mP</p>"`);
                         $("#gems").append(gem_amount_p);
                     }
                 }
@@ -35,7 +35,7 @@ gen_top("GEMiner", "Mine digital gems for real distraction.");
                         success: data => {
                             data = JSON.parse(data);
                             if (typeof data == "string")
-                                return showInfo("aaa");
+                                return showInfo(data);
                             
                             let output = "";
                             for (i of data) {

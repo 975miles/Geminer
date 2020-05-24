@@ -1,9 +1,12 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT']."/../start.php";
-require_once $_SERVER['DOCUMENT_ROOT']."/../consts/gems/index.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/../consts/gems.php";
 
 if (!$is_logged_in)
     die("\"must be logged in\"");
+
+if ($user['mines_left'] <= 0)
+    die("\"you don't have any mines left\"");
 
 $max_number = 0;
 foreach ($all_gems as $gem) {
@@ -51,7 +54,8 @@ for ($x = 0; $x < $vein_amount; $x++) {
         ->execute([$amount, $user['id']]);
 }
 
-$dbh->prepare("UPDATE users SET shifts_completed = shifts_completed + 1 WHERE id = ?")
+//whyyyyyyyyyyyyyyy doesnt sqlite have +=
+$dbh->prepare("UPDATE users SET shifts_completed = shifts_completed + 1, mines_left = mines_left - 1 WHERE id = ?")
     ->execute([$user['id']]);
 
 echo json_encode($veins);

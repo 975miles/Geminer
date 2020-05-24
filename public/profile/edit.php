@@ -23,7 +23,6 @@ if (isset($_POST) and isset($_POST['name'])) {
 ?>
 
 <h1>Edit Profile</h1>
-<p>edit profile</p>
 <form action="" method="post" autocomplete="off">
     <label for="username">Username:</label>
     <input id="username" type="text" name="name" class="form-control" placeholder="username" value="<?=$user['name']?>">

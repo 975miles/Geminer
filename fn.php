@@ -16,10 +16,9 @@ function restrict_to($group = "admin") {
     global $dbh;
     global $is_logged_in;
     global $user;
-    if ($is_logged_in) {
-        if ($user["is_$group"])
-            return; //The user has access
-    }
+    
+    if ($is_logged_in and $user["is_$group"])
+        return; //The user has access
 
     require_once $_SERVER['DOCUMENT_ROOT']."/../pages/restricted.php";
     die();
@@ -71,6 +70,12 @@ function show_info($error="Unknown error occurred.", $title="Error!") {
         $(document).ready(()=>showInfo("<?=$error?>", "<?=$title?>")); 
     </script>
     <?php
+}
+
+function throw_error($error="Unknown error occurred.", $title="Error!") {
+    show_info($error, $title);
+    gen_bottom();
+    die();
 }
 
 function gen_top($title = "GEMiner", $description = null) {

@@ -20,7 +20,7 @@ class Gem {
     }
 }
 
-$gems_json = json_decode(file_get_contents(__DIR__."/../../public/a/data/gems.json", true));
+$gems_json = json_decode(file_get_contents(__DIR__."/../public/a/data/gems.json", true));
 $all_gems = Array();
 foreach ($gems_json as $id=>$gem_info) {
     $all_gems[$id] = new Gem(

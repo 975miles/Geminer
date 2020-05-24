@@ -12,3 +12,16 @@ code {
     background-color: black;
     padding: 5px;
 }
+
+.profile-badge {
+    display: inline-block;
+    height: 2em
+}
+
+.colour-displayer {
+    float: left;
+    width: 1.5em;
+    height: 1.5em;
+    margin: 6px 0.5em;
+    border: 1px solid rgba(0, 0, 0, .2);
+}

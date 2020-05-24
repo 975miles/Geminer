@@ -5,11 +5,12 @@
 <p>
     You must 
     <?php if ($group == "admin") { ?>
-    be an admin
+    have admin rights
     <?php } else if ($group == "premium") { ?>
     have a premium account
     <?php } ?>
-     to access this page.
+     to access this page.<br>
+    If you already do, are you logged in?
 </p>
 
 <?php gen_bottom(); ?>

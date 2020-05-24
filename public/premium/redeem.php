@@ -16,7 +16,7 @@ if (isset($_POST) and isset($_POST['code'])) {
     $sth->execute([$code_hash]);
     $results = $sth->fetchAll(PDO::FETCH_ASSOC);
     if (count($results) > 0) {
-        $dbh->prepare("UPDATE users SET is_premium = 1 WHERE id = ?")->execute([$user['id']]);
+        $dbh->prepare("UPDATE users SET is_premium = 1, date_became_premium = ? WHERE id = ?")->execute([time(), $user['id']]);
         $dbh->prepare("DELETE FROM codes WHERE code_hash = ?")->execute([$code_hash]);
         redirect("/premium/welcome.php");
     } else
