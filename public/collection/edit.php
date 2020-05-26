@@ -71,7 +71,6 @@ if (isset($_POST['collection_data'])) {
     var collectionHeight = collectionData.length;
     var pixelWidth = (collectionWidth * boxWidth) + ((collectionWidth - 1) * gridLineWidth);
     var pixelHeight = (collectionHeight * boxWidth) + ((collectionHeight - 1) * gridLineWidth);
-    console.log(collectionData);
     var canvasObject = $("#collectionEditor");
     var canvasWidth = canvasObject.width();
     var canvasHeight = canvasWidth * (collectionHeight / collectionWidth);
@@ -79,7 +78,6 @@ if (isset($_POST['collection_data'])) {
     canvasObject.attr("width", canvasWidth);
     canvasObject.attr("height", canvasHeight);
     var canvas = canvasObject[0];
-    console.log(canvas.width);
     var context = canvas.getContext("2d");
     var submitting = false;
     var mousePos;
@@ -134,7 +132,6 @@ if (isset($_POST['collection_data'])) {
 
     function placeGem() {
         if (mouseOnTile && selectedGem != null) {
-            console.log(mousePos);
             gemRemoving = collectionData[mousePos.y][mousePos.x];
             gemRemovingAmount = $(`#gem_${gemRemoving}_amount`);
             gemRemovingAmount.html((Number(gemRemovingAmount.html()) + 1).toFixed(3));
@@ -227,7 +224,6 @@ if (isset($_POST['collection_data'])) {
     }
 
     function selectGem(gem) {
-        console.log("hehe")
         let gem_button = $(`#gem_${gem}_button`);
 
         if (gem_button.hasClass("disabled"))
@@ -235,9 +231,7 @@ if (isset($_POST['collection_data'])) {
 
         $(".btn.active").removeClass("active");
 
-        console.log(selectedGem, gem)
         if (selectedGem == gem) {
-            console.log("aaa")
             selectedGem = null;
             return;
         }

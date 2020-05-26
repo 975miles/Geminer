@@ -21,7 +21,7 @@ if (isset($_GET['user'])) {
         <img src="/a/i/profile-badges/premium.png" class="profile-badge" id="profile-badge-premium" data-toggle="tooltip" data-html="true">
         <tooltipcontent for="profile-badge-premium"><?=htmlentities($user_found['name'])?> has been a premium member of GEMiner since <span class='unix-ts'><?=$user_found['date_became_premium']?></span>.</tooltipcontent>
         <?php } ?>
-        <img src="/a/i/profile-badges/member.png" class="profile-badge" id="profile-badge-member" onclick="console.log($('.tooltip').html())" data-toggle="tooltip" data-html="true">
+        <img src="/a/i/profile-badges/member.png" class="profile-badge" id="profile-badge-member" data-toggle="tooltip" data-html="true">
         <tooltipcontent for="profile-badge-member"><?=htmlentities($user_found['name'])?> has been a member of GEMiner since <span class='unix-ts'><?=$user_found['date_signed_up']?></span>.</tooltipcontent>
         </h1>
         <p><?=htmlentities($user_found['name'])?> has completed <?=$user_found['shifts_completed']?> shifts.</p>

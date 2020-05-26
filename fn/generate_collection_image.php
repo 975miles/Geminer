@@ -21,8 +21,6 @@ function generate_collection_image($collection_id, $fill_page = false) {
 
                 let tileColour = hexToRgb("#"+gemsInfo[collectionData[y][x]].colour);
 
-                console.log(tileColour);
-
                 imageData.data[pixelindex] = tileColour.r;
                 imageData.data[pixelindex+1] = tileColour.g;
                 imageData.data[pixelindex+2] = tileColour.b;
