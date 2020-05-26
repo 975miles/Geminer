@@ -25,3 +25,18 @@ code {
     margin: 6px 0.5em;
     border: 1px solid rgba(0, 0, 0, .2);
 }
+
+.collection-img {
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+}
+
+.fill-page {
+    height: 60vh;
+    max-height: 60vh;
+    max-width: 100%;
+    width: auto;
+
+    object-fit: contain;
+}

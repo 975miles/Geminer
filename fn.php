@@ -1,7 +1,16 @@
 <?php
+$function_dir = __DIR__."/fn";
+require_once "$function_dir/generate_collection_image.php";
+
+
 function redirect($url) {
-    header("Location: $url");
-    die();
+    gen_top();
+    ?>
+<script>
+    window.location.replace("<?=$url?>");
+</script>
+    <?php
+    gen_bottom();
 }
 
 function require_auth() {

@@ -35,7 +35,7 @@ if (isset($_POST['name']) and isset($_POST['type'])) {
         $dbh->prepare("INSERT INTO collections (type, name, by, created_at, data) VALUES (?, ?, ?, ?, ?)")
             ->execute([$_POST['type'], $_POST['name'], $user['id'], time(), json_encode($empty_collection)]);
 
-        redirect("/collection/edit?id=".dechex($dbh->lastInsertId()));
+        redirect("/collection/edit.php?id=".dechex($dbh->lastInsertId()));
     }
 }
 ?>
