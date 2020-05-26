@@ -178,12 +178,15 @@ if (isset($_POST['collection_data'])) {
 
     function drawGrid() {
         context.fillStyle = "black";
+        /*
         realGridLineWidth = reverseConvertCoords(gridLineWidth, 0).x;
         for (let row = 1; row < collectionHeight; row++)
             context.fillRect(0, reverseConvertCoords(0, row * boxWidthFull - gridLineWidth).y, canvasWidth, realGridLineWidth);
         
         for (let column = 1; column < collectionWidth; column++)
             context.fillRect(reverseConvertCoords(column * boxWidthFull - gridLineWidth, 0).x, 0, realGridLineWidth, canvasHeight);
+        */
+        context.fillRect(0, 0, canvasWidth, canvasHeight);
     }
 
     function drawTiles() {
