@@ -7,7 +7,7 @@ if ($is_logged_in)
 
 function getLoginCode() { //Get a code from the identificator host.
     global $identificator_host;
-    redirect("$identificator_host/login?redirect_uri=" . (isset($_SERVER['HTTPS']) and $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]".$_SERVER['REQUEST_URI']);
+    redirect("$identificator_host/login?redirect_uri=" . ((isset($_SERVER['HTTPS']) and $_SERVER['HTTPS'] === 'on') ? "https" : "http") . "://$_SERVER[HTTP_HOST]".$_SERVER['REQUEST_URI']);
 } 
 if (!isset($_GET['code'])) //If there is no code in the url query,
     getLoginCode(); //get one.    

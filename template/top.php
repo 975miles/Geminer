@@ -41,6 +41,12 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/contact.php">Contact</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/marketplace">Marketplace</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/collection/leaderboard.php">Collections</a>
+                    </li>
                 </ul>
                 <?php if ($is_logged_in) { ?>
                     <a class="btn btn-dark text-light dropdown-toggle" role="button" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

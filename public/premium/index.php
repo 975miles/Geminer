@@ -39,14 +39,26 @@ td, th {
     <tbody>
         <tr>
             <td>Shift storage (how many shifts you can save while idle)</td>
-            <td>25 (storage for just over a day)</td>
-            <td>9000 (storage for just over a year)</td>
+            <td><?=$mine_storage_limit_free?></td>
+            <td><?=$mine_storage_limit_premium?></td>
         </tr>
 
         <tr>
             <td>Collections (how many you can create)</td>
-            <td>10</td>
-            <td>250</td>
+            <td><?=$collection_storage_limit_free?></td>
+            <td><?=$collection_storage_limit_premium?></td>
+        </tr>
+
+        <tr>
+            <td>Maximum concurrent marketplace listings</td>
+            <td><?=$max_marketplace_listings_free?></td>
+            <td><?=$max_marketplace_listings_premium?></td>
+        </tr>
+
+        <tr>
+            <td>Profile badge to show everyone when you supported GEMiner</td>
+            <td>X</td>
+            <td>✓</td>
         </tr>
 
         <tr>

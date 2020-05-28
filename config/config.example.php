@@ -9,9 +9,20 @@ $repo_url = "https://github.com/975miles/GEMiner";
 $issue_url = "$repo_url/issues";
 
 //The email of someone running the app, if any inquiries are needed o.O.
-$contact_email = "w@w.w";
+$contact_email = "(email address not set up yet)";
 
 //The URL of a page where you can buy / get premium codes.
 $premium_purchase_url = "data:,Code%20purchasing%20has%20not%20yet%20been%20set%20up.%20Go%20to%20our%20contact%20page%20and%20contact%20us%20if%20you%20really%20need%20premium%20right%20now%2C%20we%20might%20be%20able%20to%20get%20it%20for%20you.";
 
+$max_collection_name_length = 32;
+
 $valid_username_characters = "abcdefghijklmnopqrstuvwxyz0123456789";
+
+$mine_storage_limit_free = 100;
+$mine_storage_limit_premium = 10000;
+
+$collection_storage_limit_free = 35;
+$collection_storage_limit_premium = 250;
+
+$max_marketplace_listings_free = 25;
+$max_marketplace_listings_premium = 200;

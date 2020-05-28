@@ -11,13 +11,22 @@ if ($collection['by'] != $user['id'])
 
 $gem_amounts = get_real_gem_amounts($exclude=$collection['id']);
 
-if (isset($_POST['collection_data'])) {
+if (isset($_POST['collection_data'], $_POST['name'])) {
     function parse_collection() {
+        global $max_collection_name_length;
         global $collection_types;
         global $collection;
         global $gem_amounts;
         global $user;
         global $dbh;
+        if (mb_strlen($_POST['name']) > $max_collection_name_length) {
+            show_info("Collection name must be at most $max_collection_name_length characters.");
+            return;
+        } else if (mb_strlen($_POST['name']) <= 0) {
+            show_info("Collection name can't be empty.");
+            return;
+        }
+
         $gem_amounts_parsing = $gem_amounts;
         $collection_data = json_decode($_POST['collection_data'], true);
         $collection_type = $collection_types[$collection['type']];
@@ -42,8 +51,8 @@ if (isset($_POST['collection_data'])) {
                     return;
             }
         }
-        $dbh->prepare("UPDATE collections SET data = ? WHERE id = ?;")
-            ->execute([json_encode($collection_data), $collection['id']]);
+        $dbh->prepare("UPDATE collections SET data = ?, name = ? WHERE id = ?;")
+            ->execute([json_encode($collection_data), $_POST['name'], $collection['id']]);
         redirect("/collection/view.php?id=".dechex($collection['id']));
     }
 
@@ -52,7 +61,9 @@ if (isset($_POST['collection_data'])) {
 }
 ?>
 
-<h1>wip</h1>
+<form id="collectionSubmission" action="" method="post">
+    <input name="name" class="form-control" value="<?=$collection['name']?>" maxlength=<?=$max_collection_name_length?>>
+</form>
 <p>Right click on any tile to show what gem it is.</p>
 <canvas id="collectionEditor" style="width:100%;"></canvas>
 <div id="gems"></div>
@@ -241,8 +252,8 @@ if (isset($_POST['collection_data'])) {
 
     function submit() {
         submitting = true;
-        let form = $(`<form action="" method="post"><input name="collection_data" value="${JSON.stringify(collectionData)}" /></form>`);
-        $("body").append(form);
+        let form = $("#collectionSubmission");
+        form.append(`<input name="collection_data" value="${JSON.stringify(collectionData)}" />`);
         form.submit();
     }
 

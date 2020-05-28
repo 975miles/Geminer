@@ -18,13 +18,13 @@ if ($is_logged_in) {
     $interval = 3600; //1 hour
     //Get the closest hour going back from the current time, and the closest hour going forward from the last time the user logged in, and calculate how many "15 minute on-the-dots" have passed since the user last mined
     $mines_gained = ((($now - ($now % $interval)) - ($last_login + ($interval - ($last_login % $interval)))) / $interval) + 1;
-    $new_mine_amount = $user['mines_left'] + $mines_gained;
-    $mine_amount_limit = ($user['is_premium'] ? 9000 : 25);
+    $new_mine_amount = $user['energy'] + $mines_gained;
+    $mine_amount_limit = ($user['is_premium'] ? $mine_storage_limit_premium : $mine_storage_limit_free);
     if ($new_mine_amount > $mine_amount_limit)
         $new_mine_amount = $mine_amount_limit;
     //set the user's last login time to the current time (not just current_timestamp because timezone)
     //set the user's allowed amount of mines to the newly calculated number on the database and the script
-    $dbh->prepare("UPDATE users SET last_login = ?, mines_left = ? WHERE id = ?")
+    $dbh->prepare("UPDATE users SET last_login = ?, energy = ? WHERE id = ?")
         ->execute([time(), $new_mine_amount, $user['id']]);
-    $user['mines_left'] = $new_mine_amount;
+    $user['energy'] = $new_mine_amount;
 }

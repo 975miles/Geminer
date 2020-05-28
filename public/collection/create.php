@@ -4,9 +4,7 @@ require_auth();
 require_once $_SERVER['DOCUMENT_ROOT']."/../consts/collection-types.php";
 gen_top("GEMiner - Creating a collection...");
 
-$max_collection_name_length = 32;
-
-$max_collection_amount = ($user['is_premium'] ? 250 : 10);
+$max_collection_amount = ($user['is_premium'] ? $collection_storage_limit_premium : $collection_storage_limit_free);
 
 $sth = $dbh->prepare("SELECT id FROM collections WHERE by = ?");
 $sth->execute([$user['id']]);
@@ -16,7 +14,7 @@ if (count($results) >= $max_collection_amount)
 
 if (isset($_POST['name']) and isset($_POST['type'])) {
     if (mb_strlen($_POST['name']) > $max_collection_name_length)
-        show_info("Collection name must be at most 32 characters.");
+        show_info("Collection name must be at most $max_collection_name_length characters.");
     else if (mb_strlen($_POST['name']) <= 0)
         show_info("Collection name can't be empty.");
     else if (!array_key_exists($_POST['type'], $collection_types))

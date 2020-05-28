@@ -12,6 +12,6 @@ gen_top("Get in touch about GEMiner", "Ways to contact us");
 <p>Make an issue for it at the <a href="<?=$issue_url?>">git repository</a>.</p>
 
 <h3>Want to get in touch about something else?</h3>
-<p>Email us at <code><?=$contact_email?></code>.</p>
+<p>Email us at <a href="mailto:<?=$contact_email?>"><?=$contact_email?>.</p>
 
 <?php gen_bottom() ?>

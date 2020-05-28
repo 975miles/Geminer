@@ -6,31 +6,7 @@ function generate_collection_image($collection_id, $fill_page = false) {
     $results = $sth->fetchAll(PDO::FETCH_ASSOC);
     $collection_data = $results[0]['data'];
     ?>
-<script>
-    (async scriptElement => {
-        await gemsInfo;
-        let collectionData = JSON.parse("<?=$collection_data?>");
-        let height = collectionData.length;
-        let width = collectionData[0].length;
-        let canvas = $(`<canvas width=${width} height=${height}></canvas>`)[0];
-        let context = canvas.getContext("2d");
-        let imageData = context.createImageData(width, height);
-        for (let y=0; y<height; y++) {
-            for (let x=0; x<width; x++) {
-                let pixelindex = (y * width + x) * 4;
-
-                let tileColour = hexToRgb("#"+gemsInfo[collectionData[y][x]].colour);
-
-                imageData.data[pixelindex] = tileColour.r;
-                imageData.data[pixelindex+1] = tileColour.g;
-                imageData.data[pixelindex+2] = tileColour.b;
-                imageData.data[pixelindex+3] = 255;
-            }
-        }
-        context.putImageData(imageData, 0, 0);
-        scriptElement.replaceWith(`<img class="collection-img<?=($fill_page ? " fill-page" : "")?>" src="${canvas.toDataURL()}">`);
-    })($(document.currentScript));
-</script>
+<script>genCollectionImage($(document.currentScript), "<?=$collection_data?>"<?=$fill_page ? ", true" : ""?>);</script>
     <?php
 }
 
