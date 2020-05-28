@@ -62,6 +62,7 @@ async function genCollectionImage(scriptTag, data, fillPage = false) {
 
 $(document).ready(()=>{
     $("[data-toggle=\"tooltip\"]").tooltip(); //enable bootstrap tooltips
+    $("[data-toggle=\"popover\"]").popover();
     $(".unix-ts").each((i, e)=>{
         $(e).html(new Date($(e).html()*1000).toDateString());
     });

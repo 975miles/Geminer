@@ -91,6 +91,10 @@ function gen_top($title = "GEMiner", $description = null) {
     global $is_logged_in;
     global $user;
     global $repo_url;
+    global $energy_regeneration_interval;
+    global $mining_energy_cost;
+    global $mine_storage_limit_free;
+    global $mine_storage_limit_premium;
     $page_info = Array (
         'title' => $title,
         'description' => $description,

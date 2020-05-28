@@ -1,15 +1,18 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT']."/../start.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/../consts/gems.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/../consts/locations.php";
 
 if (!$is_logged_in)
     die("\"must be logged in\"");
 
-if ($user['energy'] <= 0)
+if ($user['energy'] < $mining_energy_cost)
     die("\"you don't have any mines left\"");
 
+$location = $locations[$user['location']];
+
 $max_number = 0;
-foreach ($all_gems as $gem) {
+foreach ($location->gems as $gem) {
     $max_number += $gem->chance;
 };
 
@@ -20,7 +23,7 @@ $veins = Array();
 for ($x = 0; $x < $vein_amount; $x++) {
     $number = mt_rand(1, $max_number);
 
-    foreach ($all_gems as $gem_id=>$gem) {
+    foreach ($location->gems as $gem) {
         $number -= $gem->chance;
 
         if ($number <= 0) {
@@ -46,16 +49,16 @@ for ($x = 0; $x < $vein_amount; $x++) {
         $amount = 1;
     
     $veins[$x] = Array(
-        'gem' => $gem_id,
+        'gem' => $gem->id,
         'amount' => $amount
     );
     
-    $dbh->prepare("UPDATE users SET `$gem_id` = `$gem_id` + ? WHERE id = ?")
+    $dbh->prepare("UPDATE users SET `$gem->id` = `$gem->id` + ? WHERE id = ?")
         ->execute([$amount, $user['id']]);
 }
 
 //whyyyyyyyyyyyyyyy doesnt sqlite have +=
-$dbh->prepare("UPDATE users SET shifts_completed = shifts_completed + 1, energy = energy - 1 WHERE id = ?")
-    ->execute([$user['id']]);
+$dbh->prepare("UPDATE users SET shifts_completed = shifts_completed + 1, energy = energy - ? WHERE id = ?")
+    ->execute([$mining_energy_cost, $user['id']]);
 
 echo json_encode($veins);

@@ -26,6 +26,11 @@ code {
     border: 1px solid rgba(0, 0, 0, .2);
 }
 
+.colour-displayer-sm {
+    width: 1em !important;
+    height: 1em !important;
+}
+
 .collection-img {
     image-rendering: pixelated;
     image-rendering: -moz-crisp-edges;
@@ -39,4 +44,9 @@ code {
     width: auto;
 
     object-fit: contain;
+}
+
+.energy-icon {
+    background-image: url("/a/i/energy.png");
+    height: 1.5em
 }

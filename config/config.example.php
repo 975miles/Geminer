@@ -18,6 +18,15 @@ $max_collection_name_length = 32;
 
 $valid_username_characters = "abcdefghijklmnopqrstuvwxyz0123456789";
 
+//The amount of seconds between each time everyone's energy regenerates by one.
+$energy_regeneration_interval = 3600;
+
+//how much energy is used to mine
+$mining_energy_cost = 1;
+
+//how much energy is used to move to another location
+$moving_energy_cost = 25;
+
 $mine_storage_limit_free = 100;
 $mine_storage_limit_premium = 10000;
 

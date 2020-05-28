@@ -1,0 +1,103 @@
+[
+    {
+        "id": 0,
+        "name": "Minerville (one)",
+        "gems": [
+            {
+                "id": 2,
+                "chance": 1,
+                "quantity": 1
+            },
+
+            {
+                "id": 3,
+                "chance": 100,
+                "quantity": 2000
+            },
+
+            {
+                "id": 9,
+                "chance": 100,
+                "quantity": 5000
+            }
+        ]
+    },
+
+    {
+        "id": 1,
+        "name": "Minerville (two)",
+        "gems": [
+            {
+                "id": 0,
+                "chance": 5,
+                "quantity": 100
+            },
+
+            {
+                "id": 5,
+                "chance": 25,
+                "quantity": 500
+            },
+
+            {
+                "id": 11,
+                "chance": 15,
+                "quantity": 200
+            }
+        ]
+    },
+
+    {
+        "id": 2,
+        "name": "Minerville (three)",
+        "gems": [
+            {
+                "id": 7,
+                "chance": 50,
+                "quantity": 1000
+            },
+
+            {
+                "id": 6,
+                "chance": 5,
+                "quantity": 100
+            },
+
+            {
+                "id": 1,
+                "chance": 5,
+                "quantity": 100
+            }
+        ]
+    },
+
+    {
+        "id": 3,
+        "name": "Minerville (four)",
+        "gems": [
+            {
+                "id": 4,
+                "chance": 100,
+                "quantity": 2000
+            },
+
+            {
+                "id": 8,
+                "chance": 25,
+                "quantity": 250
+            },
+
+            {
+                "id": 12,
+                "chance": 3,
+                "quantity": 150
+            },
+
+            {
+                "id": 10,
+                "chance": 25,
+                "quantity": 250
+            }
+        ]
+    }
+]
