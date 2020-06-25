@@ -26,6 +26,7 @@ else if (isset( $_POST['gem'], $_POST['amount'])) {
             ->execute([$amount, $profit, $user['id']]);
         $user['money'] += $profit;
         $user[$gem] -= $amount;
+        $real_gem_amounts[$gem] -= $amount;
         show_info("You throw ${amount}mP of ".$all_gems[$gem]->name." into the volcano, and it inexplicably erupts ".display_money($profit)."!");
     }
 }
