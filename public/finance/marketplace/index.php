@@ -76,7 +76,7 @@ if ($listing_count > 0) {
         $bg = $profile_backgrounds[get_user_by_id($listing['user'])['profile_background']];
         ?>
         <div class=" rounded border border-dark" style="background: <?=$bg->bgshort?>; color: <?=$bg->text_colour?>;">
-            <p style="margin: 0"><?php user_button($listing['user'], true, "sm"); ?><?=$listings_are_filtered ? " -" : ("is <b>".($listing['type'] == 0 ? "selling" : "buying")."</b>")?> <a href="/finance/marketplace/listing?id=<?=dechex($listing['id'])?>"><?=$listing['amount']?>mP <?=$listings_are_filtered ? "" : "of ".gem_displayer($gem->id).$gem->name." "?>for <?=display_money($listing['price'])?></a> (<?=$listing['type'] == 0 ? round($listing['amount']/$listing['price']/100, 8)."mP/$currency_symbol" : round($listing['price']/$listing['amount']/100, 8).$currency_symbol."/mP"?>)</p>
+            <p style="margin: 0"><?php user_button($listing['user'], true, "sm"); ?><?=$listings_are_filtered ? " -" : ("is <b>".($listing['type'] == 0 ? "selling" : "buying")."</b>")?> <a href="/finance/marketplace/listing.php?id=<?=dechex($listing['id'])?>"><?=$listing['amount']?>mP <?=$listings_are_filtered ? "" : "of ".gem_displayer($gem->id).$gem->name." "?>for <?=display_money($listing['price'])?></a> (<?=$listing['type'] == 0 ? round($listing['amount']/$listing['price']/100, 8)."mP/$currency_symbol" : round($listing['price']/$listing['amount']/100, 8).$currency_symbol."/mP"?>)</p>
         </div>
     <?php } ?>
     <hr>
