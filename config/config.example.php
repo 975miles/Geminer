@@ -54,7 +54,7 @@ $max_marketplace_listings_premium = 100;
 
 //the maximum username length is 16, so both of these must be at most 16 and at least 1, to prevent an empty username
 $min_username_length_free = 6;
-$min_username_length_premium = 3;
+$min_username_length_premium = 2;
 
 $max_username_length_free = 12;
 $max_username_length_premium = 16;
