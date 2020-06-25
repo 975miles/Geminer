@@ -18,13 +18,14 @@ else if (isset( $_POST['gem'], $_POST['amount'])) {
         show_info("You can't throw in that much!");
     else if (!array_key_exists($gem, $all_gems))
         show_info("That gem... doesn't exist..?");
-    else if ($user[$gem] < $amount)
+    else if ($amount > $user[$gem])
         show_info("You don't have enough of that gem");
     else {
         $profit = $all_gems[$gem]->value * $amount;
         $dbh->prepare("UPDATE users SET `$gem` = `$gem` - ?, money = money + ? WHERE id = ?")
             ->execute([$amount, $profit, $user['id']]);
         $user['money'] += $profit;
+        $user[$gem] -= $amount;
         show_info("You throw ${amount}mP of ".$all_gems[$gem]->name." into the volcano, and it inexplicably erupts ".display_money($profit)."!");
     }
 }
