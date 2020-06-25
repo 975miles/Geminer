@@ -18,7 +18,7 @@ else if (isset( $_POST['gem'], $_POST['amount'])) {
         show_info("You can't throw in that much!");
     else if (!array_key_exists($gem, $all_gems))
         show_info("That gem... doesn't exist..?");
-    else if ($amount > $user[$gem])
+    else if ($amount > $real_gem_amounts[$gem])
         show_info("You don't have enough of that gem");
     else {
         $profit = $all_gems[$gem]->value * $amount;
