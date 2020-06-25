@@ -1,7 +1,9 @@
 <?php
 $function_dir = __DIR__."/fn";
 require_once "$function_dir/generate_collection_image.php";
-
+require_once $_SERVER['DOCUMENT_ROOT']."/../consts/cosmetics/tag_styles.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/../consts/cosmetics/tag_fonts.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/../consts/cosmetics/backgrounds.php";
 
 function redirect($url) {
     gen_top();
@@ -64,7 +66,7 @@ function user_exists($username) {
     global $dbh;
     global $user;
 
-    $sth = $dbh->prepare("SELECT * FROM users WHERE name = ?");
+    $sth = $dbh->prepare("SELECT * FROM users WHERE name = ? COLLATE NOCASE");
     $sth->execute([$username]);
     $results = $sth->fetchAll(PDO::FETCH_ASSOC);
     if (count($results) == 0)
@@ -73,7 +75,18 @@ function user_exists($username) {
         return true;
 }
 
+function user_background($user_id) {
+    global $profile_backgrounds;
+    return $profile_backgrounds[get_user_by_id($user_id)['profile_background']]->style_tag();
+}
+
+function display_money($amount) {
+    global $currency_symbol;
+    return number_format($amount/100, 2).$currency_symbol;
+}
+
 function show_info($error="Unknown error occurred.", $title="Error!") {
+    gen_top();
     ?>
     <script>
         $(document).ready(()=>showInfo("<?=$error?>", "<?=$title?>")); 
@@ -87,14 +100,22 @@ function throw_error($error="Unknown error occurred.", $title="Error!") {
     die();
 }
 
-function gen_top($title = "GEMiner", $description = null) {
+function hover_about($info) {
+    ?><span class="badge badge-secondary" data-toggle="tooltip" title="<?=htmlentities($info)?>">?</span><?php
+}
+
+function gen_top($title = null, $description = null) {
     global $is_logged_in;
     global $user;
+    global $tag_styles;
+    global $tag_fonts;
     global $repo_url;
     global $energy_regeneration_interval;
+    global $currency_symbol;
     global $mining_energy_cost;
-    global $mine_storage_limit_free;
-    global $mine_storage_limit_premium;
+    global $energy_storage_limit_free;
+    global $energy_storage_limit_premium;
+    $title = ($title == null ? "Geminer" : "Geminer - $title");
     $page_info = Array (
         'title' => $title,
         'description' => $description,
@@ -105,4 +126,32 @@ function gen_top($title = "GEMiner", $description = null) {
 function gen_bottom() {
     require_once $_SERVER['DOCUMENT_ROOT']."/../template/bottom.php";
     die();
+}
+
+//https://gist.github.com/jasny/2000705
+function linkify($value, $protocols = array('http', 'mail'), array $attributes = array()) {
+    // Link attributes
+    $attr = '';
+    foreach ($attributes as $key => $val) {
+        $attr .= ' ' . $key . '="' . htmlentities($val) . '"';
+    }
+    
+    $links = array();
+    
+    // Extract existing links and tags
+    $value = preg_replace_callback('~(<a .*?>.*?</a>|<.*?>)~i', function ($match) use (&$links) { return '<' . array_push($links, $match[1]) . '>'; }, $value);
+    
+    // Extract text links for each protocol
+    foreach ((array)$protocols as $protocol) {
+        switch ($protocol) {
+            case 'http':
+            case 'https':   $value = preg_replace_callback('~(?:(https?)://([^\s<]+)|(www\.[^\s<]+?\.[^\s<]+))(?<![\.,:])~i', function ($match) use ($protocol, &$links, $attr) { if ($match[1]) $protocol = $match[1]; $link = $match[2] ?: $match[3]; return '<' . array_push($links, "<a $attr href=\"$protocol://$link\">$link</a>") . '>'; }, $value); break;
+            case 'mail':    $value = preg_replace_callback('~([^\s<]+?@[^\s<]+?\.[^\s<]+)(?<![\.,:])~', function ($match) use (&$links, $attr) { return '<' . array_push($links, "<a $attr href=\"mailto:{$match[1]}\">{$match[1]}</a>") . '>'; }, $value); break;
+            case 'twitter': $value = preg_replace_callback('~(?<!\w)[@#](\w++)~', function ($match) use (&$links, $attr) { return '<' . array_push($links, "<a $attr href=\"https://twitter.com/" . ($match[0][0] == '@' ? '' : 'search/%23') . $match[1]  . "\">{$match[0]}</a>") . '>'; }, $value); break;
+            default:        $value = preg_replace_callback('~' . preg_quote($protocol, '~') . '://([^\s<]+?)(?<![\.,:])~i', function ($match) use ($protocol, &$links, $attr) { return '<' . array_push($links, "<a $attr href=\"$protocol://{$match[1]}\">{$match[1]}</a>") . '>'; }, $value); break;
+        }
+    }
+    
+    // Insert all link
+    return preg_replace_callback('/<(\d+)>/', function ($match) use (&$links) { return $links[$match[1] - 1]; }, $value);
 }

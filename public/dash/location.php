@@ -1,6 +1,6 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT']."/../start.php";
-gen_top("The GEMiner page template's title", "this is the page description");
+gen_top("The Geminer page template's title", "this is the page description");
 
 if (isset($_POST['location']) and $is_logged_in and $user['location'] != $_POST['location']) {
     require_once $_SERVER['DOCUMENT_ROOT']."/../consts/locations.php";
@@ -17,13 +17,18 @@ if (isset($_POST['location']) and $is_logged_in and $user['location'] != $_POST[
 ?>
 
 <h1>Locations</h1>
+<?php if ($is_logged_in) { ?>
 <p>
     You're currently in <b><span id="currentLocation"><span class="spinner-border spinner-border-sm" role="status"><span class="sr-only"></span></span></span></b>.
     <a href="/dash/mining.php">Mine</a>
 </p>
+<?php } ?>
 
 <p class="lead">
     It costs <?=$moving_energy_cost?> <img src="/a/i/energy.png" class="energy-icon"> to move to another location.
+    <?php if (!$is_logged_in) { ?>
+    Log in to move.
+    <?php }?>
 </p>
 
 <style>
@@ -53,13 +58,13 @@ if (isset($_POST['location']) and $is_logged_in and $user['location'] != $_POST[
             for (gem of i.gems) 
                 totalGemChance += gem.chance;
             for (gem of i.gems) {
-                locationCardBody.append('<hr>');
-                locationCardBody.append(`<div class="colour-displayer colour-displayer-sm" style="background:#${gemsInfo[gem.id].colour}">`);
+                locationCardBody.append('<hr style="margin:0">');
+                locationCardBody.append(await displayGem(gem.id, "sm"));
                 let percentage = 100 * gem.chance / totalGemChance;
                 locationCardBody.append(`<span>${gemsInfo[gem.id].name} (${percentage.toFixed(2)}%)</span>`);
             }
-            locationCardBody.append('<hr>');
             if (loggedIn) {
+                locationCardBody.append('<hr style="margin-top:0">');
                 if (user.location != i.id)
                     locationCardBody.append(`<form action="" method="post"><button class="btn btn-primary" name="location" value=${i.id}>Go here</button></form>`);
                 else
@@ -72,7 +77,8 @@ if (isset($_POST['location']) and $is_logged_in and $user['location'] != $_POST[
         
         $("#locations").html(div);
 
-        $("#currentLocation").html(data[user.location].name);
+        if (loggedIn)
+            $("#currentLocation").html(data[user.location].name);
     });
 </script>
 

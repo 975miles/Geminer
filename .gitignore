@@ -1,4 +1,17 @@
+#modules
+vendor
+
+#config
 config/config.php
+
+#data
 data.db
+backups
+
+#administration tools
+public/admin/dbm
 public/phpliteadmin
-test.php
+
+#development files
+public/test.php
+todo.*

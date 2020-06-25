@@ -1,7 +1,8 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT']."/../start.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/../consts/collection-types.php";
 require_auth();
-gen_top("GEMiner premium", "Redeem a GEMiner premium code.");
+gen_top("Geminer premium", "Redeem a Geminer premium code.");
 
 if ($user['is_premium']) {
     ?>
@@ -17,6 +18,14 @@ if (isset($_POST) and isset($_POST['code'])) {
     $results = $sth->fetchAll(PDO::FETCH_ASSOC);
     if (count($results) > 0) {
         $dbh->prepare("UPDATE users SET is_premium = 1, date_became_premium = ? WHERE id = ?")->execute([time(), $user['id']]);
+        $massive_collection_data = Array();
+        for ($row_num = 0; $row_num < $collection_types[3]->height; $row_num++) {
+            $row = Array();
+            for ($column_num = 0; $column_num < $collection_types[3]->width; $column_num++)
+                $row[$column_num] = -1;
+            $massive_collection_data[$row_num] = $row;
+        }
+        $dbh->prepare("INSERT INTO collections (type, by, created_at, data, name) VALUES (?, ?, ?, ?, ?)")->execute([3, $user['id'], time(), json_encode($massive_collection_data), $user['name']."'s Bigmassive Collection"]);
         $dbh->prepare("DELETE FROM codes WHERE code_hash = ?")->execute([$code_hash]);
         redirect("/premium/welcome.php");
     } else

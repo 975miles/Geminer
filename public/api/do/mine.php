@@ -6,8 +6,15 @@ require_once $_SERVER['DOCUMENT_ROOT']."/../consts/locations.php";
 if (!$is_logged_in)
     die("\"must be logged in\"");
 
-if ($user['energy'] < $mining_energy_cost)
-    die("\"you don't have any mines left\"");
+if (isset($_GET['times'])) {
+    $times_to_mine = intval($_GET['times']);
+    if ($times_to_mine < 1)
+        die("\"You need to mine at least one time!\"");
+} else
+    $times_to_mine = 1;
+
+if ($user['energy'] < $mining_energy_cost * $times_to_mine)
+    die("\"You don't have enough energy to do that.\"");
 
 $location = $locations[$user['location']];
 
@@ -15,10 +22,12 @@ $max_number = 0;
 foreach ($location->gems as $gem) {
     $max_number += $gem->chance;
 };
+$vein_amount = 0;
+for ($x = 0; $x < $times_to_mine; $x++)
+    $vein_amount += mt_rand(1, 9);
 
-$vein_amount = mt_rand(1, 9);
-
-$veins = Array();
+//$veins = Array();
+$gem_amounts = Array();
 
 for ($x = 0; $x < $vein_amount; $x++) {
     $number = mt_rand(1, $max_number);
@@ -31,34 +40,25 @@ for ($x = 0; $x < $vein_amount; $x++) {
         }
     };
     
-    $power = 0;
-    $change_direction = mt_rand(0, 1);
-
-    while (mt_rand(0, 1) == 1) {
-        if ($change_direction == 1)
-            $power++;
-        else
-            $power--;
-    }
-
-    $add_amount = (mt_rand() / mt_getrandmax()) - 0.5;
-    $amount_multiplier = 2**($power+$add_amount);
-    $amount = $gem->quantity * $amount_multiplier;
-    $amount = round($amount);
+    $amount = round($gem->quantity * log(mt_rand(1, mt_getrandmax()) / mt_getrandmax(), 2) * -1);
     if ($amount <= 0)
         $amount = 1;
     
-    $veins[$x] = Array(
+    /*$veins[$x] = Array(
         'gem' => $gem->id,
         'amount' => $amount
-    );
+    );*/
     
-    $dbh->prepare("UPDATE users SET `$gem->id` = `$gem->id` + ? WHERE id = ?")
-        ->execute([$amount, $user['id']]);
+    if (!array_key_exists($gem->id, $gem_amounts))
+        $gem_amounts[$gem->id] = 0;
+    $gem_amounts[$gem->id] += $amount;
 }
 
-//whyyyyyyyyyyyyyyy doesnt sqlite have +=
-$dbh->prepare("UPDATE users SET shifts_completed = shifts_completed + 1, energy = energy - ? WHERE id = ?")
-    ->execute([$mining_energy_cost, $user['id']]);
+foreach ($gem_amounts as $gem_id => $amount)
+    $dbh->prepare("UPDATE users SET `$gem_id` = `$gem_id` + ? WHERE id = ?")
+        ->execute([$amount, $user['id']]);
 
-echo json_encode($veins);
+$dbh->prepare("UPDATE users SET shifts_completed = shifts_completed + ?, energy = energy - ? WHERE id = ?")
+    ->execute([$times_to_mine, $mining_energy_cost * $times_to_mine, $user['id']]);
+
+echo json_encode($gem_amounts);

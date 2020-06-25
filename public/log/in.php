@@ -1,6 +1,5 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT']."/../start.php";
-$identificator_host = "https://identificator.xyz";
 
 if ($is_logged_in)
     redirect_back();
@@ -25,29 +24,39 @@ else { //If no code has been generated yet,
     }
 }
 
-$id = strval($user_logging_in->id);
+$id = $user_logging_in->id;
 
 $sth = $dbh->prepare("SELECT * FROM users WHERE identificator_id = ?");
 $sth->execute([$id]);
 $results = $sth->fetchAll(PDO::FETCH_ASSOC);
 if (count($results) == 0) {
-    do {
-        $default_username_length = 6;
-        $name = "";
-        for ($i = 0; $i < $default_username_length; $i++) {
-            $name .= $valid_username_characters[mt_rand(0, mb_strlen($valid_username_characters) - 1)];
-        }
-    } while (user_exists($name));
+    function gen_unused_name() {
+        global $name;
+        global $default_username_length;
+        global $valid_username_characters;
+        
+    }
 
-    $dbh->prepare("INSERT INTO users (identificator_id, name, date_signed_up, last_login) VALUES (?, ?, ?, ?)")
-        ->execute([$id, $name, time(), time()]);
+    $name = strtolower($user_logging_in->name);
+    if (is_null($name) or mb_strlen($name) > $max_username_length or mb_strlen($name) < $min_username_length_free or !valid_username($name) or user_exists($name))
+        do {
+            $default_username_length = 6;
+            $name = "";
+            for ($i = 0; $i < $default_username_length; $i++) {
+                $name .= $valid_username_characters[mt_rand(0, mb_strlen($valid_username_characters) - 1)];
+            }
+        } while (user_exists($name));
 
-    $sth = $dbh->prepare("SELECT id FROM users WHERE identificator_id = ?");
-    $sth->execute([$id]);
-    $user_found = $sth->fetchAll(PDO::FETCH_ASSOC)[0];
+    //$min_username_length_free
+
+    $dbh->prepare("INSERT INTO users (identificator_id, name) VALUES (?, ?)")
+        ->execute([$id, $name]);
+
+    $user_id_found = $dbh->lastInsertId();
+    $_GET['redirect_back_to'] = "/about/welcome.php";
 } else
-    $user_found = $results[0];
+    $user_id_found = $results[0]['id'];
 
-$_SESSION['user'] = $user_found['id'];
+$_SESSION['user'] = $user_id_found;
 
 redirect_back();

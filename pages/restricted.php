@@ -1,4 +1,4 @@
-<?php gen_top("GEMiner - restricted page"); ?>
+<?php gen_top("Geminer - restricted page"); ?>
 
 <h1>No.</h1>
 <h3>This page is restricted.</h3>

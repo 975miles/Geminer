@@ -2,7 +2,7 @@
 require_once $_SERVER['DOCUMENT_ROOT']."/../start.php";
 require_auth();
 require_once $_SERVER['DOCUMENT_ROOT']."/../consts/collection-types.php";
-gen_top("GEMiner - Editing a collection...");
+gen_top("Geminer - Editing a collection...");
 require_once $_SERVER['DOCUMENT_ROOT']."/../fn/get_collection.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/../fn/real_gem_amounts.php";
 
@@ -90,6 +90,7 @@ if (isset($_POST['collection_data'], $_POST['name'])) {
     canvasObject.attr("height", canvasHeight);
     var canvas = canvasObject[0];
     var context = canvas.getContext("2d");
+    context.imageSmoothingEnabled = false;
     var submitting = false;
     var mousePos;
     var mouseDown = false;
@@ -141,7 +142,7 @@ if (isset($_POST['collection_data'], $_POST['name'])) {
     });
     document.addEventListener('mouseup', () => mouseDown = false);
 
-    function placeGem() {
+    async function placeGem() {
         if (mouseOnTile && selectedGem != null) {
             gemRemoving = collectionData[mousePos.y][mousePos.x];
             gemRemovingAmount = $(`#gem_${gemRemoving}_amount`);
@@ -151,10 +152,7 @@ if (isset($_POST['collection_data'], $_POST['name'])) {
 
             collectionData[mousePos.y][mousePos.x] = selectedGem;
 
-            context.fillStyle = "#"+gemsInfo[selectedGem].colour;
-
-            let tileCoords = reverseConvertCoords(mousePos.x * boxWidthFull, mousePos.y * boxWidthFull);
-            context.fillRect(tileCoords.x, tileCoords.y, realBoxWidth, realBoxWidth);
+            await drawTile(selectedGem, mousePos.x, mousePos.y);
 
             correctAvailabilityClass(gemRemoving);
             correctAvailabilityClass(selectedGem);
@@ -197,25 +195,45 @@ if (isset($_POST['collection_data'], $_POST['name'])) {
         context.fillRect(0, 0, canvasWidth, canvasHeight);
     }
 
-    function drawTiles() {
+    async function drawTile(gemId, x, y) {
+        return new Promise(async (res, rej) => {
+            await gemsInfo;
+            
+            let gem = gemsInfo[gemId];
+            let tileCoords = reverseConvertCoords(x * boxWidthFull, y * boxWidthFull)
+            
+            if (gem.type == "colour") {
+                context.fillStyle = "#"+gem.colour;
+                context.fillRect(tileCoords.x, tileCoords.y, realBoxWidth, realBoxWidth);
+                res();
+            } else if (gem.type == "image") {
+                let gemImage = new Image();
+                gemImage.onload = () => {
+                    context.drawImage(gemImage, tileCoords.x, tileCoords.y, realBoxWidth, realBoxWidth);
+                    res();
+                }
+                gemImage.src = `/a/i/gem/${gemId}.png`;
+            }
+        });
+    }
+
+    async function drawTiles() {
         for (let row = 0; row < collectionHeight; row++)
             for (let column = 0; column < collectionWidth; column++) {
                 let tile = collectionData[row][column];
-                context.fillStyle = "#"+gemsInfo[tile].colour;
-
-                let tileCoords = reverseConvertCoords(column * boxWidthFull, row * boxWidthFull)
-                context.fillRect(tileCoords.x, tileCoords.y, realBoxWidth, realBoxWidth);
+                await drawTile(tile, column, row);
 
                 gemAmounts[tile] -= 1000;
             }
     }
 
-    function createButtons() {
+    async function createButtons() {
         $("#gems").html("");
-        for (i of Object.keys(gemAmounts).sort()) { //sort is just to get emptite to the top
-            $("#gems").append($(`<div class="colour-displayer" style="background:#${gemsInfo[i].colour}"/>`))
-            $("#gems").append($(`<button id="gem_${gemsInfo[i].id}_button" class="btn btn-primary" onclick="selectGem(${gemsInfo[i].id})">${gemsInfo[i].name}: <span id="gem_${gemsInfo[i].id}_amount">${(gemAmounts[i]/1000).toFixed(3)}</span><span id="gem_${gemsInfo[i].id}_unit">P</button>"`));
-            correctAvailabilityClass(gemsInfo[i].id);
+        sortedGems.unshift(gemsInfo["-1"]);
+        for (i of sortedGems) { //sort is just to get emptite to the top
+            $("#gems").append($(await displayGem(i.id)));
+            $("#gems").append($(`<button id="gem_${gemsInfo[i.id].id}_button" class="btn btn-primary" onclick="selectGem(${gemsInfo[i.id].id})">${gemsInfo[i.id].name}: <span id="gem_${gemsInfo[i.id].id}_amount">${(gemAmounts[i.id]/1000).toFixed(3)}</span><span id="gem_${gemsInfo[i.id].id}_unit">P</button>"`));
+            correctAvailabilityClass(gemsInfo[i.id].id);
             $("#gems").append($("<br>"));
         }
     }
@@ -259,9 +277,10 @@ if (isset($_POST['collection_data'], $_POST['name'])) {
 
     async function drawCollection() {
         drawGrid();
-        gemsInfo = await loadGems();
-        drawTiles();
-        createButtons();
+        await gemsInfo;
+        await drawTiles();
+        await sortedGems;
+        await createButtons();
     }
     drawCollection();
 </script>

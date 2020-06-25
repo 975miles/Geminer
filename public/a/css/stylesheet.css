@@ -1,9 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Tera&family=Noto+Sans+JP:wght@500&family=Raleway:ital,wght@1,200&family=Sriracha&family=Roboto+Mono:wght@100&family=Playfair+Display:wght@500&family=Roboto:wght@300&family=Comic+Neue&family=Metal+Mania&family=Pacifico&family=Comfortaa:wght@300&family=Crimson+Text:ital@1&family=Balsamiq+Sans&family=MuseoModerno:wght@200&family=Piedra&family=Archivo+Black&family=Lobster+Two:ital@1&family=Patrick+Hand&family=Cinzel&family=Bungee&family=Righteous&family=Fredoka+One&family=Caveat&family=Maven+Pro&family=Permanent+Marker&family=Amatic+SC:wght@700&family=Holtwood+One+SC&family=Indie+Flower&family=Bebas+Neue&family=Orbitron&family=Leckerli+One&display=swap');
+
 body {
     background-color: #ff564a;
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+#root {
+    margin-bottom: 5em;
 }
 
 .navbar {
-    background-color: #d1271b;
+    background: #d1271b;
+}
+
+.modal-content,
+.card
+{
+    color: black;
+}
+
+a:not([class]) {
+    color: #0070d3;
 }
 
 code {
@@ -18,35 +35,76 @@ code {
     height: 2em
 }
 
-.colour-displayer {
-    float: left;
+.gem-displayer {
+    background-repeat: no-repeat;
+    background-size: 100%;
+    display: inline-block;
+    vertical-align: middle;
     width: 1.5em;
     height: 1.5em;
-    margin: 6px 0.5em;
+    margin: 6px 0.25em;
     border: 1px solid rgba(0, 0, 0, .2);
 }
 
-.colour-displayer-sm {
+.gem-displayer-sm {
     width: 1em !important;
     height: 1em !important;
 }
 
 .collection-img {
+    outline: 1px solid black;
     image-rendering: pixelated;
     image-rendering: -moz-crisp-edges;
     image-rendering: crisp-edges;
 }
 
 .fill-page {
-    height: 60vh;
-    max-height: 60vh;
     max-width: 100%;
-    width: auto;
-
-    object-fit: contain;
+    width: 640px;
 }
 
 .energy-icon {
     background-image: url("/a/i/energy.png");
     height: 1.5em
+}
+
+a {
+    color: #134ead;
+}
+
+
+.btn-custom {
+    color: white !important;
+    border: none !important;
+}
+    
+.btn-custom:hover, 
+.btn-custom:focus, 
+.btn-custom.active, 
+.dropdown-toggle.btn-custom[aria-expanded="true"] {
+    color: white !important;
+    box-shadow: inset 0 0 0 10px rgba(0,0,0,0.2);
+    transition: box-shadow 0.15s ease-in-out;
+}
+
+
+.btn-custom:active {
+    filter: brightness(125%);
+}
+
+.btn-custom-light {
+    color: black !important;
+}
+
+.btn-custom-light:hover, 
+.btn-custom-light:focus, 
+.btn-custom-light:active, 
+.btn-custom-light.active, 
+.dropdown-toggle.btn-custom-light[aria-expanded="true"] {
+    color: black !important;
+}
+
+@keyframes darken {
+    from {filter: brightness(100%);}
+    to {filter: brightness(80%);}
 }

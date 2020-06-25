@@ -5,6 +5,7 @@ function loadGems(includeEmptite=true) {
                 data["-1"] = {
                     "id": -1,
                     "name": "emptite",
+                    "type": "colour",
                     "colour": "f7f6cd",
                     "chance": 5,
                     "quantity": 100
@@ -14,10 +15,17 @@ function loadGems(includeEmptite=true) {
     );
 }
 
-var gemsInfo = new Promise(async (res, rej) => {
+var gemsInfo = new Promise(async res => {
     let tempGemsInfo = await loadGems();
-    res();
     gemsInfo = tempGemsInfo;
+    res();
+});
+
+var sortedGems = new Promise(async res => {
+    await gemsInfo;
+    let tempGemsInfo = [...gemsInfo];
+    sortedGems = tempGemsInfo.sort((a, b) => (a.name < b.name) ? -1 : (a.name > b.name) ? 1 : 0);
+    res();
 });
 
 function showInfo(error="Unknown error occurred.", title="Error!") {
@@ -35,6 +43,10 @@ function hexToRgb(hex) {
         b: parseInt(result[3], 16)
     } : null;
 }
+
+function replaceScript(scriptTag, html) {
+    scriptTag.replaceWith(html);
+};
 
 async function genCollectionImage(scriptTag, data, fillPage = false) {
     await gemsInfo;
@@ -57,12 +69,36 @@ async function genCollectionImage(scriptTag, data, fillPage = false) {
         }
     }
     context.putImageData(imageData, 0, 0);
-    scriptTag.replaceWith(`<img class="collection-img${(fillPage ? " fill-page" : "")}" src="${canvas.toDataURL()}">`);
+    replaceScript(scriptTag, `<img class="collection-img${(fillPage ? " fill-page" : "")}" src="${canvas.toDataURL()}">`);
 }
 
+async function displayGem(gemId, size=null) {
+    await gemsInfo;
+    let gem = gemsInfo[gemId];
+
+    let elemClass = "gem-displayer";
+    if (size != null)
+        elemClass += " gem-displayer-" + size;
+
+    let style = "";
+    style += `background-color: #${gem.colour};`;
+    if (gem.type == "image")
+        style += `background-image: url('/a/i/gem/${gem.id}.png');`;
+
+    return `<span class="${elemClass}" style="${style}"></span>`;
+}
+
+function displayMoney(amount) {
+    return (amount/100).toFixed(2)+currencySymbol;
+}
+
+$.extend({
+    getQueryParameters : function(str = window.location.search) {
+        return str.replace(/(^\?)/,'').split("&").map(function(n){return n = n.split("="),this[n[0]] = n[1],this}.bind({}))[0];
+    }  
+});
+
 $(document).ready(()=>{
-    $("[data-toggle=\"tooltip\"]").tooltip(); //enable bootstrap tooltips
-    $("[data-toggle=\"popover\"]").popover();
     $(".unix-ts").each((i, e)=>{
         $(e).html(new Date($(e).html()*1000).toDateString());
     });
@@ -70,4 +106,8 @@ $(document).ready(()=>{
         $("#"+$(e).attr("for")).attr("data-original-title", e.innerHTML);
         $(e).remove();
     });
+    if (window.history.replaceState)
+        window.history.replaceState(null, null, window.location.href);
+    $("[data-toggle=\"tooltip\"]").tooltip(); //enable bootstrap tooltips
+    $("[data-toggle=\"popover\"]").popover();
 });

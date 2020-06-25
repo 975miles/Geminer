@@ -1,4 +1,4 @@
 <?php
-session_start();
+require_once $_SERVER['DOCUMENT_ROOT']."/../start.php";
 session_destroy();
-header("Location: /");
+redirect_back();
