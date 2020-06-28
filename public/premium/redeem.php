@@ -36,7 +36,7 @@ if (isset($_POST) and isset($_POST['code'])) {
 <h1>Redeem</h1>
 <p>Don't have a code? Read about getting one <a class="btn btn-sm btn-primary" href="/premium">here</a>.</p>
 <form action="" method="post" autocomplete="off">
-    <input type="text" name="code" class="form-control" placeholder="Enter your premium code here">
+    <input type="text" name="code" class="form-control" placeholder="Enter your premium code here" value="<?php if (isset($_GET['code'])) echo $_GET['code']; ?>">
     <button type="submit" class="btn btn-lg btn-primary">Submit</button>
 </form>
 

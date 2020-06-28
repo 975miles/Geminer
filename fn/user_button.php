@@ -10,7 +10,7 @@ function user_button($user_id, $show_pfp = true, $size = null, $element = "a", $
     $tag_font = $tag_fonts[($force_font !== false ? $force_font : $user_found['tag_font'])];
     ?>
 <<?=$element?> href="/profile?user=<?=htmlentities($user_found['name'])?>" class="btn <?=is_null($size) ? "" : "btn-$size"?> <?=$tag_style->get_classes()?>" style="<?=$tag_style->get_style().$tag_font->style?>">
-    <?php if ($show_pfp) generate_collection_image(get_pfp_collection_id($user_id)); ?>
+    <?php if ($show_pfp) place_collection_image(get_pfp_collection_id($user_id)); ?>
     <span class="user-button-username"><?=htmlentities($user_found['name'])?></span>
 </<?=$element?>>
     <?php

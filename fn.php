@@ -1,6 +1,6 @@
 <?php
 $function_dir = __DIR__."/fn";
-require_once "$function_dir/generate_collection_image.php";
+require_once "$function_dir/place_collection_image.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/../consts/cosmetics/tag_styles.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/../consts/cosmetics/tag_fonts.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/../consts/cosmetics/backgrounds.php";
@@ -104,12 +104,9 @@ function hover_about($info) {
     ?><span class="badge badge-secondary" data-toggle="tooltip" title="<?=htmlentities($info)?>">?</span><?php
 }
 
-function gen_top($title = null, $description = null) {
+function gen_very_top($title = null, $description = null) {
     global $is_logged_in;
     global $user;
-    global $tag_styles;
-    global $tag_fonts;
-    global $repo_url;
     global $energy_regeneration_interval;
     global $currency_symbol;
     global $mining_energy_cost;
@@ -121,6 +118,20 @@ function gen_top($title = null, $description = null) {
         'description' => $description,
     );
     require_once $_SERVER['DOCUMENT_ROOT']."/../template/top.php";
+}
+
+function gen_middle() {
+    global $is_logged_in;
+    global $user;
+    global $currency_symbol;
+    global $tag_styles;
+    global $tag_fonts;
+    require_once $_SERVER['DOCUMENT_ROOT']."/../template/middle.php";
+}
+
+function gen_top($title = null, $description = null) {
+    gen_very_top($title, $description);
+    gen_middle();
 }
 
 function gen_bottom() {

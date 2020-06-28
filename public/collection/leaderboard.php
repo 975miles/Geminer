@@ -1,6 +1,6 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT']."/../start.php";
-require_once $_SERVER['DOCUMENT_ROOT']."/../fn/generate_collection_image.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/../fn/place_collection_image.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/../fn/user_button.php";
 gen_top("Geminer - Collection leaderboard", "The top-rated gem collections.");
 
@@ -29,7 +29,7 @@ foreach ($collections as $collection) {
     ?>
     <?=$position?>: 
     <a href="/collection/view.php?id=<?=dechex($collection['id'])?>">
-        <?php generate_collection_image($collection['id']); ?>
+        <?php place_collection_image($collection['id']); ?>
         <?=htmlentities($collection['name'])?>
     </a>
     with <?=$collection['score']?> point<?=$collection['score'] == 1 ? "" : "s"?>

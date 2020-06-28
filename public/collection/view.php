@@ -1,6 +1,5 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT']."/../start.php";
-gen_top("A gem collection");
 require_once $_SERVER['DOCUMENT_ROOT']."/../fn/get_collection.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/../fn/user_button.php";
 
@@ -23,6 +22,7 @@ if ($is_logged_in) {
     if (count($results) > 0)
         $user_rating = ($results[0]['is_positive'] ? true : false);
 }
+gen_top("A gem collection", "&quot;".$collection['name']."&quot; by ".get_user_by_id($collection['by'])['name']);
 ?>
 <?=user_background($collection['by'])?>
 <h1><?=htmlentities($collection['name'])?></h1>
@@ -58,7 +58,9 @@ if ($is_logged_in) {
             }));
         }
     }
-    $("#collectionImg").attr("src", canvas.toDataURL());
+    let imgData = canvas.toDataURL();
+    $("#collectionImg").attr("src", imgData);
+    $("head").append(`<meta property="og:image" content="${imgData}">`);
 })()
 </script>
 <hr>
