@@ -48,7 +48,7 @@ function replaceScript(scriptTag, html) {
     scriptTag.replaceWith(html);
 };
 
-async function genCollectionImage(scriptTag, data, fillPage = false) {
+async function genCollectionImage(data, fillPage = false) {
     await gemsInfo;
     data = JSON.parse(data);
     let height = data.length;
@@ -69,7 +69,11 @@ async function genCollectionImage(scriptTag, data, fillPage = false) {
         }
     }
     context.putImageData(imageData, 0, 0);
-    replaceScript(scriptTag, `<img class="collection-img${(fillPage ? " fill-page" : "")}" src="${canvas.toDataURL()}">`);
+    return canvas.toDataURL();
+}
+
+async function placeCollectionImage(scriptTag, data, fillPage = false) {
+    replaceScript(scriptTag, `<img class="collection-img${(fillPage ? " fill-page" : "")}" src="${await genCollectionImage(data, fillPage)}">`);
 }
 
 async function displayGem(gemId, size=null) {

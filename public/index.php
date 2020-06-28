@@ -1,7 +1,7 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT']."/../start.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/../fn/user_button.php";
-gen_top("Geminer", "Mine digital gems for real distraction.");
+gen_top(null, "Mine digital gems for real distraction.");
 ?>
 
 <h1>Geminer</h1>

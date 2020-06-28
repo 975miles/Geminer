@@ -130,7 +130,7 @@ if (isset($_GET['user'])) {
             ?>
             <a href="/collection/view.php?id=<?=dechex($collection['id'])?>">
                 <span class="lead">
-                    <?=generate_collection_image($collection['id'])?>
+                    <?=place_collection_image($collection['id'])?>
                     <?=htmlentities($collection['name'])?>
                 </span>
             </a>

@@ -35,7 +35,7 @@ $energy_regeneration_interval = 3600;
 $mining_energy_cost = 1;
 
 //how much energy is used to move to another location
-$moving_energy_cost = 10;
+$moving_energy_cost = 3;
 
 $max_veins_per_mine_free = 5;
 $max_veins_per_mine_premium = 11;
