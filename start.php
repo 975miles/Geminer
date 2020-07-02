@@ -16,7 +16,7 @@ $is_logged_in = isset($_SESSION['user']);
 if ($is_logged_in) {
     $user = get_user_by_id($_SESSION['user']);
     if($user == null)
-        redirect("/log/out.php");
+        redirect("/log/out");
     
     $last_login = $user['last_login'];
     $now = time();

@@ -10,7 +10,7 @@ if (isset($_POST['id'])) {
     if ($collection and $collection['by'] == $user['id'] and $collection['type'] != 3 and !$collection['is_pfp']) {
         $dbh->prepare("DELETE FROM collections WHERE id = ?")->execute([$id]);
         $dbh->prepare("DELETE FROM collection_ratings WHERE collection = ?")->execute([$id]);
-        redirect("/collection/view.php?id=".dechex($id));
+        redirect("/collection/view?id=".dechex($id));
     } else
         throw_error("you don't have permission to delete that collection");
 } else 

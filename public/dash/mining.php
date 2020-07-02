@@ -6,7 +6,7 @@ require_once $_SERVER['DOCUMENT_ROOT']."/../consts/locations.php";
 ?>
 
 <h1>The Mine</h1>
-<p>You're currently in <b><?=$locations[$user['location']]->name?></b>. <a href="/dash/location.php">Move</a></p>
+<p>You're currently in <b><?=$locations[$user['location']]->name?></b>. <a href="/dash/location">Move</a></p>
 
 <hr>
 <div style="display: inline-block">
@@ -22,7 +22,7 @@ require_once $_SERVER['DOCUMENT_ROOT']."/../consts/locations.php";
     <hr>
     <div id="gems"><div class="spinner-border" role="status"><span class="sr-only"></span></div></div>
     <hr>
-    <a class="btn btn-primary" href="/finance/sell-gems.php">Sell gems</a>
+    <a class="btn btn-primary" href="/finance/sell-gems">Sell gems</a>
 </div>
 
 <script>

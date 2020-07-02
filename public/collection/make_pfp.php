@@ -10,7 +10,7 @@ if (isset($_POST['id'])) {
     if ($collection and $collection['by'] == $user['id'] and $collection['type'] == 0 and !$collection['is_pfp']) {
         $dbh->prepare("UPDATE collections SET is_pfp = 0 WHERE by = ?")->execute([$user['id']]); //make existing pfp a normal collection
         $dbh->prepare("UPDATE collections SET is_pfp = 1 WHERE id = ?")->execute([$id]);
-        redirect("/collection/view.php?id=".dechex($id));
+        redirect("/collection/view?id=".dechex($id));
     } else
         throw_error("you don't have permission to make that your pfp");
 } else 

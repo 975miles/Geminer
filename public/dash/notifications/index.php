@@ -39,7 +39,7 @@ if (count($notifications) > 0) {
                 <p style="margin: 0"><?=user_button($notification['sender'])?> <?=$action?> on <span class="unix-ts"><?=$notification['date']?></span>.</p>
                 <div class="ml-auto">
                     <form class="form-inline" action="dismiss.php" method="post">
-                        <a class="btn btn-<?=$msgs_left <= 0 ? "outline-primary disabled" : "primary"?>" href="/message/send.php?to=<?=htmlentities(get_user_by_id($notification['sender'])['name'])?>">Reply <span class="badge badge-dark"><?=$msgs_left?></span></a>
+                        <a class="btn btn-<?=$msgs_left <= 0 ? "outline-primary disabled" : "primary"?>" href="/message/send?to=<?=htmlentities(get_user_by_id($notification['sender'])['name'])?>">Reply <span class="badge badge-dark"><?=$msgs_left?></span></a>
                         <button class="btn btn-danger" name="id" value="<?=$notification['id']?>" type="submit"><?=$notification['type'] == 0 ? "Delete" : "Dismiss" ?></button>
                     </form>
                 </div>

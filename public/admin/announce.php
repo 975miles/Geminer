@@ -4,7 +4,7 @@ restrict_to("admin");
 
 if (isset($_POST['announcement'])) {
     $dbh->prepare("INSERT INTO announcements (text, by, date) VALUES (?, ?, ?)")->execute([$_POST['announcement'], $user['id'], time()]);
-    redirect("/dash/notifications");
+    redirect("/announcements");
 } else {
     gen_top();?>
     <h1>Make an announcement</h1>
