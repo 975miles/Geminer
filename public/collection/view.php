@@ -64,18 +64,18 @@ gen_top("A gem collection", "&quot;".$collection['name']."&quot; by ".get_user_b
 })()
 </script>
 <hr>
-<a id="rate-1" class="btn btn-light text-dark"<?php if ($is_logged_in) { ?> onclick="rate(1)"<?php } else { ?> href="/log/in.php"<?php } ?> value="<?=$user_rating === true ? "true" : "false"?>">
+<a id="rate-1" class="btn btn-light text-dark"<?php if ($is_logged_in) { ?> onclick="rate(1)"<?php } else { ?> href="/log/in"<?php } ?> value="<?=$user_rating === true ? "true" : "false"?>">
     <img src="/a/i/ratings/<?=$user_rating === true ? "" : "in"?>active/positive.png" height=30>
     <?=$positive_rating_amount?>
 </a>
 
-<a id="rate-0" class="btn btn-light text-dark"<?php if ($is_logged_in) { ?> onclick="rate(0)"<?php } else { ?> href="/log/in.php"<?php } ?> value="<?=$user_rating === false ? "true" : "false"?>">
+<a id="rate-0" class="btn btn-light text-dark"<?php if ($is_logged_in) { ?> onclick="rate(0)"<?php } else { ?> href="/log/in"<?php } ?> value="<?=$user_rating === false ? "true" : "false"?>">
     <img src="/a/i/ratings/<?=$user_rating === false ? "" : "in"?>active/negative.png" height=30>
     <?=$negative_rating_amount?>
 </a>
 
 <span style="font-size:2em">= <?=$positive_rating_amount - $negative_rating_amount?></span>
-<span>, putting it in position <b><?=$leaderboard_position?></b> on the <a href="/collection/leaderboard.php">leaderboard</a>.</span>
+<span>, putting it in position <b><?=$leaderboard_position?></b> on the <a href="/collection/leaderboard">leaderboard</a>.</span>
 
 <script>
     function rate(isPositive) {
@@ -96,7 +96,7 @@ gen_top("A gem collection", "&quot;".$collection['name']."&quot; by ".get_user_b
 <?php if ($is_logged_in and $collection['by'] == $user['id']) { ?>
 <hr>
 <h2>This collection is yours.</h2>
-<a href="/collection/edit.php?id=<?=$_GET['id']?>" class="btn btn-primary">Edit</a>
+<a href="/collection/edit?id=<?=$_GET['id']?>" class="btn btn-primary">Edit</a>
 <br>
 <?php if (!$collection['is_pfp'] and $collection['type'] == 0) { ?>
 <form action="/collection/make_pfp.php" method="post">

@@ -11,7 +11,7 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="mainNavbarDropdown">
                 <a class="dropdown-item" href="/">Home</a>
-                <a class="dropdown-item" href="/contact.php">Contact</a>
+                <a class="dropdown-item" href="/contact">Contact</a>
             </div>
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,10 +25,10 @@
                     Collections
                     </a>
                     <div class="dropdown-menu" aria-labelledby="collectionsDropdown">
-                        <a class="dropdown-item" href="/collection/leaderboard.php">Top collections</a>
+                        <a class="dropdown-item" href="/collection/leaderboard">Top collections</a>
                         <?php if ($is_logged_in) { ?>
                         <a class="dropdown-item" href="/profile?user=<?=$user['name']?>">Your collections</a>
-                        <a class="dropdown-item" href="/collection/create.php">Create a new collection</a>
+                        <a class="dropdown-item" href="/collection/create">Create a new collection</a>
                         <?php } ?>
                     </div>
                 </li>
@@ -43,8 +43,8 @@
                         <img src="/a/i/energy.png" class="energy-icon" alt="energy">
                 </a>
                 <div class="dropdown-menu" aria-labelledby="dashDropdown">
-                    <a class="dropdown-item" href="/dash/mining.php">Go to mine</a>
-                    <a class="dropdown-item" href="/dash/location.php">All of the mines</a>
+                    <a class="dropdown-item" href="/dash/mining">Go to mine</a>
+                    <a class="dropdown-item" href="/dash/location">All of the mines</a>
                     <div class="dropdown-divider"></div>
                     <span class="dropdown-item" id="timeUntilNextRegeneration">loading...</span>
                     <span class="dropdown-item" id="timeUntilFullRegeneration">loading...</span>
@@ -95,7 +95,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="financeDropdown">
                     <a class="dropdown-item" href="/finance/marketplace">Marketplace</a>
-                    <a class="dropdown-item" href="/finance/sell-gems.php">TVWIEMWYTGI</a>
+                    <a class="dropdown-item" href="/finance/sell-gems">TVWIEMWYTGI</a>
                 </div>
             </div>
             <div class="dropdown">
@@ -115,7 +115,7 @@
                     <span class="badge badge-danger">!</span>
                     <?php } ?>
                     </a>
-                    <a class="dropdown-item" href="/announcements.php">
+                    <a class="dropdown-item" href="/announcements">
                     Announcements
                     <?php if (!$user['read_announcements']) {?>
                     <span class="badge badge-danger">!</span>
@@ -128,11 +128,11 @@
                     <a class="dropdown-item" href="/premium">Upgrade to a premium account</a>
                     <?php } ?>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="/log/out.php?redirect_back_to=<?=$_SERVER['REQUEST_URI']?>">Logout</a>
+                    <a class="dropdown-item" href="/log/out?redirect_back_to=<?=$_SERVER['REQUEST_URI']?>">Logout</a>
                 </div>
             </div>
             <?php } else { ?>
-            <a class="btn btn-outline-dark" href="/log/in.php?redirect_back_to=<?=$_SERVER['REQUEST_URI']?>">
+            <a class="btn btn-outline-dark" href="/log/in?redirect_back_to=<?=$_SERVER['REQUEST_URI']?>">
                 Login
             </a>
             <?php } ?>

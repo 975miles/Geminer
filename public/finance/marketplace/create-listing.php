@@ -29,7 +29,7 @@ function validate() {
     } else return;
     $sth = $dbh->prepare("INSERT INTO marketplace_listings (user, type, gem, amount, price) VALUES (?, ?, ?, ?, ?)");
     $sth->execute([$user['id'], $type, $gem, $amount, $price]);
-    redirect("/finance/marketplace/listing.php?id=".dechex($dbh->lastInsertId()));
+    redirect("/finance/marketplace/listing?id=".dechex($dbh->lastInsertId()));
 }
 
 $max_marketplace_listings = ($user['is_premium'] ? $max_marketplace_listings_premium : $max_marketplace_listings_free);

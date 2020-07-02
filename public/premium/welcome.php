@@ -9,11 +9,11 @@ gen_top();
 <p class="lead">Here are some things you can do right now:</p>
 
 <ul>
-    <li>Take advantage of all your beautiful new tag styles by <a href="/profile/edit.php">editing your profile</a></li>
+    <li>Take advantage of all your beautiful new tag styles by <a href="/profile/edit">editing your profile</a></li>
     <?php
     $sth = $dbh->prepare("SELECT id FROM collections WHERE by = ? AND type = 3");
     $sth->execute([$user['id']]);
     $new_collection_id = dechex($sth->fetchColumn());
     ?>
-    <li>Edit your new <a href="/collection/view.php?id=<?=$new_collection_id?>">massive collection</a></li>
+    <li>Edit your new <a href="/collection/view?id=<?=$new_collection_id?>">massive collection</a></li>
 </ul>

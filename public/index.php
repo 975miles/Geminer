@@ -21,7 +21,7 @@ if ($sth->fetchColumn() > 0) {
     $bg = $profile_backgrounds[get_user_by_id($announcement['by'])['profile_background']];
 ?>
 <div class="container-fluid rounded border border-dark" style="padding: 1em; background: <?=$bg->bgshort?>; color: <?=$bg->text_colour?>;">
-    <p><a href="/announcements.php">Announcement</a> by <?=user_button($announcement['by'])?> on <span class="unix-ts"><?=$announcement['date']?></span></p>
+    <p><a href="/announcements">Announcement</a> by <?=user_button($announcement['by'])?> on <span class="unix-ts"><?=$announcement['date']?></span></p>
     <hr>
     <p style="margin: 0">
         <?=linkify(htmlentities($announcement['text']))?>
