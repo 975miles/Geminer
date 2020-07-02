@@ -27,7 +27,7 @@ $announcement_count = $sth->fetchColumn();
 <h1>Announcements</h1>
 <?php if ($user['is_admin']) { ?>
 <hr>
-<a class="btn btn-primary" href="/admin/announce">Make an announcement</a>
+<a class="btn btn-primary" href="/admin/announce.php">Make an announcement</a>
 <?php } ?>
 <hr>
 <?php

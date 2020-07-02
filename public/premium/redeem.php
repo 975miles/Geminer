@@ -27,7 +27,7 @@ if (isset($_POST) and isset($_POST['code'])) {
         }
         $dbh->prepare("INSERT INTO collections (type, by, created_at, data, name) VALUES (?, ?, ?, ?, ?)")->execute([3, $user['id'], time(), json_encode($massive_collection_data), $user['name']."'s Bigmassive Collection"]);
         $dbh->prepare("DELETE FROM codes WHERE code_hash = ?")->execute([$code_hash]);
-        redirect("/premium/welcome");
+        redirect("/premium/welcome.php");
     } else
         show_info("Your redemption code was invalid.", "Unknown code");
 }

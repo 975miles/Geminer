@@ -22,7 +22,7 @@ gen_top("Geminer Premium", "Details about Geminer premium");
         You already have Geminer premium.
     </h3>
     <?php } else { ?>
-        To get Geminer premium, <a class="btn btn-sm btn-primary" href="<?=$premium_purchase_url?>">buy</a> a code then <a class="btn btn-sm btn-primary" href="redeem">redeem</a> it.
+        To get Geminer premium, <a class="btn btn-sm btn-primary" href="<?=$premium_purchase_url?>">buy</a> a code then <a class="btn btn-sm btn-primary" href="redeem.php">redeem</a> it.
     </h3>
     Oh? You want to know what it is you're buying before you buy what you're buying?<br>
     Fine, here.

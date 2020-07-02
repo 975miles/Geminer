@@ -40,7 +40,7 @@ if (isset($_GET['user'])) {
         ?>
         <?=user_background($user_found['id'])?>
         <h1>
-        <a href="/collection/view?id=<?=dechex(get_pfp_collection_id($user_found['id']))?>">
+        <a href="/collection/view.php?id=<?=dechex(get_pfp_collection_id($user_found['id']))?>">
             <?=generate_pfp_collection($user_found['id'])?>
         </a>
         <?php user_button($user_found['id'], false, "lg"); ?>
@@ -93,7 +93,7 @@ if (isset($_GET['user'])) {
                     <p>You can't interact with this user. Either they've blocked you, their inbox is full, or you've interacted with them too much lately and they have to delete some of your messages first.</p>
                 <?php } else { ?>
                     <p>You can interact with this user <b><?=$msgs_left?></b> more times before they have to delete some of your messages.</p>
-                    <a class="btn btn-sm btn-primary" href="/message/send?to=<?=$user_found['name']?>">Message this user</a>
+                    <a class="btn btn-sm btn-primary" href="/message/send.php?to=<?=$user_found['name']?>">Message this user</a>
                     <form class="form-inline" action="" method="post">
                         <button class="btn btn-sm btn-primary" type="submit">Pay this user</button>
                         <div class="input-group mb-2" style="max-width: 200px">
@@ -109,9 +109,11 @@ if (isset($_GET['user'])) {
                 </form>
             <?php } else { ?>
                 <h3>Actions (this is you)</h3>
-                <a href="edit" class="btn btn-primary">Edit your profile</a>
+                <a href="edit.php" class="btn btn-primary">Edit your profile</a>
                 <br>
-                <a href="/collection/create" class="btn btn-primary">Create new collection</a>
+                <a href="/collection/create.php" class="btn btn-primary">Create new collection</a>
+                <br>
+                <a class="btn btn-sm btn-danger" href="/contact.php">Close your account (contact support)</a>
         <?php
             }
         } else {
@@ -126,7 +128,7 @@ if (isset($_GET['user'])) {
         $collections = $sth->fetchAll(PDO::FETCH_ASSOC);
         foreach ($collections as $collection) {
             ?>
-            <a href="/collection/view?id=<?=dechex($collection['id'])?>">
+            <a href="/collection/view.php?id=<?=dechex($collection['id'])?>">
                 <span class="lead">
                     <?=place_collection_image($collection['id'])?>
                     <?=htmlentities($collection['name'])?>
@@ -146,7 +148,7 @@ if (isset($_GET['user'])) {
             foreach ($listings as $listing) {
                 $gem = $all_gems[$listing['gem']];
                 ?>
-                <p><a href="/finance/marketplace/listing?id=<?=dechex($listing['id'])?>">
+                <p><a href="/finance/marketplace/listing.php?id=<?=dechex($listing['id'])?>">
                     <?=$listing['type'] == 0 ? "Selling" : "Buying" ?> <?=$listing['amount']?>mP of <?=gem_displayer($gem->id)?></span><?=$gem->name?> for <?=display_money($listing['price'])?>.
                 </a></p>
                 <?php

@@ -28,7 +28,7 @@ foreach ($collections as $collection) {
     $position++;
     ?>
     <?=$position?>: 
-    <a href="/collection/view?id=<?=dechex($collection['id'])?>">
+    <a href="/collection/view.php?id=<?=dechex($collection['id'])?>">
         <?php place_collection_image($collection['id']); ?>
         <?=htmlentities($collection['name'])?>
     </a>

@@ -11,7 +11,7 @@ if (isset($_POST['location']) and $is_logged_in and $user['location'] != $_POST[
     else {
         $dbh->prepare("UPDATE users SET location = ?, energy = energy - ? WHERE id = ?")
             ->execute([$_POST['location'], $moving_energy_cost, $user['id']]);
-        redirect('/dash/mining');
+        redirect('/dash/mining.php');
     }
 }
 ?>
@@ -20,7 +20,7 @@ if (isset($_POST['location']) and $is_logged_in and $user['location'] != $_POST[
 <?php if ($is_logged_in) { ?>
 <p>
     You're currently in <b><span id="currentLocation"><span class="spinner-border spinner-border-sm" role="status"><span class="sr-only"></span></span></span></b>.
-    <a href="/dash/mining">Mine</a>
+    <a href="/dash/mining.php">Mine</a>
 </p>
 <?php } ?>
 

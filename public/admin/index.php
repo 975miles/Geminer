@@ -7,7 +7,7 @@ gen_top();
 <hr>
 <a class="btn btn-primary" href="dbm/">Manage the database</a>
 <hr>
-<a class="btn btn-primary" href="announce">Make an announcement</a>
+<a class="btn btn-primary" href="announce.php">Make an announcement</a>
 <hr>
 <form class="form-inline "action="generate-premium-codes.php" method="get">
     <button class="btn btn-primary" type="submit">Generate</button>

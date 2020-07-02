@@ -20,7 +20,7 @@ function require_auth() {
     if ($is_logged_in)
         return;
     else
-        redirect("/log/in?redirect_back_to=".$_SERVER['REQUEST_URI']);
+        redirect("/log/in.php?redirect_back_to=".$_SERVER['REQUEST_URI']);
 }
 
 function restrict_to($group = "admin") {

@@ -53,7 +53,7 @@ if (isset($_POST['collection_data'], $_POST['name'])) {
         }
         $dbh->prepare("UPDATE collections SET data = ?, name = ? WHERE id = ?;")
             ->execute([json_encode($collection_data), $_POST['name'], $collection['id']]);
-        redirect("/collection/view?id=".dechex($collection['id']));
+        redirect("/collection/view.php?id=".dechex($collection['id']));
     }
 
     parse_collection();

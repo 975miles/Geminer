@@ -19,9 +19,8 @@ Do these and you'll be good to go.
 3. [Run `composer install`](https://getcomposer.org/)
 4. Run `sqlite3 data.db` then do `.read createdb.sql`
 5. Set up a web server using the `public` directory as the root
-6. Configure the web server so that php files can be accessed without the ".php" extension (e.g. `/announcements.php` can be viewed from `/announcements`)
-7. Create an account on the new website
-8. Run `sqlite3 data.db` then do `UPDATE users SET is_admin = 1;` to make yourself an admin
+6. Create an account on the new website
+7. Run `sqlite3 data.db` then do `UPDATE users SET is_admin = 1;` to make yourself an admin
  
 ### Database manager
 To set up phpLiteAdmin to manage the database easier, follow these steps.
