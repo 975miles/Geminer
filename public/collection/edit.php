@@ -2,7 +2,7 @@
 require_once $_SERVER['DOCUMENT_ROOT']."/../start.php";
 require_auth();
 require_once $_SERVER['DOCUMENT_ROOT']."/../consts/collection-types.php";
-gen_top("Geminer - Editing a collection...");
+gen_top("Editing a collection...");
 require_once $_SERVER['DOCUMENT_ROOT']."/../fn/get_collection.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/../fn/real_gem_amounts.php";
 
@@ -11,7 +11,7 @@ if ($collection['by'] != $user['id'])
 
 $gem_amounts = get_real_gem_amounts($exclude=$collection['id']);
 
-if (isset($_POST['collection_data'], $_POST['name'])) {
+if (isset($_POST['collection_data'], $_POST['name'], $_POST['mode'])) {
     function parse_collection() {
         global $max_collection_name_length;
         global $collection_types;
@@ -51,8 +51,8 @@ if (isset($_POST['collection_data'], $_POST['name'])) {
                     return;
             }
         }
-        $dbh->prepare("UPDATE collections SET data = ?, name = ? WHERE id = ?;")
-            ->execute([json_encode($collection_data), $_POST['name'], $collection['id']]);
+        $dbh->prepare("UPDATE collections SET data = ?, name = ?, mode = ? WHERE id = ?;")
+            ->execute([json_encode($collection_data), $_POST['name'], ($_POST['mode'] == "colour" ? 1 : 0), $collection['id']]);
         redirect("/collection/view?id=".dechex($collection['id']));
     }
 
@@ -75,6 +75,8 @@ if (isset($_POST['collection_data'], $_POST['name'])) {
     var gridLineWidth = 1;
     var hoverTime = 1000;
     var boxWidthFull = boxWidth + gridLineWidth;
+    var firstRender = true;
+    var mode = "<?=$collection['mode'] == 0 ? "gem" : "colour"?>";
     var collectionData = JSON.parse("<?=$collection['data']?>");
     var gemAmounts = Object.assign({}, JSON.parse("<?=json_encode($gem_amounts)?>"));
     gemAmounts["-1"] = Infinity;
@@ -146,9 +148,11 @@ if (isset($_POST['collection_data'], $_POST['name'])) {
         if (mouseOnTile && selectedGem != null) {
             gemRemoving = collectionData[mousePos.y][mousePos.x];
             gemRemovingAmount = $(`#gem_${gemRemoving}_amount`);
-            gemRemovingAmount.html((Number(gemRemovingAmount.html()) + 1).toFixed(3));
+            gemAmounts[gemRemoving] += 1000;
+            gemRemovingAmount.html((gemAmounts[gemRemoving]/1000).toFixed(3));
             gemPlacingAmount = $(`#gem_${selectedGem}_amount`);
-            gemPlacingAmount.html((Number(gemPlacingAmount.html()) - 1).toFixed(3));
+            gemAmounts[selectedGem] -= 1000;
+            gemPlacingAmount.html((gemAmounts[selectedGem]/1000).toFixed(3));
 
             collectionData[mousePos.y][mousePos.x] = selectedGem;
 
@@ -195,6 +199,8 @@ if (isset($_POST['collection_data'], $_POST['name'])) {
         context.fillRect(0, 0, canvasWidth, canvasHeight);
     }
 
+    var gemImages = {};
+
     async function drawTile(gemId, x, y) {
         return new Promise(async (res, rej) => {
             await gemsInfo;
@@ -202,14 +208,18 @@ if (isset($_POST['collection_data'], $_POST['name'])) {
             let gem = gemsInfo[gemId];
             let tileCoords = reverseConvertCoords(x * boxWidthFull, y * boxWidthFull)
             
-            if (gem.type == "colour") {
+            if (mode == "colour") { //if mode is colour
                 context.fillStyle = "#"+gem.colour;
                 context.fillRect(tileCoords.x, tileCoords.y, realBoxWidth, realBoxWidth);
                 res();
-            } else if (gem.type == "image") {
+            } else if (mode == "gem") { //if mode is gem
+                if (!gemImages.hasOwnProperty(gemId)) {
+                    gemImages[gemId] = new Image();
+                    gemImages[gemId].src = `/a/i/gem/${gemId}.png`;
+                }
                 let gemImage = new Image();
                 gemImage.onload = () => {
-                    context.drawImage(gemImage, tileCoords.x, tileCoords.y, realBoxWidth, realBoxWidth);
+                    context.drawImage(gemImages[gemId], tileCoords.x, tileCoords.y, realBoxWidth, realBoxWidth);
                     res();
                 }
                 gemImage.src = `/a/i/gem/${gemId}.png`;
@@ -223,19 +233,25 @@ if (isset($_POST['collection_data'], $_POST['name'])) {
                 let tile = collectionData[row][column];
                 await drawTile(tile, column, row);
 
-                gemAmounts[tile] -= 1000;
+                if (firstRender)
+                    gemAmounts[tile] -= 1000;
             }
     }
 
     async function createButtons() {
         $("#gems").html("");
-        sortedGems.unshift(gemsInfo["-1"]);
-        for (i of sortedGems) { //sort is just to get emptite to the top
-            $("#gems").append($(await displayGem(i.id)));
-            $("#gems").append($(`<button id="gem_${gemsInfo[i.id].id}_button" class="btn btn-primary" onclick="selectGem(${gemsInfo[i.id].id})">${gemsInfo[i.id].name}: <span id="gem_${gemsInfo[i.id].id}_amount">${(gemAmounts[i.id]/1000).toFixed(3)}</span><span id="gem_${gemsInfo[i.id].id}_unit">P</button>"`));
+        if (sortedGems[0].id != -1)
+            sortedGems.unshift(gemsInfo["-1"]);
+        for (i of sortedGems) {
+            let gemDisplayer = $(await displayGem(i.id));
+            if (mode == "colour")
+                gemDisplayer.css({"background-image": "none"});
+            $("#gems").append(gemDisplayer);
+            $("#gems").append($(`<button id="gem_${gemsInfo[i.id].id}_button" class="btn btn-primary" onclick="selectGem(${gemsInfo[i.id].id})">${gemsInfo[i.id].name}: <span id="gem_${gemsInfo[i.id].id}_amount">${(gemAmounts[i.id]/1000).toFixed(3)}</span><span id="gem_${gemsInfo[i.id].id}_unit">px</button>"`));
             correctAvailabilityClass(gemsInfo[i.id].id);
             $("#gems").append($("<br>"));
         }
+        $("#gems").prepend(`<button class="btn btn-primary" id="drawModeSwitcher" onclick="switchDrawMode()">Switch to a ${mode == "gem" ? "colour" : "gem"} collection</button><br><br>`);
     }
 
     function correctAvailabilityClass(gem) {
@@ -272,7 +288,14 @@ if (isset($_POST['collection_data'], $_POST['name'])) {
         submitting = true;
         let form = $("#collectionSubmission");
         form.append(`<input name="collection_data" value="${JSON.stringify(collectionData)}" />`);
+        form.append(`<input name="mode" value="${mode}" />`);
         form.submit();
+    }
+    
+    function switchDrawMode() {
+        firstRender = false;
+        mode = (mode == "gem" ? "colour" : "gem");
+        drawCollection();
     }
 
     async function drawCollection() {
@@ -282,6 +305,7 @@ if (isset($_POST['collection_data'], $_POST['name'])) {
         await sortedGems;
         await createButtons();
     }
+
     drawCollection();
 </script>
 

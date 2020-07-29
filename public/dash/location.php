@@ -1,11 +1,11 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT']."/../start.php";
-gen_top("The Geminer page template's title", "this is the page description");
+gen_top("Locations", "All the Geminer locations and their gems.");
 
 if (isset($_POST['location']) and $is_logged_in and $user['location'] != $_POST['location']) {
     require_once $_SERVER['DOCUMENT_ROOT']."/../consts/locations.php";
     if ($user['energy'] < $moving_energy_cost)
-        show_info("You don't have enough <img src=\"/a/i/energy.png\" class=\"energy-icon\"> to do that.");
+        show_info("You don't have enough <img src=\\\"/a/i/energy.png\\\" class=\\\"energy-icon\\\"> to do that.");
     else if (!array_key_exists($_POST['location'], $locations))
         show_info("That's not a valid location.");
     else {

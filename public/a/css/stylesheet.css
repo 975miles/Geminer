@@ -9,9 +9,11 @@ body {
     margin-bottom: 5em;
 }
 
+/*
 .navbar {
-    background: #d1271b;
+    padding: 0.5rem 1rem;
 }
+*/
 
 .modal-content,
 .card
@@ -43,7 +45,18 @@ code {
     width: 1.5em;
     height: 1.5em;
     margin: 6px 0.25em;
-    border: 1px solid rgba(0, 0, 0, .2);
+    border: 1px solid rgba(0, 0, 0, 0);
+}
+
+.bg-displayer {
+    background-repeat: no-repeat;
+    background-size: 100%;
+    display: inline-block;
+    vertical-align: middle;
+    width: 100px;
+    height: 75px;
+    margin: 6px 0.25em;
+    border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 .gem-displayer-sm {
@@ -53,6 +66,12 @@ code {
 
 .collection-img {
     outline: 1px solid black;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+}
+
+.pixels {
     image-rendering: pixelated;
     image-rendering: -moz-crisp-edges;
     image-rendering: crisp-edges;

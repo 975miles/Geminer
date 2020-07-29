@@ -2,6 +2,7 @@
 require_once $_SERVER['DOCUMENT_ROOT']."/../start.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/../consts/gems.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/../consts/cosmetics/backgrounds.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/../consts/birthstones.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/../fn/user_button.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/../fn/gem_displayer.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/../fn/inbox/send_msg.php";
@@ -52,6 +53,9 @@ if (isset($_GET['user'])) {
         <?php } ?>
         <img src="/a/i/profile-badges/member.png" class="profile-badge" id="profile-badge-member" data-toggle="tooltip" data-html="true">
         <tooltipcontent for="profile-badge-member"><?=htmlentities($user_found['name'])?> has been a member of Geminer since <span class='unix-ts'><?=$user_found['date_signed_up']?></span>.</tooltipcontent>
+        <?php if ($user_found['birthstone'] != 0) { $birthstone = $birthstones[$user_found['birthstone']]; ?>
+        <img src="/a/i/gem/<?=$birthstone->gem->id?>.png" class="profile-badge pixels rounded-circle border border-dark" data-toggle="tooltip" title="<?=htmlentities($user_found['name'])?> was born in <?=$birthstone->month?> - their birthstone is <?=$birthstone->gem->name?>.">
+        <?php } ?>
         </h1>
         <p><?=htmlentities($user_found['name'])?> was last online <span class="unix-ts" id="lastOnline"><?=$user_found['last_login']?></span>.</p>
         <script>
@@ -147,7 +151,7 @@ if (isset($_GET['user'])) {
                 $gem = $all_gems[$listing['gem']];
                 ?>
                 <p><a href="/finance/marketplace/listing?id=<?=dechex($listing['id'])?>">
-                    <?=$listing['type'] == 0 ? "Selling" : "Buying" ?> <?=$listing['amount']?>mP of <?=gem_displayer($gem->id)?></span><?=$gem->name?> for <?=display_money($listing['price'])?>.
+                    <?=$listing['type'] == 0 ? "Selling" : "Buying" ?> <?=$listing['amount']?>mpx of <?=gem_displayer($gem->id)?></span><?=$gem->name?> for <?=display_money($listing['price'])?>.
                 </a></p>
                 <?php
             }
@@ -157,7 +161,7 @@ if (isset($_GET['user'])) {
             <?php
         }
     } else {
-        gen_top("Geminer - unknown user");
+        gen_top("Unknown user");
         ?>
         <h1>User not found</h1>
         <?php
@@ -166,7 +170,7 @@ if (isset($_GET['user'])) {
     if ($is_logged_in) 
         redirect("?user=".$user['name']);
     else {
-        gen_top("Geminer - unknown user");
+        gen_top("Unknown user");
         ?>
         <h1>No user specified</h1>
         <?php

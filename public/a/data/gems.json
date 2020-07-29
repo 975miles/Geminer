@@ -3,23 +3,20 @@
         "id": 0,
         "name": "ruby",
         "value": 1,
-        "type": "colour",
-        "colour": "ed0e0e"
+        "colour": "7c0e1a"
     },
 
     {
         "id": 1,
         "name": "sapphire",
         "value": 1,
-        "type": "colour",
-        "colour": "1816b5"
+        "colour": "2332ba"
     },
 
     {
         "id": 2,
         "name": "diamond",
         "value": 1,
-        "type": "image",
         "colour": "d0e8f2"
     },
 
@@ -27,15 +24,13 @@
         "id": 3,
         "name": "amethyst",
         "value": 6,
-        "type": "colour",
-        "colour": "452a96"
+        "colour": "772c8b"
     },
 
     {
         "id": 4,
         "name": "peridot",
         "value": 1,
-        "type": "colour",
         "colour": "6beb15"
     },
 
@@ -43,7 +38,6 @@
         "id": 5,
         "name": "onyx",
         "value": 1,
-        "type": "colour",
         "colour": "161517"
     },
 
@@ -51,7 +45,6 @@
         "id": 6,
         "name": "emerald",
         "value": 1,
-        "type": "colour",
         "colour": "16a13b"
     },
 
@@ -59,31 +52,27 @@
         "id": 7,
         "name": "chrysoberyl",
         "value": 1,
-        "type": "colour",
-        "colour": "c4be12"
+        "colour": "cbb419"
     },
 
     {
         "id": 8,
         "name": "citrine",
         "value": 1,
-        "type": "colour",
-        "colour": "fcb335"
+        "colour": "e2a143"
     },
 
     {
         "id": 9,
         "name": "grey quartz",
         "value": 1,
-        "type": "colour",
-        "colour": "999999"
+        "colour": "747671"
     },
 
     {
         "id": 10,
-        "name": "rubelite",
+        "name": "rubellite",
         "value": 1,
-        "type": "colour",
         "colour": "e320af"
     },
 
@@ -91,7 +80,6 @@
         "id": 11,
         "name": "kunzite",
         "value": 1,
-        "type": "colour",
         "colour": "ff8ce0"
     },
 
@@ -99,703 +87,615 @@
         "id": 12,
         "name": "pectolite",
         "value": 1,
-        "type": "colour",
-        "colour": "66e6ff"
+        "colour": "93b1c1"
     },
 
     {
         "id": 13,
-        "name": "n/a",
+        "name": "fire agate",
         "value": 1,
-        "type": "colour",
-        "colour": "283b2d"
+        "colour": "ad3e11"
     },
 
     {
         "id": 14,
-        "name": "n/a",
+        "name": "malachite",
         "value": 1,
-        "type": "colour",
-        "colour": "283b2d"
+        "colour": "2bd0a6"
     },
 
     {
         "id": 15,
-        "name": "n/a",
+        "name": "watermelon tourmaline",
         "value": 1,
-        "type": "colour",
-        "colour": "283b2d"
+        "colour": "af797c"
     },
 
     {
         "id": 16,
-        "name": "n/a",
+        "name": "azurite",
         "value": 1,
-        "type": "colour",
-        "colour": "283b2d"
+        "colour": "1a7a72"
     },
 
     {
         "id": 17,
-        "name": "n/a",
+        "name": "ammolite",
         "value": 1,
-        "type": "colour",
-        "colour": "283b2d"
+        "colour": "398510"
     },
 
     {
         "id": 18,
-        "name": "n/a",
+        "name": "brown zircon",
         "value": 1,
-        "type": "colour",
-        "colour": "283b2d"
+        "colour": "281413"
     },
 
     {
         "id": 19,
-        "name": "n/a",
+        "name": "ametrine",
         "value": 1,
-        "type": "colour",
-        "colour": "283b2d"
+        "colour": "b57790"
     },
 
     {
         "id": 20,
-        "name": "n/a",
+        "name": "denditric agate",
         "value": 1,
-        "type": "colour",
-        "colour": "283b2d"
+        "colour": "c1b7a4"
     },
 
     {
         "id": 21,
-        "name": "n/a",
+        "name": "moss agate",
         "value": 1,
-        "type": "colour",
-        "colour": "283b2d"
+        "colour": "346026"
     },
 
     {
         "id": 22,
-        "name": "n/a",
+        "name": "amber",
         "value": 1,
-        "type": "colour",
-        "colour": "283b2d"
+        "colour": "f97426"
     },
 
     {
         "id": 23,
-        "name": "n/a",
+        "name": "amazonite",
         "value": 1,
-        "type": "colour",
-        "colour": "283b2d"
+        "colour": "21b5a3"
     },
 
     {
         "id": 24,
-        "name": "n/a",
+        "name": "anhydrite",
         "value": 1,
-        "type": "colour",
-        "colour": "283b2d"
+        "colour": "a6a9aa"
     },
 
     {
         "id": 25,
-        "name": "n/a",
+        "name": "aragonite",
         "value": 1,
-        "type": "colour",
-        "colour": "283b2d"
+        "colour": "aa3923"
     },
 
     {
         "id": 26,
-        "name": "n/a",
+        "name": "atacamite",
         "value": 1,
-        "type": "colour",
-        "colour": "283b2d"
+        "colour": "2e6551"
     },
 
     {
         "id": 27,
-        "name": "n/a",
+        "name": "golden beryl",
         "value": 1,
-        "type": "colour",
-        "colour": "283b2d"
+        "colour": "dfa705"
     },
 
     {
         "id": 28,
-        "name": "n/a",
+        "name": "bloodstone",
         "value": 1,
-        "type": "colour",
-        "colour": "283b2d"
+        "colour": "301c14"
     },
 
     {
         "id": 29,
-        "name": "n/a",
+        "name": "mangano calcite",
         "value": 1,
-        "type": "colour",
-        "colour": "283b2d"
+        "colour": "d3b2b5"
     },
 
     {
         "id": 30,
-        "name": "n/a",
+        "name": "green calcite",
         "value": 1,
-        "type": "colour",
-        "colour": "283b2d"
+        "colour": "87b626"
     },
 
     {
         "id": 31,
-        "name": "n/a",
+        "name": "black calcite",
         "value": 1,
-        "type": "colour",
-        "colour": "283b2d"
+        "colour": "151513"
     },
 
     {
         "id": 32,
-        "name": "n/a",
+        "name": "carnelian",
         "value": 1,
-        "type": "colour",
-        "colour": "283b2d"
+        "colour": "bf3218"
     },
 
     {
         "id": 33,
-        "name": "n/a",
+        "name": "celestite",
         "value": 1,
-        "type": "colour",
-        "colour": "283b2d"
+        "colour": "aab6ca"
     },
 
     {
         "id": 34,
-        "name": "n/a",
+        "name": "cerussite",
         "value": 1,
-        "type": "colour",
-        "colour": "283b2d"
+        "colour": "e7e6e3"
     },
 
     {
         "id": 35,
-        "name": "n/a",
+        "name": "chalcedony",
         "value": 1,
-        "type": "colour",
-        "colour": "283b2d"
+        "colour": "92b2d7"
     },
 
     {
         "id": 36,
-        "name": "n/a",
+        "name": "charoite",
         "value": 1,
-        "type": "colour",
-        "colour": "283b2d"
+        "colour": "5a3676"
     },
 
     {
         "id": 37,
-        "name": "n/a",
+        "name": "chiastolite",
         "value": 1,
-        "type": "colour",
-        "colour": "283b2d"
+        "colour": "483524"
     },
 
     {
         "id": 38,
-        "name": "n/a",
+        "name": "chrysocolla",
         "value": 1,
-        "type": "colour",
-        "colour": "283b2d"
+        "colour": "2faf9e"
     },
 
     {
         "id": 39,
-        "name": "n/a",
+        "name": "chrysoprase",
         "value": 1,
-        "type": "colour",
-        "colour": "283b2d"
+        "colour": "66b078"
     },
 
     {
         "id": 40,
-        "name": "n/a",
+        "name": "cinnabar",
         "value": 1,
-        "type": "colour",
-        "colour": "283b2d"
+        "colour": "c32f5a"
     },
 
     {
         "id": 41,
-        "name": "n/a",
+        "name": "danburite",
         "value": 1,
-        "type": "colour",
-        "colour": "283b2d"
+        "colour": "e6d7c6"
     },
 
     {
         "id": 42,
-        "name": "n/a",
+        "name": "dioptase",
         "value": 1,
-        "type": "colour",
-        "colour": "283b2d"
+        "colour": "33877d"
     },
 
     {
         "id": 43,
-        "name": "n/a",
+        "name": "howlite",
         "value": 1,
-        "type": "colour",
-        "colour": "283b2d"
+        "colour": "cccccc"
     },
 
     {
         "id": 44,
-        "name": "n/a",
+        "name": "garnet",
         "value": 1,
-        "type": "colour",
-        "colour": "283b2d"
+        "colour": "860e1d"
     },
 
     {
         "id": 45,
-        "name": "n/a",
-        "value": 1,
-        "type": "colour",
-        "colour": "283b2d"
+        "name": "alexandrite",
+        "value": 0.287,
+        "colour": "01758f"
     },
 
     {
         "id": 46,
-        "name": "n/a",
+        "name": "aquamarine",
         "value": 1,
-        "type": "colour",
-        "colour": "283b2d"
+        "colour": "4ec3ab"
     },
 
     {
         "id": 47,
-        "name": "n/a",
+        "name": "topaz",
         "value": 1,
-        "type": "colour",
-        "colour": "283b2d"
+        "colour": "ce8d13"
     },
 
     {
         "id": 48,
-        "name": "n/a",
+        "name": "opal",
         "value": 1,
-        "type": "colour",
-        "colour": "283b2d"
+        "colour": "7ad1c8"
     },
 
     {
         "id": 49,
-        "name": "n/a",
+        "name": "z",
         "value": 1,
-        "type": "colour",
         "colour": "283b2d"
     },
 
     {
         "id": 50,
-        "name": "n/a",
+        "name": "z",
         "value": 1,
-        "type": "colour",
         "colour": "283b2d"
     },
 
     {
         "id": 51,
-        "name": "n/a",
+        "name": "z",
         "value": 1,
-        "type": "colour",
         "colour": "283b2d"
     },
 
     {
         "id": 52,
-        "name": "n/a",
+        "name": "z",
         "value": 1,
-        "type": "colour",
         "colour": "283b2d"
     },
 
     {
         "id": 53,
-        "name": "n/a",
+        "name": "z",
         "value": 1,
-        "type": "colour",
         "colour": "283b2d"
     },
 
     {
         "id": 54,
-        "name": "n/a",
+        "name": "z",
         "value": 1,
-        "type": "colour",
         "colour": "283b2d"
     },
 
     {
         "id": 55,
-        "name": "n/a",
+        "name": "z",
         "value": 1,
-        "type": "colour",
         "colour": "283b2d"
     },
 
     {
         "id": 56,
-        "name": "n/a",
+        "name": "z",
         "value": 1,
-        "type": "colour",
         "colour": "283b2d"
     },
 
     {
         "id": 57,
-        "name": "n/a",
+        "name": "z",
         "value": 1,
-        "type": "colour",
         "colour": "283b2d"
     },
 
     {
         "id": 58,
-        "name": "n/a",
+        "name": "z",
         "value": 1,
-        "type": "colour",
         "colour": "283b2d"
     },
 
     {
         "id": 59,
-        "name": "n/a",
+        "name": "z",
         "value": 1,
-        "type": "colour",
         "colour": "283b2d"
     },
 
     {
         "id": 60,
-        "name": "n/a",
+        "name": "z",
         "value": 1,
-        "type": "colour",
         "colour": "283b2d"
     },
 
     {
         "id": 61,
-        "name": "n/a",
+        "name": "z",
         "value": 1,
-        "type": "colour",
         "colour": "283b2d"
     },
 
     {
         "id": 62,
-        "name": "n/a",
+        "name": "z",
         "value": 1,
-        "type": "colour",
         "colour": "283b2d"
     },
 
     {
         "id": 63,
-        "name": "n/a",
+        "name": "z",
         "value": 1,
-        "type": "colour",
         "colour": "283b2d"
     },
 
     {
         "id": 64,
-        "name": "n/a",
+        "name": "z",
         "value": 1,
-        "type": "colour",
         "colour": "283b2d"
     },
 
     {
         "id": 65,
-        "name": "n/a",
+        "name": "z",
         "value": 1,
-        "type": "colour",
         "colour": "283b2d"
     },
 
     {
         "id": 66,
-        "name": "n/a",
+        "name": "z",
         "value": 1,
-        "type": "colour",
         "colour": "283b2d"
     },
 
     {
         "id": 67,
-        "name": "n/a",
+        "name": "z",
         "value": 1,
-        "type": "colour",
         "colour": "283b2d"
     },
 
     {
         "id": 68,
-        "name": "n/a",
+        "name": "z",
         "value": 1,
-        "type": "colour",
         "colour": "283b2d"
     },
 
     {
         "id": 69,
-        "name": "n/a",
+        "name": "z",
         "value": 1,
-        "type": "colour",
         "colour": "283b2d"
     },
 
     {
         "id": 70,
-        "name": "n/a",
+        "name": "z",
         "value": 1,
-        "type": "colour",
         "colour": "283b2d"
     },
 
     {
         "id": 71,
-        "name": "n/a",
+        "name": "z",
         "value": 1,
-        "type": "colour",
         "colour": "283b2d"
     },
 
     {
         "id": 72,
-        "name": "n/a",
+        "name": "z",
         "value": 1,
-        "type": "colour",
         "colour": "283b2d"
     },
 
     {
         "id": 73,
-        "name": "n/a",
+        "name": "z",
         "value": 1,
-        "type": "colour",
         "colour": "283b2d"
     },
 
     {
         "id": 74,
-        "name": "n/a",
+        "name": "z",
         "value": 1,
-        "type": "colour",
         "colour": "283b2d"
     },
 
     {
         "id": 75,
-        "name": "n/a",
+        "name": "z",
         "value": 1,
-        "type": "colour",
         "colour": "283b2d"
     },
 
     {
         "id": 76,
-        "name": "n/a",
+        "name": "z",
         "value": 1,
-        "type": "colour",
         "colour": "283b2d"
     },
 
     {
         "id": 77,
-        "name": "n/a",
+        "name": "z",
         "value": 1,
-        "type": "colour",
         "colour": "283b2d"
     },
 
     {
         "id": 78,
-        "name": "n/a",
+        "name": "z",
         "value": 1,
-        "type": "colour",
         "colour": "283b2d"
     },
 
     {
         "id": 79,
-        "name": "n/a",
+        "name": "z",
         "value": 1,
-        "type": "colour",
         "colour": "283b2d"
     },
 
     {
         "id": 80,
-        "name": "n/a",
+        "name": "z",
         "value": 1,
-        "type": "colour",
         "colour": "283b2d"
     },
 
     {
         "id": 81,
-        "name": "n/a",
+        "name": "z",
         "value": 1,
-        "type": "colour",
         "colour": "283b2d"
     },
 
     {
         "id": 82,
-        "name": "n/a",
+        "name": "z",
         "value": 1,
-        "type": "colour",
         "colour": "283b2d"
     },
 
     {
         "id": 83,
-        "name": "n/a",
+        "name": "z",
         "value": 1,
-        "type": "colour",
         "colour": "283b2d"
     },
 
     {
         "id": 84,
-        "name": "n/a",
+        "name": "z",
         "value": 1,
-        "type": "colour",
         "colour": "283b2d"
     },
 
     {
         "id": 85,
-        "name": "n/a",
+        "name": "z",
         "value": 1,
-        "type": "colour",
         "colour": "283b2d"
     },
 
     {
         "id": 86,
-        "name": "n/a",
+        "name": "z",
         "value": 1,
-        "type": "colour",
         "colour": "283b2d"
     },
 
     {
         "id": 87,
-        "name": "n/a",
+        "name": "z",
         "value": 1,
-        "type": "colour",
         "colour": "283b2d"
     },
 
     {
         "id": 88,
-        "name": "n/a",
+        "name": "z",
         "value": 1,
-        "type": "colour",
         "colour": "283b2d"
     },
 
     {
         "id": 89,
-        "name": "n/a",
+        "name": "z",
         "value": 1,
-        "type": "colour",
         "colour": "283b2d"
     },
 
     {
         "id": 90,
-        "name": "n/a",
+        "name": "z",
         "value": 1,
-        "type": "colour",
         "colour": "283b2d"
     },
 
     {
         "id": 91,
-        "name": "n/a",
+        "name": "z",
         "value": 1,
-        "type": "colour",
         "colour": "283b2d"
     },
 
     {
         "id": 92,
-        "name": "n/a",
+        "name": "z",
         "value": 1,
-        "type": "colour",
         "colour": "283b2d"
     },
 
     {
         "id": 93,
-        "name": "n/a",
+        "name": "z",
         "value": 1,
-        "type": "colour",
         "colour": "283b2d"
     },
 
     {
         "id": 94,
-        "name": "n/a",
+        "name": "z",
         "value": 1,
-        "type": "colour",
         "colour": "283b2d"
     },
 
     {
         "id": 95,
-        "name": "n/a",
+        "name": "z",
         "value": 1,
-        "type": "colour",
         "colour": "283b2d"
     },
 
     {
         "id": 96,
-        "name": "n/a",
+        "name": "z",
         "value": 1,
-        "type": "colour",
         "colour": "283b2d"
     },
 
     {
         "id": 97,
-        "name": "n/a",
+        "name": "z",
         "value": 1,
-        "type": "colour",
         "colour": "283b2d"
     },
 
     {
         "id": 98,
-        "name": "n/a",
+        "name": "z",
         "value": 1,
-        "type": "colour",
         "colour": "283b2d"
     },
 
     {
         "id": 99,
-        "name": "n/a",
+        "name": "z",
         "value": 1,
-        "type": "colour",
         "colour": "283b2d"
     }
 ]

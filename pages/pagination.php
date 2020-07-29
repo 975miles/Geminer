@@ -19,7 +19,9 @@
                 <button class="page-link" onclick="goToPage(<?=$page['url']?>)"><?=$page['num']?></button>
             </li>
             <?php } else { ?>
-            <li class="page-item disabled"><span><?=$page['num']?></span></li>
+            <li class="page-item disabled">
+                <span class="page-link"><?=$page['num']?></span>
+            </li>
             <?php } ?>
         <?php } ?>
 

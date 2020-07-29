@@ -1,5 +1,7 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT']."/../start.php";
+$title = "TVWIEMWYTGI";
+$desc = "The volcano which erupts money when you throw in gems";
 require_auth();
 require_once $_SERVER['DOCUMENT_ROOT']."/../fn/real_gem_amounts.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/../consts/gems.php";
@@ -13,7 +15,7 @@ if ($sth->fetchColumn() >= $max_marketplace_listings)
     throw_error("You've reached your maximum limit of concurrent marketplace listings ($max_marketplace_listings).");
 else if (isset( $_POST['gem'], $_POST['amount'])) {
     $amount = intval($_POST['amount']);
-    $gem = intval($_POST['gem']);
+    $gem = $_POST['gem'] == "none" ? null : intval($_POST['gem']);
     if ($amount < 1 or $amount > 1000000000)
         show_info("You can't throw in that much!");
     else if (!array_key_exists($gem, $all_gems))
@@ -21,17 +23,18 @@ else if (isset( $_POST['gem'], $_POST['amount'])) {
     else if ($amount > $real_gem_amounts[$gem])
         show_info("You don't have enough of that gem");
     else {
-        $profit = $all_gems[$gem]->value * $amount;
+        $profit = floor($all_gems[$gem]->value * $amount);
         $dbh->prepare("UPDATE users SET `$gem` = `$gem` - ?, money = money + ? WHERE id = ?")
             ->execute([$amount, $profit, $user['id']]);
         $user['money'] += $profit;
         $user[$gem] -= $amount;
         $real_gem_amounts[$gem] -= $amount;
-        show_info("You throw ${amount}mP of ".$all_gems[$gem]->name." into the volcano, and it inexplicably erupts ".display_money($profit)."!");
+        gen_top($title, $desc);
+        show_info("You throw ${amount}mpx of ".$all_gems[$gem]->name." into the volcano, and it inexplicably erupts ".display_money($profit)."!", "How?!");
     }
 }
 
-gen_top("TVWIEMWYTGI", "The volcano which erupts money when you throw in gems");
+gen_top($title, $desc);
 ?>
 
 <h1>TVWIEMWYTGI</h1>
@@ -47,7 +50,7 @@ gen_top("TVWIEMWYTGI", "The volcano which erupts money when you throw in gems");
         <div class="input-group mb-2" style="max-width: 200px">
             <input class="form-control" id="gemAmountInput" type="number" name="amount" min="0" max="1000000000" value="1" onchange="showProfit()">
             <div class="input-group-prepend">
-                <div class="input-group-text">mP</div>
+                <div class="input-group-text">mpx</div>
             </div>
         </div>
 
@@ -55,7 +58,7 @@ gen_top("TVWIEMWYTGI", "The volcano which erupts money when you throw in gems");
     </form>
 </div>
 
-<p>Throwing in <span id="gemAmount"><i>(select...)</i></span>mP of <span id="gemName"><i>(select...)</i></span> would make the volcano erupt <span id="profitAmount"><i>(select...)</i></span>.</p>
+<p>Throwing in <span id="gemAmount"><i>(select...)</i></span>mpx of <span id="gemName"><i>(select...)</i></span> would make the volcano erupt <span id="profitAmount"><i>(select...)</i></span>.</p>
 
 <br>
 <script>
@@ -69,14 +72,14 @@ gen_top("TVWIEMWYTGI", "The volcano which erupts money when you throw in gems");
             gem = gemsInfo[gem];
             $("#gemAmount").html(amount);
             $("#gemName").html(await displayGem(gem.id, "sm")+" "+gem.name);
-            $("#profitAmount").html(displayMoney(gem.value * amount));
+            $("#profitAmount").html(displayMoney(Math.floor(gem.value * amount)));
         }
     }
 
     $(document).ready(async ()=>{
         await sortedGems;
         for (gem of sortedGems)
-            $("#gemSelect").append($(`<option style="color:#${gem.colour}" value=${gem.id}>${gem.name} (${displayMoney(gem.value)}/mP) - you have ${gemAmounts[gem.id]}mP</option>`));
+            $("#gemSelect").append($(`<option style="color:#${gem.colour}" value=${gem.id}>${gem.name} (${displayMoney(gem.value, 3)}/mpx) - you have ${gemAmounts[gem.id]}mpx</option>`));
     });
 </script>
 

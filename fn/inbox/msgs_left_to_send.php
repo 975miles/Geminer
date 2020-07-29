@@ -5,6 +5,9 @@ function msgs_left_to_send($sender_id, $recipient_id) {
     global $dbh;
     global $max_messages_per_person_free;
     global $max_messages_per_person_premium;
+
+    if ($sender_id == 0)
+        return 1;
     
     //if the sender is blocked by the recipient, no messages can be sent
     $sth = $dbh->prepare("SELECT COUNT(1) FROM user_blocks WHERE blocker = ? AND blocked = ?");

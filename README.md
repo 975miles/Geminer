@@ -1,7 +1,7 @@
-# Geminer
+# [Geminer](https://pastebin.com/raw/9gJBUfGp)
 ### Geminer is a number simulator where users mine, sell, and decorate virtual canvases with gems.
 
-**Note**: The code on this repository may be ahead of what you see on the main site, but the PTR will most likely be up-to-date with this repository.
+**Note**: The code on this repository may be ahead of what you see on [the main site](https://pastebin.com/raw/9gJBUfGp), but [the PTR](https://geminer-ptr.flynna.uk) will most likely be up-to-date with this repository.
 
 Below are instructions on how to set up Geminer for testing purposes or whatever else.
 

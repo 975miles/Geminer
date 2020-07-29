@@ -27,27 +27,24 @@ gen_top("A gem collection", "&quot;".$collection['name']."&quot; by ".get_user_b
 <?=user_background($collection['by'])?>
 <h1><?=htmlentities($collection['name'])?></h1>
 <p>by <?php user_button($collection['by']); ?></p>
-<img class="collection-img fill-page" id="collectionImg">
+<img class="collection-img fill-page" id="collectionImg" src="/a/i/loading.png">
+<br><br>
+<button class="btn btn-primary" id="drawModeSwitcher" onclick="switchDrawMode()"></button>
 <script>
-(async ()=> {
+async function drawCollection() {
+    $("#collectionImg").attr("src", "/a/i/loading.png");
+    $("#drawModeSwitcher").html("Switch to "+(mode == "gem" ? "colour" : "gem")+" rendering mode");
     await gemsInfo;
-    let data = JSON.parse("<?=$collection['data']?>");
-    let height = data.length;
-    let width = data[0].length;
-    const tileSize = 16;
-    let canvas = $(`<canvas width=${width * tileSize} height=${height * tileSize}></canvas>`)[0];
-    let context = canvas.getContext("2d");
-    
     for (let y=0; y<height; y++) {
         for (let x=0; x<width; x++) {
             await (new Promise(async (res, rej) => {
                 let gem = gemsInfo[data[y][x]];
                 
-                if (gem.type == "colour") {
+                if (mode == "colour") {
                     context.fillStyle = "#"+gem.colour;
                     context.fillRect(x * tileSize, y * tileSize, tileSize, tileSize);
                     res();
-                } else if (gem.type == "image") {
+                } else if (mode == "gem") {
                     let gemImage = new Image();
                     gemImage.onload = () => {
                         context.drawImage(gemImage, x * tileSize, y * tileSize, tileSize, tileSize);
@@ -60,8 +57,27 @@ gen_top("A gem collection", "&quot;".$collection['name']."&quot; by ".get_user_b
     }
     let imgData = canvas.toDataURL();
     $("#collectionImg").attr("src", imgData);
-    $("head").append(`<meta property="og:image" content="${imgData}">`);
-})()
+}
+
+function switchDrawMode() {
+    mode = (mode == "gem" ? "colour" : "gem");
+    drawCollection();
+}
+
+var mode = "<?=$collection['mode'] == 0 ? "gem" : "colour"?>";
+var data = "<?=$collection['data']?>";
+(async ()=> {
+    $("h1").prepend(`<img class="collection-img" style="height:1em" src="${await genCollectionImage(data)}"> `);
+})();
+data = JSON.parse(data);
+const height = data.length;
+const width = data[0].length;
+const tileSize = 16;
+var canvas = $(`<canvas width=${width * tileSize} height=${height * tileSize}></canvas>`)[0];
+var context = canvas.getContext("2d");
+drawCollection(mode);
+
+
 </script>
 <hr>
 <a id="rate-1" class="btn btn-light text-dark"<?php if ($is_logged_in) { ?> onclick="rate(1)"<?php } else { ?> href="/log/in"<?php } ?> value="<?=$user_rating === true ? "true" : "false"?>">
@@ -98,15 +114,15 @@ gen_top("A gem collection", "&quot;".$collection['name']."&quot; by ".get_user_b
 <h2>This collection is yours.</h2>
 <a href="/collection/edit?id=<?=$_GET['id']?>" class="btn btn-primary">Edit</a>
 <br>
-<?php if (!$collection['is_pfp'] and $collection['type'] == 0) { ?>
+<?php if (!$collection['is_pfp'] and $collection['type'] != 3) { ?>
 <form action="/collection/make_pfp.php" method="post">
     <button class="btn btn-primary" name="id" value="<?=$collection['id']?>">Make this collection your profile picture</button>
 </form>
 <?php } else { ?>
-<button class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="<?php if ($collection['is_pfp']) { ?>This collection is already your profile picture.<?php } else if ($collection['type'] != 0) { ?>You can only make standard square collections your profile picture.<?php } ?>" disabled>Make this collection your profile picture</button>
+<button class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="<?php if ($collection['is_pfp']) { ?>This collection is already your profile picture.<?php } else if ($collection['type'] == 3) { ?>You can't make massive collections your profile picture.<?php } ?>" disabled>Make this collection your profile picture</button>
 <br>
 <?php } if ($collection['is_pfp'] or $collection['type'] == 3) { ?>
-<button class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="<?php if ($collection['is_pfp']) { ?>You can't delete your profile picture. Make another standard square collection your profile picture and then come here to delete this.<?php } else if ($collection['type'] == 3) { ?>You only get one massive collection, so you can't delete it.<?php } ?>" disabled>Delete</button>
+<button class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="<?php if ($collection['is_pfp']) { ?>You can't delete your profile picture. Make another collection your profile picture and then come here to delete this.<?php } else if ($collection['type'] == 3) { ?>You only get one massive collection, so you can't delete it.<?php } ?>" disabled>Delete</button>
 <?php } else { ?>
 <button class="btn btn-danger" type="submit" name="id" value="<?=$collection['id']?>" onclick="$('#confirmCollectionDelete').modal()">Delete</button>
 

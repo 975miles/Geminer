@@ -3,7 +3,7 @@ require_once $_SERVER['DOCUMENT_ROOT']."/../start.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/../fn/user_button.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/../fn/inbox/msgs_left_to_send.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/../fn/inbox/send_msg.php";
-gen_top("Geminer - Send a message");
+gen_top("Sending a message...");
 require_auth();
 
 if (isset($_GET['to'])) {

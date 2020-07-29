@@ -7,7 +7,6 @@
                         <div class="modal-title" id="infoBoxTitle">Error title should go here.</div>
                     </div>
                     <div class="modal-body" id="infoBoxContents">Error contents should go here.</div>
-                    <div class="modal-footer"><button class="btn btn-secondary" accesskey="s" type="button" data-dismiss="modal">Dismiss (esc)</button></div>
                 </div>
             </div>
         </div>

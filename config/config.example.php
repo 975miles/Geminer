@@ -63,7 +63,7 @@ $max_username_length_premium = 16;
 //Messages from the system will bypass this limit.
 $max_inbox_size_free = 125;
 $max_inbox_size_premium = 500;
-$max_inbox_size_admin = 100000; //this is high because when admins have to help users they'll need to verify them
+$max_inbox_size_admin = 1000; //make this a bit high if admins will have to help users
 
 $max_messages_per_person_free = 5;
 $max_messages_per_person_premium = 10;

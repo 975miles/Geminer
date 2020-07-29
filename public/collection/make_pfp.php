@@ -7,7 +7,7 @@ if (isset($_POST['id'])) {
     $sth = $dbh->prepare("SELECT * FROM collections WHERE id = ?");
     $sth->execute([$id]);
     $collection = $sth->fetch();
-    if ($collection and $collection['by'] == $user['id'] and $collection['type'] == 0 and !$collection['is_pfp']) {
+    if ($collection and $collection['by'] == $user['id'] and $collection['type'] != 3 and !$collection['is_pfp']) {
         $dbh->prepare("UPDATE collections SET is_pfp = 0 WHERE by = ?")->execute([$user['id']]); //make existing pfp a normal collection
         $dbh->prepare("UPDATE collections SET is_pfp = 1 WHERE id = ?")->execute([$id]);
         redirect("/collection/view?id=".dechex($id));

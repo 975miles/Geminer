@@ -32,7 +32,6 @@ gen_top("Geminer Premium", "Details about Geminer premium");
 </p>
 
 <h2>Premium features</h2>
-<p><i>Premium just includes QoL and cosmetic features, none of them are "pay-to-win"... yet.</i></p>
 
 <ul>
     <?php
@@ -43,9 +42,8 @@ gen_top("Geminer Premium", "Details about Geminer premium");
         return $output/$n;
     }
     ?>
-    <li>Approximately <?=vein_average($max_veins_per_mine_premium)/vein_average($max_veins_per_mine_free)?>x the amount of gems per mine</li>
-    <li>TVWIEMWYTGI can somehow sense the greatness of premium members, and erupts around <?=$free_sell_divisor?>x the amount of money for them</li>
-    <li>One massive <?=$collection_types[3]->width?>*<?=$collection_types[3]->height?> collection</li>
+    <li>Approximately <?=vein_average($max_veins_per_mine_premium)/vein_average($max_veins_per_mine_free)?>x the amount of gems per mining shift</li>
+    <li>One massive <?=$collection_types[3]->width?>*<?=$collection_types[3]->height?> collection (automatically created)</li>
     <li>Profile badge showing when you supported Geminer</li>
     <li>No more link nagging you to get premium in your top-right profile dropdown.</li>
     <?php foreach ($extra_premium_features as $extra_premium_feature) { ?>
@@ -125,9 +123,15 @@ td, th {
         </tr>
 
         <tr>
+            <td>Available navbar backgrounds</td>
+            <td><?=count(array_filter($navbar_backgrounds, function ($i) {return !$i->premium;}))?></td>
+            <td><?=count($navbar_backgrounds)?></td>
+        </tr>
+
+        <tr>
             <td>Total possible customisation combinations</td>
-            <td><?=count(array_filter($tag_styles, function ($i) {return !$i->premium;}))*count(array_filter($tag_fonts, function ($i) {return !$i->premium;}))*count(array_filter($profile_backgrounds, function ($i) {return !$i->premium;}))?></td>
-            <td><?=count($tag_styles)*count($tag_fonts)*count($profile_backgrounds)?></td>
+            <td><?=count(array_filter($tag_styles, function ($i) {return !$i->premium;}))*count(array_filter($tag_fonts, function ($i) {return !$i->premium;}))*count(array_filter($profile_backgrounds, function ($i) {return !$i->premium;}))*count(array_filter($navbar_backgrounds, function ($i) {return !$i->premium;}))?></td>
+            <td><?=count($tag_styles)*count($tag_fonts)*count($profile_backgrounds)*count($navbar_backgrounds)?></td>
         </tr>
 
         <tr>

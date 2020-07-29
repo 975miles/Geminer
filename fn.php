@@ -4,6 +4,7 @@ require_once "$function_dir/place_collection_image.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/../consts/cosmetics/tag_styles.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/../consts/cosmetics/tag_fonts.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/../consts/cosmetics/backgrounds.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/../consts/cosmetics/navbarbgs.php";
 
 function redirect($url) {
     gen_top();
@@ -20,7 +21,7 @@ function require_auth() {
     if ($is_logged_in)
         return;
     else
-        redirect("/log/in?redirect_back_to=".$_SERVER['REQUEST_URI']);
+        require_once $_SERVER['DOCUMENT_ROOT']."/../pages/authneeded.php";   
 }
 
 function restrict_to($group = "admin") {
@@ -37,7 +38,7 @@ function restrict_to($group = "admin") {
 
 function redirect_back($fallback = "/") {
     if (isset($_GET['redirect_back_to']))
-        redirect($_GET['redirect_back_to']);
+        redirect(urldecode($_GET['redirect_back_to']));
     else
         redirect($fallback);
 }
@@ -80,9 +81,9 @@ function user_background($user_id) {
     return $profile_backgrounds[get_user_by_id($user_id)['profile_background']]->style_tag();
 }
 
-function display_money($amount) {
+function display_money($amount, $extra_decimals = 0, $include_currency_symbol = true) {
     global $currency_symbol;
-    return number_format($amount/100, 2).$currency_symbol;
+    return number_format($amount/100, 2 + $extra_decimals).($include_currency_symbol ? $currency_symbol : "");
 }
 
 function show_info($error="Unknown error occurred.", $title="Error!") {
@@ -97,7 +98,6 @@ function show_info($error="Unknown error occurred.", $title="Error!") {
 function throw_error($error="Unknown error occurred.", $title="Error!") {
     show_info($error, $title);
     gen_bottom();
-    die();
 }
 
 function hover_about($info) {
@@ -124,8 +124,12 @@ function gen_middle() {
     global $is_logged_in;
     global $user;
     global $currency_symbol;
+    global $repo_url;
     global $tag_styles;
     global $tag_fonts;
+    global $navbar_backgrounds;
+    $selected_navbar_backgrounds = json_decode($user['navbar_backgrounds']);
+    $navbar_background = $navbar_backgrounds[($is_logged_in ? $selected_navbar_backgrounds[array_rand($selected_navbar_backgrounds)] : 0)];
     require_once $_SERVER['DOCUMENT_ROOT']."/../template/middle.php";
 }
 

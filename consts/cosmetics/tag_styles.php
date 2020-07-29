@@ -35,25 +35,25 @@ $tag_styles = [
     ),
 
     new TagStyle(
-        $bg = "red",
-        $light = false,
-        $premium = false
-    ),
-
-    new TagStyle(
-        $bg = "#f5ef3b",
+        $bg = "#ff75f6",
         $light = true,
         $premium = false
     ),
 
     new TagStyle(
-        $bg = "#4287f5",
+        $bg = "#FF3E96",
         $light = false,
         $premium = false
     ),
 
     new TagStyle(
-        $bg = "#2abf6d",
+        $bg = "#8B0A50",
+        $light = false,
+        $premium = false
+    ),
+
+    new TagStyle(
+        $bg = "#DA70D6",
         $light = false,
         $premium = false
     ),
@@ -65,14 +65,134 @@ $tag_styles = [
     ),
 
     new TagStyle(
+        $bg = "#D8BFD8",
+        $light = true,
+        $premium = false
+    ),
+
+    new TagStyle(
+        $bg = "#8B008B",
+        $light = false,
+        $premium = false
+    ),
+
+    new TagStyle(
+        $bg = "#4B0082",
+        $light = false,
+        $premium = false
+    ),
+
+    new TagStyle(
+        $bg = "#8470FF",
+        $light = false,
+        $premium = false
+    ),
+
+    new TagStyle(
+        $bg = "#191970",
+        $light = false,
+        $premium = false
+    ),
+
+    new TagStyle(
+        $bg = "#0000CD",
+        $light = false,
+        $premium = false
+    ),
+
+    new TagStyle(
+        $bg = "#4287f5",
+        $light = false,
+        $premium = false
+    ),
+
+    new TagStyle(
+        $bg = "#87CEFF",
+        $light = true,
+        $premium = false
+    ),
+
+    new TagStyle(
+        $bg = "#00E5EE",
+        $light = true,
+        $premium = false
+    ),
+
+    new TagStyle(
+        $bg = "#00FA9A",
+        $light = true,
+        $premium = false
+    ),
+
+    new TagStyle(
+        $bg = "#2abf6d",
+        $light = false,
+        $premium = false
+    ),
+
+    new TagStyle(
+        $bg = "#008B45",
+        $light = false,
+        $premium = false
+    ),
+
+    new TagStyle(
+        $bg = "#98FB98",
+        $light = true,
+        $premium = false
+    ),
+
+    new TagStyle(
+        $bg = "#f5ef3b",
+        $light = true,
+        $premium = false
+    ),
+
+    new TagStyle(
+        $bg = "#FFFFE0",
+        $light = true,
+        $premium = false
+    ),
+
+    new TagStyle(
+        $bg = "#CDC9A5",
+        $light = true,
+        $premium = false
+    ),
+
+    new TagStyle(
         $bg = "#e09600",
         $light = true,
         $premium = false
     ),
 
     new TagStyle(
-        $bg = "#ff75f6",
+        $bg = "#8B6508",
+        $light = false,
+        $premium = false
+    ),
+
+    new TagStyle(
+        $bg = "#8B4500",
+        $light = false,
+        $premium = false
+    ),
+
+    new TagStyle(
+        $bg = "#8B7E66",
+        $light = false,
+        $premium = false
+    ),
+
+    new TagStyle(
+        $bg = "#FF6A6A",
         $light = true,
+        $premium = false
+    ),
+
+    new TagStyle(
+        $bg = "red",
+        $light = false,
         $premium = false
     ),
 

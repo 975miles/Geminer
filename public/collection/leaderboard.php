@@ -2,11 +2,11 @@
 require_once $_SERVER['DOCUMENT_ROOT']."/../start.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/../fn/place_collection_image.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/../fn/user_button.php";
-gen_top("Geminer - Collection leaderboard", "The top-rated gem collections.");
+gen_top("Collection leaderboard", "The top-rated gem collections.");
 
 use JasonGrimes\Paginator;
 
-$collections_shown_per_page = 50;
+$collections_shown_per_page = 25;
 $page_number = 1;
 
 if (isset($_GET['page']))

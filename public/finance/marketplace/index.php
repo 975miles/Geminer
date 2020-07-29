@@ -3,7 +3,7 @@ require_once $_SERVER['DOCUMENT_ROOT']."/../start.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/../consts/gems.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/../fn/user_button.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/../fn/gem_displayer.php";
-gen_top("Geminer - Marketplace", "Where miners go to buy and sell their hard-earned gems.");
+gen_top("Marketplace", "Where miners go to buy and sell their hard-earned gems.");
 
 use JasonGrimes\Paginator;
 
@@ -16,17 +16,21 @@ if (isset($_GET['page']))
 $listings_are_filtered = false;
 if (isset($_GET['listing-type'], $_GET['gem'])) {
     $gem_id = intval($_GET['gem']);
-    $listing_type = intval($_GET['listing-type']);
+    $listing_type = $_GET['listing-type'];
+    $all_types_to_find = Array(
+        "buy" => [0, 2],
+        "sell" => [1, 3]
+    );
     if (!array_key_exists($gem_id, $all_gems))
         throw_error("That gem doesn't exist.");
-    else if (!($listing_type == 0 or $listing_type == 1))
+    else if (!array_key_exists($listing_type, $all_types_to_find))
         throw_error("That's not a valid listing type.");
-    
+    $types_to_find = $all_types_to_find[$listing_type];
     $gem = $all_gems[$gem_id];
     $listings_are_filtered = true;
 }
 
-$sql = "FROM marketplace_listings".($listings_are_filtered ? " WHERE gem = $gem_id AND type = $listing_type " : "");
+$sql = "FROM marketplace_listings".($listings_are_filtered ? " WHERE gem = $gem_id AND (type = ".$types_to_find[0]." OR type = ".$types_to_find[1].") " : "");
 $sth = $dbh->prepare("SELECT * $sql ORDER BY created DESC LIMIT $listings_shown_per_page OFFSET ".($page_number-1)*$listings_shown_per_page);
 $sth->execute();
 $listings = $sth->fetchAll(PDO::FETCH_ASSOC);
@@ -42,8 +46,8 @@ $listing_count = $sth->fetchColumn();
         I want to
         <select class="form-control" name="listing-type" required>
             <option selected="selected" disabled="true">select...</option>
-            <option value="0">buy some</option>
-            <option value="1">sell my</option>
+            <option value="buy">buy some</option>
+            <option value="sell">sell my</option>
         </select>
 
         <select class="form-control" name="gem" id="gemSelect" required>
@@ -76,7 +80,7 @@ if ($listing_count > 0) {
         $bg = $profile_backgrounds[get_user_by_id($listing['user'])['profile_background']];
         ?>
         <div class=" rounded border border-dark" style="background: <?=$bg->bgshort?>; color: <?=$bg->text_colour?>;">
-            <p style="margin: 0"><?php user_button($listing['user'], true, "sm"); ?><?=$listings_are_filtered ? " -" : ("is <b>".($listing['type'] == 0 ? "selling" : "buying")."</b>")?> <a href="/finance/marketplace/listing?id=<?=dechex($listing['id'])?>"><?=$listing['amount']?>mP <?=$listings_are_filtered ? "" : "of ".gem_displayer($gem->id).$gem->name." "?>for <?=display_money($listing['price'])?></a> (<?=$listing['type'] == 0 ? round($listing['amount']/$listing['price']/100, 8)."mP/$currency_symbol" : round($listing['price']/$listing['amount']/100, 8).$currency_symbol."/mP"?>)</p>
+            <p style="margin: 0"><?php user_button($listing['user'], true, "sm"); ?> <b><?=$listing['type'] == 0 ? "is selling" : ($listing['type'] == 1 ? "is buying" : ($listing['type'] == 2 ? "has a shop selling" : "is collecting"))?></b> <a href="/finance/marketplace/listing?id=<?=dechex($listing['id'])?>"><?=($listing['type'] == 0 or $listing['type'] == 1) ? $listing['amount']."mpx".($listings_are_filtered ? "" : " of") : ""?> <?=$listings_are_filtered ? "" : "".gem_displayer($gem->id).$gem->name." "?>for <?=($listing['type'] == 0 or $listing['type'] == 1) ? display_money($listing['price']) : display_money($listing['price']/1000, 3)."/mpx"?></a><?=$listing['type'] == 0 ? " (".round($listing['amount']/$listing['price']/100, 8)."mpx/".$currency_symbol.")" : ($listing['type'] == 1 ? " (".display_money($listing['price']/$listing['amount'], 6)."/mpx)" : "")?>.</p>
         </div>
     <?php } ?>
     <hr>

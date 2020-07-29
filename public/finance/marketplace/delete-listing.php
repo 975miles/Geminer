@@ -8,12 +8,25 @@ if (isset($_POST['id'])) {
     $sth->execute([$id, $user['id']]);
     $listing = $sth->fetch();
     if ($listing) {
-        if ($listing['type'] == 1)
-            $dbh->prepare("UPDATE users SET money = money + ? WHERE id = ?")
-                ->execute([$listing['price'], $user['id']]);
-        else if ($listing['type'] == 0)
-            $dbh->prepare("UPDATE users SET "."`".$listing['gem']."`"." = `".$listing['gem']."` + ? WHERE id = ?")
-                ->execute([$listing['amount'], $user['id']]);
+        switch ($listing['type']) {
+            case 2:
+                //fallthrough
+            case 0:
+                $dbh->prepare("UPDATE users SET "."`".$listing['gem']."`"." = `".$listing['gem']."` + ? WHERE id = ?")
+                    ->execute([$listing['amount'], $user['id']]);
+                break;
+
+            case 1:
+                $dbh->prepare("UPDATE users SET money = money + ? WHERE id = ?")
+                    ->execute([$listing['price'], $user['id']]);
+                break;
+    
+            case 3:
+                $dbh->prepare("UPDATE users SET money = money + ? WHERE id = ?")
+                    ->execute([floor($listing['price'] * $listing['amount'] / 1000), $user['id']]);
+                break;
+        }
+
         $dbh->prepare("DELETE FROM marketplace_listings WHERE id = ?")
             ->execute([$id]);
         redirect("/finance/marketplace");

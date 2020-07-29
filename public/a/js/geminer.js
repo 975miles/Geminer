@@ -5,10 +5,8 @@ function loadGems(includeEmptite=true) {
                 data["-1"] = {
                     "id": -1,
                     "name": "emptite",
-                    "type": "colour",
-                    "colour": "f7f6cd",
-                    "chance": 5,
-                    "quantity": 100
+                    "type": "image",
+                    "colour": "f2e3ce"
                 };
             res(data)
         })
@@ -28,10 +26,23 @@ var sortedGems = new Promise(async res => {
     res();
 });
 
-function showInfo(error="Unknown error occurred.", title="Error!") {
+function showInfo(error="Unknown error occurred.", title="Error!", removable = true) {
     $("#infoBoxTitle").html(title);
     $("#infoBoxContents").html(error);
+    footerExists = $("#infoBox").find(".modal-footer").length > 0 ? true : false;
+    let backdrop;
+    if (removable) {
+        backdrop = "true";
+        if (!footerExists)
+            $("#infoBox").find(".modal-content").append($(`<div class="modal-footer"><button class="btn btn-secondary" type="button" data-dismiss="modal">Dismiss (esc)</button></div>`));
+    } else {
+        backdrop = "static";
+        if (footerExists)
+            $("#infoBox").find(".modal-footer").remove();
+    }
+    //$("#infoBox").attr("data-backdrop", backdrop);
     $("#infoBox").modal(); //show modal on page
+    $("#infoBox").data("bs.modal")._config.backdrop = backdrop;
 }
 
 //stole this from https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb oops
@@ -84,16 +95,14 @@ async function displayGem(gemId, size=null) {
     if (size != null)
         elemClass += " gem-displayer-" + size;
 
-    let style = "";
-    style += `background-color: #${gem.colour};`;
-    if (gem.type == "image")
-        style += `background-image: url('/a/i/gem/${gem.id}.png');`;
+    let style = `background-color: #${gem.colour};background-image: url('/a/i/gem/${gem.id}.png');`;
 
     return `<span class="${elemClass}" style="${style}"></span>`;
 }
 
-function displayMoney(amount) {
-    return (amount/100).toFixed(2)+currencySymbol;
+function displayMoney(amount, extraDecimals = 0, round = "round") {
+    let mult = 10 ** (extraDecimals);
+    return String(Math[round](amount*mult)/(mult*100))+currencySymbol;
 }
 
 $.extend({
@@ -113,5 +122,4 @@ $(document).ready(()=>{
     if (window.history.replaceState)
         window.history.replaceState(null, null, window.location.href);
     $("[data-toggle=\"tooltip\"]").tooltip(); //enable bootstrap tooltips
-    $("[data-toggle=\"popover\"]").popover();
 });

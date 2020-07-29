@@ -4,14 +4,16 @@
         This site requires javascript enabled.
     </noscript>
 
-    <nav class="navbar sticky-top navbar-expand-lg navbar-light">
+    <nav class="navbar sticky-top navbar-expand-lg navbar-<?=$navbar_background->dark ? "dark" : "light"?>" style="background: <?=$navbar_background->style?>">
         <div class="dropdown">
             <a class="navbar-brand dropdown-toggle" id="mainNavbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <img src="/a/i/logo256.png" height="40" alt="Geminer">
             </a>
             <div class="dropdown-menu" aria-labelledby="mainNavbarDropdown">
                 <a class="dropdown-item" href="/">Home</a>
+                <a class="dropdown-item" href="/announcements">Announcements</a>
                 <a class="dropdown-item" href="/contact">Contact</a>
+                <a class="dropdown-item" href="<?=$repo_url?>"><img src="/a/i/github.png"></a>
             </div>
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -111,13 +113,7 @@
                     <a class="dropdown-item" href="/profile?user=<?=$user['name']?>">Profile</a>
                     <a class="dropdown-item" href="/dash/notifications">
                     Notifications
-                    <?php if (!$user['read_notifications']) {?>
-                    <span class="badge badge-danger">!</span>
-                    <?php } ?>
-                    </a>
-                    <a class="dropdown-item" href="/announcements">
-                    Announcements
-                    <?php if (!$user['read_announcements']) {?>
+                    <?php if (!$user['read_notifications'] or !$user['read_announcements']) {?>
                     <span class="badge badge-danger">!</span>
                     <?php } ?>
                     </a>
