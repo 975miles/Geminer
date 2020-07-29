@@ -157,9 +157,9 @@ gen_top("A marketplace listing");
         <?php } } else { ?>
         <p>Login to interact</p>
         <?php } ?>
-    <?php } ?>
-    <?php if ($is_logged_in) ?>
-        <?php { if($user['id'] == $listing['user']) { ?>
+    <?php }
+    if ($is_logged_in) { ?>
+        <?php if($user['id'] == $listing['user']) { ?>
         <form action="delete-listing.php" method="post">
             <button class="btn btn-outline-danger" type="submit" name="id" value="<?=$listing['id']?>">Delete</button>
             <p>Deleting this will refund your <?=($listing['type'] == 0 or $listing['type'] == 2) ? "gems" : "money"?>.</p>
