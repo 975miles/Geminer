@@ -113,8 +113,11 @@ else if (isset($_POST['type'], $_POST['gem'], $_POST['amount'], $_POST['price'])
             $("#gemSelect").append($(`<option style="color:#${gem.colour}" value=${gem.id}>${gem.name} - ${gemAmounts[gem.id]}mpx</option>`));
     });
 
-    function fullPrice(up) {
-        return (Math[up ? "ceil" : "floor"](Number($("#gemAmount").val())*(Number($("#price").val()*100)))/100).toFixed(2)+currencySymbol;
+    function fullPrice(up, string = true) {
+        let price = (Math[up ? "ceil" : "floor"](Number($("#gemAmount").val())*(Number($("#price").val()*100)))/100)
+        if (string)
+            price = price.toFixed(2)+currencySymbol;
+        return price
     }
 
     async function updateForm() {
@@ -156,12 +159,12 @@ else if (isset($_POST['type'], $_POST['gem'], $_POST['amount'], $_POST['price'])
                 break;
             
             case 1:
-                if (user.money < Number(values.price))
+                if (Number(user.money) < Number(values.price))
                     return showInfo("You don't have enough money to pay that.");
                 break;
 
             case 3:
-                if (user.money < fullPrice(true))
+                if (Number(user.money) < fullPrice(true))
                     return showInfo("You don't have that much money.");
                 break;
 
