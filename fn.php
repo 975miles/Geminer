@@ -9,8 +9,9 @@ require_once $_SERVER['DOCUMENT_ROOT']."/../consts/cosmetics/navbarbgs.php";
 function redirect($url) {
     gen_top();
     ?>
-<script>
-    window.location.replace("<?=$url?>");
+<script id="redirect">
+    var redirectURL = "<?=$url?>";
+    window.location.replace(redirectURL);
 </script>
     <?php
     gen_bottom();

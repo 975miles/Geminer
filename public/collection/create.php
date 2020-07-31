@@ -20,23 +20,25 @@ if (isset($_POST['name']) and isset($_POST['type'])) {
         show_info("Collection name can't be empty.");
     else if (!array_key_exists($_POST['type'], $collection_types))
         show_info($_POST['type']." isn't a valid collection size.");
-    else if ($_POST['type'] == 3)
-        show_info("You can't create new giant collections.");
     else {
         $empty_collection = Array();
         $collection_type = $collection_types[$_POST['type']];
-        for ($row = 0; $row < $collection_type->height; $row++) {
-            $collection_row = Array();
-            for ($column = 0; $column < $collection_type->width; $column++) {
-                array_push($collection_row, -1);
+        if ($collection_type->premium and !$user['is_premium'])
+            show_info("You need to be premium to use that collection size.");
+        else {
+            for ($row = 0; $row < $collection_type->height; $row++) {
+                $collection_row = Array();
+                for ($column = 0; $column < $collection_type->width; $column++) {
+                    array_push($collection_row, -1);
+                }
+                array_push($empty_collection, $collection_row);
             }
-            array_push($empty_collection, $collection_row);
+
+            $dbh->prepare("INSERT INTO collections (type, name, by, created_at, data) VALUES (?, ?, ?, ?, ?)")
+                ->execute([$_POST['type'], $_POST['name'], $user['id'], time(), json_encode($empty_collection)]);
+
+            redirect("/collection/edit?id=".dechex($dbh->lastInsertId()));
         }
-
-        $dbh->prepare("INSERT INTO collections (type, name, by, created_at, data) VALUES (?, ?, ?, ?, ?)")
-            ->execute([$_POST['type'], $_POST['name'], $user['id'], time(), json_encode($empty_collection)]);
-
-        redirect("/collection/edit?id=".dechex($dbh->lastInsertId()));
     }
 }
 ?>
@@ -56,25 +58,34 @@ if (isset($_POST['name']) and isset($_POST['type'])) {
 <div id="sizes"></div>
 
 <script>
-const imgs = [
-    "GEAAABhAQMAAAD8yF3gAAAABlBMVEUAAAD///+l2Z/dAAAAHklEQVQ4y2NABbnbbsMRGm9U5ajKUZWjKkdV4lYJAJeV/hAX6SbbAAAAAElFTkSuQmCC",
-    "HkAAABJAQMAAAAjThunAAAABlBMVEUAAAD///+l2Z/dAAAAHElEQVQ4y2PAALnbbiMjTIFRLaNaRrWMahncWgC1Qt4wOmc7+QAAAABJRU5ErkJggg==",
-    "EkAAAB5AQMAAABPx54yAAAABlBMVEUAAAD///+l2Z/dAAAAHUlEQVQ4y2NAArnbbkMQMnNUwaiCUQWjCkYVwAAAxijeMAQTpZkAAAAASUVORK5CYII=",
-    null,
-    "DEAAAAxAQMAAABJUtNfAAAABlBMVEUAAAD///+l2Z/dAAAAFUlEQVQY02OAgdxtt4EITo+K01ccAMl3f4G4gNG+AAAAAElFTkSuQmCC",
-    "BkAAAAZAQMAAAD+JxcgAAAABlBMVEUAAAD///+l2Z/dAAAAEUlEQVQI12MAg9xttyEEfbkA0iYf4RW25YUAAAAASUVORK5CYII=",
-    "D0AAAAlAQMAAADLKXNcAAAABlBMVEUAAAD///+l2Z/dAAAAFklEQVQY02OAg9xtt0FoA5wxKkWqFACP3npZnfsXEAAAAABJRU5ErkJggg==",
-    "CUAAAA9AQMAAAAQ1TK2AAAABlBMVEUAAAD///+l2Z/dAAAAFklEQVQY02OAgNxtt3M3QMhREdqJAADJFnw5S7/64AAAAABJRU5ErkJggg==",
-]
+const tileWidth = 2;
+const lineWidth = 1;
+const fullWidth = tileWidth + lineWidth;
+
 $.getJSON("/a/data/collection-types.json", types => {
-    for (let i = 0; i < types.length; i++) {
-        let img = imgs[i];
+    for (let i in types) {
         let type = types[i];
-        if (img == null)
+        if (type.premium && !user.is_premium)
             continue;
+        let canvas = $('<canvas id="'+i+'">')[0];
+        canvas.width = type.width * fullWidth + lineWidth;
+        canvas.height = type.height * fullWidth + lineWidth;
+
+        let ctx = canvas.getContext("2d");
+        ctx.fillStyle = "black";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "white";
+        for (let x = 0; x < canvas.width; x += fullWidth) {
+            for (let y = 0; y < canvas.height; y += fullWidth) {
+                ctx.fillRect(x+lineWidth, y+lineWidth, tileWidth, tileWidth);
+            }
+        }
 
         let typeDisplay = `${type.name} - ${type.width}px*${type.height}px`;
-        $("#sizes").append($(`<div><label>${typeDisplay}</label><br><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA${img}"><br><br></div>`));
+        let div = $(`<div><label>${typeDisplay}</label><br></div>`)
+        div.append($(canvas));
+        div.append("<br><br>");
+        $("#sizes").append(div);
         $("#typeSelect").append($(`<option value="${i}">${typeDisplay}</option>`));
     }
 });

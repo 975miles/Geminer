@@ -2,6 +2,18 @@
 require_once $_SERVER['DOCUMENT_ROOT']."/../start.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/../fn/real_gem_amounts.php";
 gen_top("Convert an image to a collection");
+
+$reached_maximum = true;
+if ($is_logged_in) {
+    $max_collection_amount = ($user['is_premium'] ? $collection_storage_limit_premium : $collection_storage_limit_free);
+
+    $sth = $dbh->prepare("SELECT COUNT(1) FROM collections WHERE by = ?");
+    $sth->execute([$user['id']]);
+    $collection_amount = $sth->fetchColumn();
+
+    if ($collection_amount < $max_collection_amount)
+        $reached_maximum = false;
+}
 ?>
 
 <h1>Image converter</h1>
@@ -86,11 +98,8 @@ function uploadImage(inputElement) {
         reader.onload = e => {
             let img = new Image();
             img.onload = () => {
-                let selectedSizes = $("#sizeSelect").val().split('*');
-                collectionSize = {
-                    width: Number(selectedSizes[0]),
-                    height: Number(selectedSizes[1])
-                }
+                collectionType = Number($("#sizeSelect").val());
+                collectionSize = collectionTypes[collectionType];
                 let canvas = $("<canvas>")[0];
                 canvas.width = collectionSize.width;
                 canvas.height = collectionSize.height;
@@ -155,21 +164,65 @@ async function generateImage(sourceImg) {
     }
 
     let gemsNeeded = $("<p>You will need: <br><br></p>");
+    let creatable = !reachedMaximum;
     for (i in gemAmounts) {
         gemsNeeded.append(`${gemAmounts[i]}px of ${await displayGem(i)}${gemsInfo[i].name}`);
         if (loggedIn) {
             let userGemAmount = userGemAmounts[i]/1000;
             gemsNeeded.append(` - You have ${userGemAmount}px. ${(userGemAmount < gemAmounts[i] ? `You need ${gemAmounts[i]-userGemAmount}px more.` : "You have enough!")}`);
+            if (creatable && userGemAmount < gemAmounts[i])
+                creatable = false;
         }
         gemsNeeded.append('<br>')
     }
     div.append($("<hr>"));
     div.append(gemsNeeded);
+    if (creatable)
+        div.append($('<button class="btn btn-primary" onclick="createCollection()">Create as a collection</button>'));
+    else {
+        let err;
+        if (loggedIn) {
+            if (reachedMaximum)
+                err = "You've reached your maximum amount of collections.";
+            else
+                err = "You're missing some gems.";
+        } else
+            err = "You need to be logged in to create collections."
+        let btn = $('<button class="btn btn-primary" data-toggle="tooltip" title="'+err+'" disabled>Create as a collection</button>');
+        div.append(btn);
+        btn.tooltip();
+    }
+}
+
+function createCollection() {
+    var collectionName = "Generated collection"
+    $.post("/collection/create", {
+        name: collectionName,
+        type: collectionType
+    }, page => {
+        eval($(page).find("#redirect").html().split("\n")[1]);
+        console.log(redirectURL);
+        for (let i in outputImage)
+            for (let t in outputImage[i])
+                outputImage[i][t] = Number(outputImage[i][t]);
+        $.post(redirectURL, {
+            name: collectionName,
+            collection_data: JSON.stringify(outputImage),
+            mode: mode
+        }, page2 => {
+            console.log(JSON.stringify(outputImage));
+            console.log(page2)
+            console.log($(page2).find("#redirect").html())
+            eval($(page2).find("#redirect").html());
+        });
+    });
 }
 
 const tileSize = 16;
 var outputImage;
 var collectionSize;
+var collectionType;
+var reachedMaximum = <?=$reached_maximum ? "true" : "false"?>;
 var mode = "colour";
 var gemColours = new Promise(async (res, rej) => {
     await gemsInfo;
@@ -185,9 +238,14 @@ var gemColours = new Promise(async (res, rej) => {
 var userGemAmounts = JSON.parse("<?=json_encode(get_real_gem_amounts())?>");
 <?php } ?>
 
+var collectionTypes;
+
 $.getJSON("/a/data/collection-types.json", data=>{
-    for (i of data) {
-        $("#sizeSelect").append($(`<option value="${i.width}*${i.height}">${i.name} - ${i.width}px*${i.height}px</option>`));
+    collectionTypes = data;
+    for (i in collectionTypes) {
+        let type = collectionTypes[i];
+        if (!(type.premium && (!loggedIn || !user.is_premium)))
+            $("#sizeSelect").append($(`<option value="${i}">${type.name} - ${type.width}px*${type.height}px</option>`));
     }
 });
 </script>

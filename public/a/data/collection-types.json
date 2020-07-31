@@ -2,48 +2,168 @@
     {
         "name": "Square (standard)",
         "width": 32,
-        "height": 32
-    },
-
-    {
-        "name": "Landscape (standard)",
-        "width": 40,
-        "height": 24
-    },
-
-    {
-        "name": "Portrait (standard)",
-        "width": 24,
-        "height": 40
-    },
-
-    {
-        "name": "Square (bigmassive)",
-        "width": 256,
-        "height": 256
+        "height": 32,
+        "premium": false,
+        "pfp": true
     },
 
     {
         "name": "Square (small)",
         "width": 16,
-        "height": 16
+        "height": 16,
+        "premium": false,
+        "pfp": true
     },
 
     {
         "name": "Square (tiny)",
         "width": 8,
-        "height": 8
+        "height": 8,
+        "premium": true,
+        "pfp": true
+    },
+
+    {
+        "name": "Square (large)",
+        "width": 64,
+        "height": 64,
+        "premium": true,
+        "pfp": false
+    },
+    
+    {
+        "name": "Square (giant)",
+        "width": 128,
+        "height": 128,
+        "premium": true,
+        "pfp": false
+    },
+    
+    {
+        "name": "Square (enormous)",
+        "width": 192,
+        "height": 192,
+        "premium": true,
+        "pfp": false
+    },
+
+    {
+        "name": "Square (ginormous)",
+        "width": 256,
+        "height": 256,
+        "premium": true,
+        "pfp": false
+    },
+
+    {
+        "name": "Landscape (standard)",
+        "width": 40,
+        "height": 24,
+        "premium": false,
+        "pfp": true
     },
 
     {
         "name": "Landscape (small)",
         "width": 20,
-        "height": 12
+        "height": 12,
+        "premium": false,
+        "pfp": true
+    },
+
+    {
+        "name": "Landscape (tiny)",
+        "width": 10,
+        "height": 6,
+        "premium": true,
+        "pfp": true
+    },
+
+    {
+        "name": "Landscape (large)",
+        "width": 80,
+        "height": 48,
+        "premium": true,
+        "pfp": true
+    },
+
+    {
+        "name": "Landscape (giant)",
+        "width": 160,
+        "height": 96,
+        "premium": true,
+        "pfp": false
+    },
+
+    {
+        "name": "Landscape (enormous)",
+        "width": 240,
+        "height": 144,
+        "premium": true,
+        "pfp": false
+    },
+
+    {
+        "name": "Landscape (ginormous)",
+        "width": 320,
+        "height": 192,
+        "premium": true,
+        "pfp": false
+    },
+
+    {
+        "name": "Portrait (standard)",
+        "width": 24,
+        "height": 40,
+        "premium": false,
+        "pfp": false
     },
 
     {
         "name": "Portrait (small)",
         "width": 12,
-        "height": 20
+        "height": 20,
+        "premium": false,
+        "pfp": true
+    },
+
+    {
+        "name": "Portrait (tiny)",
+        "width": 6,
+        "height": 10,
+        "premium": true,
+        "pfp": true
+    },
+
+    {
+        "name": "Portrait (large)",
+        "width": 48,
+        "height": 80,
+        "premium": true,
+        "pfp": false
+    },
+
+    {
+        "name": "Portrait (giant)",
+        "width": 96,
+        "height": 160,
+        "premium": true,
+        "pfp": false
+    },
+
+    {
+        "name": "Portrait (enormous)",
+        "width": 144,
+        "height": 240,
+        "premium": true,
+        "pfp": false
+    },
+
+    {
+        "name": "Portrait (ginormous)",
+        "width": 192,
+        "height": 320,
+        "premium": true,
+        "pfp": false
     }
 ]

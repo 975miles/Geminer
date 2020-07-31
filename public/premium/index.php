@@ -43,7 +43,6 @@ gen_top("Geminer Premium", "Details about Geminer premium");
     }
     ?>
     <li>Approximately <?=vein_average($max_veins_per_mine_premium)/vein_average($max_veins_per_mine_free)?>x the amount of gems per mining shift</li>
-    <li>One massive <?=$collection_types[3]->width?>*<?=$collection_types[3]->height?> collection (automatically created)</li>
     <li>Profile badge showing when you supported Geminer</li>
     <li>No more link nagging you to get premium in your top-right profile dropdown.</li>
     <?php foreach ($extra_premium_features as $extra_premium_feature) { ?>
@@ -51,91 +50,91 @@ gen_top("Geminer Premium", "Details about Geminer premium");
     <?php } ?>
 </ul>
 
-<style>
-td, th {
-  border: 1px solid black;
-}
-</style>
-
-<table>
-    <thead>
+<table class="table table-dark">
+    <thead class="thead-light">
         <tr>
-            <th></th>
-            <th>Free</th>
-            <th>Premium</th>
+            <th scope="col">Feature</th>
+            <th scope="col">Free</th>
+            <th scope="col">Premium</th>
         </tr>
     </thead>
 
 
     <tbody>
         <tr>
-            <td>Maximum <img src="/a/i/energy.png" class="energy-icon" alt="energy"></td>
+            <th scope="row">Maximum <img src="/a/i/energy.png" class="energy-icon" alt="energy"></th>
             <td><?=$energy_storage_limit_free?></td>
             <td><?=$energy_storage_limit_premium?></td>
         </tr>
 
         <tr>
-            <td>Maximum collections</td>
+            <th scope="row">Available collection sizes</th>
+            <td><?=count(array_filter($collection_types, function ($i) {return !$i->premium;}))?></td>
+            <td><?=count($collection_types)?></td>
+        </tr>
+
+        <tr>
+            <th scope="row">Maximum collections</th>
             <td><?=$collection_storage_limit_free?></td>
             <td><?=$collection_storage_limit_premium?></td>
         </tr>
 
         <tr>
-            <td>Maximum concurrent marketplace listings</td>
+            <th scope="row">Maximum concurrent marketplace listings</th>
             <td><?=$max_marketplace_listings_free?></td>
             <td><?=$max_marketplace_listings_premium?></td>
         </tr>
 
         <tr>
-            <td>Maximum inbox size (messages stored)</td>
+            <th scope="row">Maximum inbox size (messages stored)</th>
             <td><?=$max_inbox_size_free?></td>
             <td><?=$max_inbox_size_premium?></td>
         </tr>
 
         <tr>
-            <td>Maximum length of sent messages</td>
+            <th scope="row">Maximum length of sent messages</th>
             <td><?=$max_sent_message_length_free?></td>
             <td><?=$max_sent_message_length_premium?></td>
         </tr>
 
         <tr>
-            <td>Allowed username length</td>
+            <th scope="row">Allowed username length</th>
             <td><?=$min_username_length_free?>-<?=$max_username_length_free?></td>
             <td><?=$min_username_length_premium?>-<?=$max_username_length_premium?></td>
         </tr>
 
         <tr>
-            <td>Available tag backgrounds</td>
+            <th scope="row">Available tag backgrounds</th>
             <td><?=count(array_filter($tag_styles, function ($i) {return !$i->premium;}))?></td>
             <td><?=count($tag_styles)?></td>
         </tr>
 
         <tr>
-            <td>Available tag fonts</td>
+            <th scope="row">Available tag fonts</th>
             <td><?=count(array_filter($tag_fonts, function ($i) {return !$i->premium;}))?></td>
             <td><?=count($tag_fonts)?></td>
         </tr>
 
         <tr>
-            <td>Available profile backgrounds</td>
+            <th scope="row">Available profile backgrounds</th>
             <td><?=count(array_filter($profile_backgrounds, function ($i) {return !$i->premium;}))?></td>
             <td><?=count($profile_backgrounds)?></td>
         </tr>
 
         <tr>
-            <td>Available navbar backgrounds</td>
+            <th scope="row">Available navbar backgrounds</th>
             <td><?=count(array_filter($navbar_backgrounds, function ($i) {return !$i->premium;}))?></td>
             <td><?=count($navbar_backgrounds)?></td>
         </tr>
 
         <tr>
-            <td>Total possible customisation combinations</td>
+            <th scope="row">Total possible customisation combinations</th>
             <td><?=count(array_filter($tag_styles, function ($i) {return !$i->premium;}))*count(array_filter($tag_fonts, function ($i) {return !$i->premium;}))*count(array_filter($profile_backgrounds, function ($i) {return !$i->premium;}))*count(array_filter($navbar_backgrounds, function ($i) {return !$i->premium;}))?></td>
             <td><?=count($tag_styles)*count($tag_fonts)*count($profile_backgrounds)*count($navbar_backgrounds)?></td>
         </tr>
 
         <tr>
-            <td>Coolness level</td>
+            <th scope="row">Coolness level</th>
             <td>Kinda</td>
             <td>Very</td>
         </tr>

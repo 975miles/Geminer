@@ -1,4 +1,6 @@
 <?php
+require_once $_SERVER['DOCUMENT_ROOT']."/../consts/collection-types.php";
+
 if (isset($_GET['id'])) {
     $id = hexdec($_GET['id']);
     if ($id == 0)
@@ -12,3 +14,4 @@ if (isset($_GET['id'])) {
     throw_error("You must specify a collection.");
 
 $collection = $results[0];
+$collection_type = $collection_types[$collection['type']];

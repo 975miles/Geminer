@@ -114,15 +114,15 @@ drawCollection(mode);
 <h2>This collection is yours.</h2>
 <a href="/collection/edit?id=<?=$_GET['id']?>" class="btn btn-primary">Edit</a>
 <br>
-<?php if (!$collection['is_pfp'] and $collection['type'] != 3) { ?>
+<?php if (!$collection['is_pfp'] and $collection_type->pfp) { ?>
 <form action="/collection/make_pfp.php" method="post">
     <button class="btn btn-primary" name="id" value="<?=$collection['id']?>">Make this collection your profile picture</button>
 </form>
 <?php } else { ?>
-<button class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="<?php if ($collection['is_pfp']) { ?>This collection is already your profile picture.<?php } else if ($collection['type'] == 3) { ?>You can't make massive collections your profile picture.<?php } ?>" disabled>Make this collection your profile picture</button>
+<button class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="<?php if ($collection['is_pfp']) { ?>This collection is already your profile picture.<?php } else if (!$collection_type->pfp) { ?>You can't make <?=$collection_type->name?> collections your profile picture.<?php } ?>" disabled>Make this collection your profile picture</button>
 <br>
-<?php } if ($collection['is_pfp'] or $collection['type'] == 3) { ?>
-<button class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="<?php if ($collection['is_pfp']) { ?>You can't delete your profile picture. Make another collection your profile picture and then come here to delete this.<?php } else if ($collection['type'] == 3) { ?>You only get one massive collection, so you can't delete it.<?php } ?>" disabled>Delete</button>
+<?php } if ($collection['is_pfp']) { ?>
+<button class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="You can't delete your profile picture. Make another collection your profile picture and then come here to delete this." disabled>Delete</button>
 <?php } else { ?>
 <button class="btn btn-danger" type="submit" name="id" value="<?=$collection['id']?>" onclick="$('#confirmCollectionDelete').modal()">Delete</button>
 
