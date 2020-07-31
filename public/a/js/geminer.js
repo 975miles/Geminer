@@ -95,7 +95,7 @@ async function displayGem(gemId, size=null) {
     if (size != null)
         elemClass += " gem-displayer-" + size;
 
-    let style = `background-color: #${gem.colour};background-image: url('/a/i/gem/${gem.id}.png');`;
+    let style = `background-color: #${gem.colour};background-image: url(/a/i/gem/${gem.id}.png);`;
 
     return `<span class="${elemClass}" style="${style}"></span>`;
 }

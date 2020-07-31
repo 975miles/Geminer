@@ -56,46 +56,25 @@ if (isset($_POST['name']) and isset($_POST['type'])) {
 <div id="sizes"></div>
 
 <script>
-const types = [
-    {
-        name: "Square (standard)",
-        img: "GEAAABhAQMAAAD8yF3gAAAABlBMVEUAAAD///+l2Z/dAAAAHklEQVQ4y2NABbnbbsMRGm9U5ajKUZWjKkdV4lYJAJeV/hAX6SbbAAAAAElFTkSuQmCC"
-    },
-    {
-        name: "Landscape (standard)",
-        img: "HkAAABJAQMAAAAjThunAAAABlBMVEUAAAD///+l2Z/dAAAAHElEQVQ4y2PAALnbbiMjTIFRLaNaRrWMahncWgC1Qt4wOmc7+QAAAABJRU5ErkJggg=="
-    },
-    {
-        name: "Portrait (standard)",
-        img: "EkAAAB5AQMAAABPx54yAAAABlBMVEUAAAD///+l2Z/dAAAAHUlEQVQ4y2NAArnbbkMQMnNUwaiCUQWjCkYVwAAAxijeMAQTpZkAAAAASUVORK5CYII="
-    },
+const imgs = [
+    "GEAAABhAQMAAAD8yF3gAAAABlBMVEUAAAD///+l2Z/dAAAAHklEQVQ4y2NABbnbbsMRGm9U5ajKUZWjKkdV4lYJAJeV/hAX6SbbAAAAAElFTkSuQmCC",
+    "HkAAABJAQMAAAAjThunAAAABlBMVEUAAAD///+l2Z/dAAAAHElEQVQ4y2PAALnbbiMjTIFRLaNaRrWMahncWgC1Qt4wOmc7+QAAAABJRU5ErkJggg==",
+    "EkAAAB5AQMAAABPx54yAAAABlBMVEUAAAD///+l2Z/dAAAAHUlEQVQ4y2NAArnbbkMQMnNUwaiCUQWjCkYVwAAAxijeMAQTpZkAAAAASUVORK5CYII=",
     null,
-    {
-        name: "Square (small)",
-        img: "DEAAAAxAQMAAABJUtNfAAAABlBMVEUAAAD///+l2Z/dAAAAFUlEQVQY02OAgdxtt4EITo+K01ccAMl3f4G4gNG+AAAAAElFTkSuQmCC"
-    },
-    {
-        name: "Square (tiny)",
-        img: "BkAAAAZAQMAAAD+JxcgAAAABlBMVEUAAAD///+l2Z/dAAAAEUlEQVQI12MAg9xttyEEfbkA0iYf4RW25YUAAAAASUVORK5CYII="
-    },
-    {
-        name: "Landscape (small)",
-        img: "D0AAAAlAQMAAADLKXNcAAAABlBMVEUAAAD///+l2Z/dAAAAFklEQVQY02OAg9xtt0FoA5wxKkWqFACP3npZnfsXEAAAAABJRU5ErkJggg=="
-    },
-    {
-        name: "Portrait (small)",
-        img: "CUAAAA9AQMAAAAQ1TK2AAAABlBMVEUAAAD///+l2Z/dAAAAFklEQVQY02OAgNxtt3M3QMhREdqJAADJFnw5S7/64AAAAABJRU5ErkJggg=="
-    },
+    "DEAAAAxAQMAAABJUtNfAAAABlBMVEUAAAD///+l2Z/dAAAAFUlEQVQY02OAgdxtt4EITo+K01ccAMl3f4G4gNG+AAAAAElFTkSuQmCC",
+    "BkAAAAZAQMAAAD+JxcgAAAABlBMVEUAAAD///+l2Z/dAAAAEUlEQVQI12MAg9xttyEEfbkA0iYf4RW25YUAAAAASUVORK5CYII=",
+    "D0AAAAlAQMAAADLKXNcAAAABlBMVEUAAAD///+l2Z/dAAAAFklEQVQY02OAg9xtt0FoA5wxKkWqFACP3npZnfsXEAAAAABJRU5ErkJggg==",
+    "CUAAAA9AQMAAAAQ1TK2AAAABlBMVEUAAAD///+l2Z/dAAAAFklEQVQY02OAgNxtt3M3QMhREdqJAADJFnw5S7/64AAAAABJRU5ErkJggg==",
 ]
-$.getJSON("/a/data/collection-types.json", sizes => {
+$.getJSON("/a/data/collection-types.json", types => {
     for (let i = 0; i < types.length; i++) {
+        let img = imgs[i];
         let type = types[i];
-        let size = sizes[i];
-        if (type == null)
+        if (img == null)
             continue;
 
-        let typeDisplay = `${type.name} - ${size.width}px*${size.height}px`;
-        $("#sizes").append($(`<div><label>${typeDisplay}</label><br><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA${type.img}"><br><br></div>`));
+        let typeDisplay = `${type.name} - ${type.width}px*${type.height}px`;
+        $("#sizes").append($(`<div><label>${typeDisplay}</label><br><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA${img}"><br><br></div>`));
         $("#typeSelect").append($(`<option value="${i}">${typeDisplay}</option>`));
     }
 });

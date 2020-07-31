@@ -1,40 +1,48 @@
 [
     {
+        "name": "Square (standard)",
         "width": 32,
         "height": 32
     },
 
     {
+        "name": "Landscape (standard)",
         "width": 40,
         "height": 24
     },
 
     {
+        "name": "Portrait (standard)",
         "width": 24,
         "height": 40
     },
 
     {
+        "name": "Square (bigmassive)",
         "width": 256,
         "height": 256
     },
 
     {
+        "name": "Square (small)",
         "width": 16,
         "height": 16
     },
 
     {
+        "name": "Square (tiny)",
         "width": 8,
         "height": 8
     },
 
     {
+        "name": "Landscape (small)",
         "width": 20,
         "height": 12
     },
 
     {
+        "name": "Portrait (small)",
         "width": 12,
         "height": 20
     }

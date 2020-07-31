@@ -1,6 +1,6 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT']."/../start.php";
-gen_top("The Geminer page template's title", "this is the page description");
+gen_top();
 ?>
 
 <h1>Login needed</h1>

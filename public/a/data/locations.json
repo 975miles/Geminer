@@ -99,5 +99,611 @@
                 "quantity": 250
             }
         ]
+    },
+
+    {
+        "id": 4,
+        "name": "cheats lol (testing location)",
+        "gems": [
+            {
+                "id": 0,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 1,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 2,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 3,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 4,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 5,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 6,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 7,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 8,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 9,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 10,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 11,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 12,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 13,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 14,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 15,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 16,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 17,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 18,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 19,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 20,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 21,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 22,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 23,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 24,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 25,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 26,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 27,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 28,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 29,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 30,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 31,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 32,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 33,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 34,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 35,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 36,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 37,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 38,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 39,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 40,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 41,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 42,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 43,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 44,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 45,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 46,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 47,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 48,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 49,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 50,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 51,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 52,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 53,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 54,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 55,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 56,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 57,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 58,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 59,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 60,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 61,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 62,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 63,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 64,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 65,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 66,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 67,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 68,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 69,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 70,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 71,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 72,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 73,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 74,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 75,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 76,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 77,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 78,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 79,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 80,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 81,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 82,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 83,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 84,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 85,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 86,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 87,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 88,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 89,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 90,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 91,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 92,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 93,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 94,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 95,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 96,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 97,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 98,
+                "chance": 1,
+                "quantity": 100000
+            },
+            
+            {
+                "id": 99,
+                "chance": 1,
+                "quantity": 100000
+            }
+        ]
     }
 ]

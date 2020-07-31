@@ -199,8 +199,6 @@ if (isset($_POST['collection_data'], $_POST['name'], $_POST['mode'])) {
         context.fillRect(0, 0, canvasWidth, canvasHeight);
     }
 
-    var gemImages = {};
-
     async function drawTile(gemId, x, y) {
         return new Promise(async (res, rej) => {
             await gemsInfo;
@@ -213,13 +211,9 @@ if (isset($_POST['collection_data'], $_POST['name'], $_POST['mode'])) {
                 context.fillRect(tileCoords.x, tileCoords.y, realBoxWidth, realBoxWidth);
                 res();
             } else if (mode == "gem") { //if mode is gem
-                if (!gemImages.hasOwnProperty(gemId)) {
-                    gemImages[gemId] = new Image();
-                    gemImages[gemId].src = `/a/i/gem/${gemId}.png`;
-                }
                 let gemImage = new Image();
                 gemImage.onload = () => {
-                    context.drawImage(gemImages[gemId], tileCoords.x, tileCoords.y, realBoxWidth, realBoxWidth);
+                    context.drawImage(gemImage, tileCoords.x, tileCoords.y, realBoxWidth, realBoxWidth);
                     res();
                 }
                 gemImage.src = `/a/i/gem/${gemId}.png`;
@@ -231,7 +225,7 @@ if (isset($_POST['collection_data'], $_POST['name'], $_POST['mode'])) {
         for (let row = 0; row < collectionHeight; row++)
             for (let column = 0; column < collectionWidth; column++) {
                 let tile = collectionData[row][column];
-                await drawTile(tile, column, row);
+                drawTile(tile, column, row);
 
                 if (firstRender)
                     gemAmounts[tile] -= 1000;

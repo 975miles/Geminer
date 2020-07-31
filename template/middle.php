@@ -32,6 +32,7 @@
                         <a class="dropdown-item" href="/profile?user=<?=$user['name']?>">Your collections</a>
                         <a class="dropdown-item" href="/collection/create">Create a new collection</a>
                         <?php } ?>
+                        <a class="dropdown-item" href="/collection/imgconverter">Image converter</a>
                     </div>
                 </li>
             </ul>
