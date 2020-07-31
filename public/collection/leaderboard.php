@@ -40,5 +40,6 @@ foreach ($collections as $collection) {
 <?php
 $paginator = new Paginator($collection_count, $collections_shown_per_page, $page_number, "(:num)");
 require $_SERVER['DOCUMENT_ROOT']."/../pages/pagination.php";
-gen_bottom();
 ?>
+<p>Or, find <a href="/collection/random">a random collection</a>.</p>
+<?php gen_bottom(); ?>

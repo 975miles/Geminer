@@ -37,7 +37,7 @@ if (count($results) == 0) {
         
     }
 
-    $name = strtolower($user_logging_in->name);
+    $name = $user_logging_in->name;
     if (is_null($name) or mb_strlen($name) > $max_username_length_free or mb_strlen($name) < $min_username_length_free or !valid_username($name) or user_exists($name))
         do {
             $default_username_length = 6;

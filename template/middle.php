@@ -27,10 +27,11 @@
                     Collections
                     </a>
                     <div class="dropdown-menu" aria-labelledby="collectionsDropdown">
-                        <a class="dropdown-item" href="/collection/leaderboard">Top collections</a>
+                        <a class="dropdown-item" href="/collection/leaderboard">Top</a>
+                        <a class="dropdown-item" href="/collection/random">Random</a>
                         <?php if ($is_logged_in) { ?>
-                        <a class="dropdown-item" href="/profile?user=<?=$user['name']?>">Your collections</a>
-                        <a class="dropdown-item" href="/collection/create">Create a new collection</a>
+                        <a class="dropdown-item" href="/profile?user=<?=$user['name']?>">Yours</a>
+                        <a class="dropdown-item" href="/collection/create">Create new</a>
                         <?php } ?>
                         <a class="dropdown-item" href="/collection/imgconverter">Image converter</a>
                     </div>

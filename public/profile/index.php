@@ -116,6 +116,8 @@ if (isset($_GET['user'])) {
                 <a href="edit" class="btn btn-primary">Edit your profile</a>
                 <br>
                 <a href="/collection/create" class="btn btn-primary">Create new collection</a>
+                <br>
+                <a href="/profile?p=<?=$user['identificator_id']?>">Permanent link to profile</a>
         <?php
             }
         } else {
@@ -166,6 +168,14 @@ if (isset($_GET['user'])) {
         <h1>User not found</h1>
         <?php
     }
+} else if (isset($_GET['p'])) {
+    $sth = $dbh->prepare("SELECT * FROM users WHERE identificator_id = ?");
+    $sth->execute([$_GET['p']]);
+    $user_found = $sth->fetchAll(PDO::FETCH_ASSOC);
+    if (count($user_found) == 0)
+        throw_error("That link is invalid.");
+    else
+        redirect("/profile?user=".$user_found[0]['name']);
 } else {
     if ($is_logged_in) 
         redirect("?user=".$user['name']);
