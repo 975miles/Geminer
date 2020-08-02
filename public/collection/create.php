@@ -25,6 +25,8 @@ if (isset($_POST['name']) and isset($_POST['type'])) {
         $collection_type = $collection_types[$_POST['type']];
         if ($collection_type->premium and !$user['is_premium'])
             show_info("You need to be premium to use that collection size.");
+        else if (isset($collection_type->level) and $collection_type->level > get_level($user['shifts_completed']))
+            show_info("You're the wrong level.");
         else {
             for ($row = 0; $row < $collection_type->height; $row++) {
                 $collection_row = Array();
@@ -63,9 +65,12 @@ const lineWidth = 1;
 const fullWidth = tileWidth + lineWidth;
 
 $.getJSON("/a/data/collection-types.json", types => {
+    let level = getLevel().level;
     for (let i in types) {
         let type = types[i];
         if (type.premium && !user.is_premium)
+            continue;
+        if (type.level != null && type.level > level)
             continue;
         let canvas = $('<canvas id="'+i+'">')[0];
         canvas.width = type.width * fullWidth + lineWidth;

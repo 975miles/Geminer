@@ -128,8 +128,8 @@ else if (isset($_POST['type'], $_POST['gem'], $_POST['amount'], $_POST['price'])
         let type = [
             [2, "Amount of the gem to sell", "Price", "The gems you've specified will be taken from your account immediately after creating this listing."],
             [2, "Amount of the gem to buy", "What you'll pay for it", "The price you've specified will be taken from your account immediately after creating this listing."],
-            [5, "Gem stock", "What you'll pay per mpx", `If all of your stock gets bought, you'll get at least ${fullPrice(false)}. The gem stock you've specified will be taken from your account immediately after creating this listing.`],
-            [5, "Amount of the gem to collect", "Price per mpx", `You'll have to pay ${fullPrice(true)} to start collecting this gem. This amount will be deducted from your account immediately after creating this listing.`],
+            [5, "Gem stock", "Price per mpx", `If all of your stock gets bought, you'll get at least ${fullPrice(false)}. The gem stock you've specified will be taken from your account immediately after creating this listing.`],
+            [5, "Amount of the gem to collect", "What you'll pay per mpx", `You'll have to pay ${fullPrice(true)} to start collecting this gem. This amount will be deducted from your account immediately after creating this listing.`],
         ][listingType];
 
         if (type != null) {

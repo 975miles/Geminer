@@ -8,6 +8,8 @@ if (isset($_POST['location']) and $is_logged_in and $user['location'] != $_POST[
         show_info("You don't have enough <img src=\\\"/a/i/energy.png\\\" class=\\\"energy-icon\\\"> to do that.");
     else if (!array_key_exists($_POST['location'], $locations))
         show_info("That's not a valid location.");
+    else if ($locations[$_POST['location']]->level > get_level($user['shifts_completed']))
+        show_info("You're the wrong level.");
     else {
         $dbh->prepare("UPDATE users SET location = ?, energy = energy - ? WHERE id = ?")
             ->execute([$_POST['location'], $moving_energy_cost, $user['id']]);
@@ -49,6 +51,9 @@ if (isset($_POST['location']) and $is_logged_in and $user['location'] != $_POST[
         await gemsInfo;
         //$("#locations");
         let div = $("<div></div>");
+        let level;
+        if (loggedIn)
+            level = getLevel().level;
         for (i of data) {
             let locationCard = $('<div class="card">');
             locationCard.append($(`<img class="card-img-top" src="/a/i/location/${i.id}.png">`));
@@ -65,10 +70,12 @@ if (isset($_POST['location']) and $is_logged_in and $user['location'] != $_POST[
             }
             if (loggedIn) {
                 locationCardBody.append('<hr style="margin-top:0">');
-                if (user.location != i.id)
-                    locationCardBody.append(`<form action="" method="post"><button class="btn btn-primary" name="location" value=${i.id}>Go here</button></form>`);
+                if (user.location == i.id)
+                    locationCardBody.append('<button class="btn btn-success" disabled>You are here</button>')
+                else if (i.level > level)
+                    locationCardBody.append(`<button class="btn btn-danger" disabled>Unlocks at level ${i.level}</button>`)
                 else
-                    locationCardBody.append('<button class="btn btn-primary" disabled>You are here</button>')
+                    locationCardBody.append(`<form action="" method="post"><button class="btn btn-primary" name="location" value=${i.id}>Go here</button></form>`);
             }
             
             locationCard.append(locationCardBody);

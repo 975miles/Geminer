@@ -45,6 +45,16 @@ function showInfo(error="Unknown error occurred.", title="Error!", removable = t
     $("#infoBox").data("bs.modal")._config.backdrop = backdrop;
 }
 
+function createToast(body="", title="!") {
+    let toast = $("#toastElem").clone();
+    toast.removeClass("hide");
+    toast.find(".toast-title").html(title);
+    toast.find(".toast-body").html(body);
+    $("#toastArea").append(toast);
+    toast.toast("show");
+    return toast;
+}
+
 //stole this from https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb oops
 function hexToRgb(hex) {
     var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
@@ -104,6 +114,23 @@ function displayMoney(amount, extraDecimals = 0, round = "round") {
     let mult = 10 ** (extraDecimals);
     return String(Math[round](amount*mult)/(mult*100))+currencySymbol;
 }
+
+function getLevel() {
+    let level = 0;
+    let shifts = user.shifts_completed;
+    let shiftsToNextLevel = baseShiftsPerLevel;
+    while (shifts >= shiftsToNextLevel) {
+        level++;
+        shifts -= shiftsToNextLevel;
+        shiftsToNextLevel += baseShiftsPerLevel;
+    }
+    return {
+        level: level,
+        shiftsInCurrentLevel: shifts,
+        shiftsToNextLevel: shiftsToNextLevel,
+        totalShifts: user.shifts_completed
+    };
+};
 
 $.extend({
     getQueryParameters : function(str = window.location.search) {

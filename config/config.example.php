@@ -29,25 +29,24 @@ $valid_username_characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWX
 $currency_symbol = "₲";
 
 //The amount of seconds between each time everyone's energy regenerates by one.
-$energy_regeneration_interval = 3600;
+$energy_regeneration_interval = 600;
 
 //how much energy is used to mine
-$mining_energy_cost = 1;
+$mining_energy_cost = 5;
 
 //how much energy is used to move to another location
 $moving_energy_cost = 3;
 
+$base_shifts_per_level = 1;
+
 $max_veins_per_mine_free = 5;
 $max_veins_per_mine_premium = 11;
 
-//for tvwiemwytgi
-$free_sell_divisor = 2;
+$energy_storage_limit_free = 500;
+$energy_storage_limit_premium = 50000;
 
-$energy_storage_limit_free = 100;
-$energy_storage_limit_premium = 10000;
-
-$collection_storage_limit_free = 15;
-$collection_storage_limit_premium = 250;
+$collection_storage_limit_free = 10;
+$collection_storage_limit_premium = 1000;
 
 $max_marketplace_listings_free = 10;
 $max_marketplace_listings_premium = 100;

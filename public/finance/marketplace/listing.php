@@ -33,8 +33,9 @@ if (isset($_GET['id'])) {
                     if ($amount > $listing['amount'])
                         show_info("There's not enough stock");
                     else {
-                        $price = floor($listing['price'] * $amount / 1000);
+                        $price = $listing['price'] * $amount / 1000;
                         if ($listing['type'] == 2) {
+                            $price = ceil($price);
                             if ($user['money'] < $price)
                                 throw_error("You need ".display_money($listing['price'])." to buy this.");
                             //take the money from the buyer
@@ -48,6 +49,7 @@ if (isset($_GET['id'])) {
                                 ->execute([$amount, $user['id']]);
                             $user['money'] -= $price;
                         } else if ($listing['type'] == 3) {
+                            $price = floor($price);
                             if ($user_gem_amount < $amount)
                                 show_info("You don't have enough to do that");
                             //take the gems from the seller (the person who just clicked sell)
@@ -150,7 +152,7 @@ gen_top("A marketplace listing");
         </form>
         <script>
         function updatePrice() {
-            $("#price").html(displayMoney(Number($("#gemAmount").val())*Number($("#listingPrice").html())*100, 0, "floor"));
+            $("#price").html(displayMoney(Number($("#gemAmount").val())*Number($("#listingPrice").html())*100, 0, "<?=$listing['type'] == 2 ? "ceil" : "floor"?>"));
         }
         updatePrice();
         </script>

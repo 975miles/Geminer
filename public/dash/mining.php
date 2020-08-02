@@ -14,12 +14,19 @@ require_once $_SERVER['DOCUMENT_ROOT']."/../fn/real_gem_amounts.php";
     <button class="btn btn-secondary" onclick="mine();">Mine</button>
     <input id="timesToMine" style="max-width:4em" type="number" name="amount" min="1" max="1000000000" value="1" onchange="$('#miningEnergyCost').html(this.value * miningEnergyCost)">
     <p style="display: inline-block">times (costs <span id="miningEnergyCost"><?=$mining_energy_cost?></span> <img src="/a/i/energy.png" class="energy-icon">)</p>
-    <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" value="true" id="animationCheck" checked>
-        <label class="form-check-label" for="animationCheck">
+    <div class="custom-control custom-checkbox custom-control-inline">
+        <input class="custom-control-input" type="checkbox" value="true" id="animationCheck" checked>
+        <label class="custom-control-label" for="animationCheck">
             Play animation
         </label>
     </div>
+</div>
+<hr>
+
+<center><h4>Level <span id="levelNum">...</span></h4></center>
+<div class="progress">
+  <div class="progress-bar bg-info" id="currentXp" role="progressbar" style="width: 0%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+  <div class="progress-bar bg-light text-dark" id="xpLeft" role="progressbar" style="width: 100%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
 </div>
 <hr>
 
@@ -35,7 +42,19 @@ require_once $_SERVER['DOCUMENT_ROOT']."/../fn/real_gem_amounts.php";
 <script>
     var gemAmounts = JSON.parse("<?=json_encode(get_real_gem_amounts())?>");
 
-    $(document).ready(async ()=>
+    function setXp() {
+        var level = getLevel();
+        $("#levelNum").html(level.level);
+        currentPercentage = level.shiftsInCurrentLevel / level.shiftsToNextLevel * 100;
+        $("#currentXp").css("width", currentPercentage + "%");
+        $("#currentXp").html(level.shiftsInCurrentLevel + "xp");
+        $("#xpLeft").css("width", (100 - currentPercentage) + "%");
+        $("#xpLeft").html((level.shiftsToNextLevel - level.shiftsInCurrentLevel) + "xp to level " + (level.level + 1));
+    }
+
+    $(document).ready(async ()=>{
+        setXp();
+
         $.getJSON("/a/data/locations.json", async locations => {
             await sortedGems;
             var currentLocationGems = [];
@@ -57,7 +76,7 @@ require_once $_SERVER['DOCUMENT_ROOT']."/../fn/real_gem_amounts.php";
             currentMineGems.append("<p>All gems:</p>")
             $("#gems").html(div.html());
         })
-    );
+    });
 
     const miningSlides = [
         {
@@ -112,6 +131,7 @@ require_once $_SERVER['DOCUMENT_ROOT']."/../fn/real_gem_amounts.php";
                                 });
                             });
                         }
+                        let previousLevel = getLevel().level;
                         user.shifts_completed += timesToMine;
                         let title = "Yields of shift";
                         if (timesToMine == 1)
@@ -122,6 +142,19 @@ require_once $_SERVER['DOCUMENT_ROOT']."/../fn/real_gem_amounts.php";
                         showInfo(output, title);
                         user.energy -= miningEnergyCost * timesToMine;
                         $("#energyAmount").html(user.energy);
+                        
+                        let currentLevel = getLevel().level;
+                        setXp();
+
+                        while (previousLevel++ < currentLevel) {
+                            await $.getJSON("/a/data/level-rewards.json", levelRewards => {
+                                let message = `You've reached level ${previousLevel}!`;
+                                let reward = levelRewards[previousLevel];
+                                if (reward != null)
+                                    message += "<hr>"+reward;
+                                createToast(message, "Level up!");
+                            });
+                        }
                     }
                 }
             );

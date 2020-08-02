@@ -1,33 +1,34 @@
 <?php
 class NavbarBackground {
-    public function __construct($style, $dark, $premium = false) {
+    public function __construct($style, $dark, $premium = false, $level = 0) {
         $this->style = $style;
         $this->dark = $dark;
         $this->premium = $premium;
+        $this->level = $level;
     }
 }
 
 $navbar_backgrounds = [
-    new NavbarBackground("#d1271b", false, false), //This one is the default, it'll show for non-logged-in users and it's the only one chosen for new users
-    new NavbarBackground("#838383", false, false),
-    new NavbarBackground("#4287f5", false, false),
-    new NavbarBackground("#f0f0f0", false, false),
-    new NavbarBackground("#1c1c1c", true, false),
-    new NavbarBackground("#56ed42", false, false),
-    new NavbarBackground("#f2ff00", false, false),
-    new NavbarBackground("#ff0898", false, false),
-    new NavbarBackground("#ff7ac8", false, false),
-    new NavbarBackground("#a126ff", false, false),
-    new NavbarBackground("#004cff", true, false),
-    new NavbarBackground("#ffaa17", false, false),
-    new NavbarBackground("#ffdd75", false, false),
-    new NavbarBackground("#a6882e", false, false),
-    new NavbarBackground("#105421", true, false),
-    new NavbarBackground("#24c74d", false, false),
-    new NavbarBackground("#19ffd1", false, false),
-    new NavbarBackground("#4b5fc4", true, false),
-    new NavbarBackground("#a80f2e", true, false),
-    new NavbarBackground("#382c4a", true, false),
+    new NavbarBackground("#d1271b", false, false, 0), //This one is the default, it'll show for non-logged-in users and it's the only one chosen for new users
+    new NavbarBackground("#838383", false, false, 0),
+    new NavbarBackground("#f0f0f0", false, false, 0),
+    new NavbarBackground("#1c1c1c", true, false, 0),
+    new NavbarBackground("#4287f5", false, false, 7),
+    new NavbarBackground("#56ed42", false, false, 7),
+    new NavbarBackground("#f2ff00", false, false, 7),
+    new NavbarBackground("#ff7ac8", false, false, 23),
+    new NavbarBackground("#a126ff", false, false, 23),
+    new NavbarBackground("#ffaa17", false, false, 23),
+    new NavbarBackground("#ff0898", false, false, 32),
+    new NavbarBackground("#004cff", true, false, 32),
+    new NavbarBackground("#ffdd75", false, false, 32),
+    new NavbarBackground("#105421", true, false, 32),
+    new NavbarBackground("#a80f2e", true, false, 32),
+    new NavbarBackground("#24c74d", false, false, 38),
+    new NavbarBackground("#19ffd1", false, false, 38),
+    new NavbarBackground("#4b5fc4", true, false, 38),
+    new NavbarBackground("#382c4a", true, false, 38),
+    new NavbarBackground("#a6882e", false, false, 38),
     new NavbarBackground("linear-gradient( 111.5deg,  rgba(249,230,1,1) 9.9%, rgba(249,144,1,1) 19.4%, rgba(255,22,22,1) 29.2%, rgba(255,22,133,1) 37.7%, rgba(255,22,197,1) 47.7%, rgba(232,22,255,1) 53.9%, rgba(162,22,255,1) 60%, rgba(80,22,255,1) 68.8%, rgba(22,104,255,1) 74.2%, rgba(22,168,255,1) 77.6%, rgba(22,255,220,1) 86.7%, rgba(22,255,179,1) 92.5%, rgba(22,255,109,1) 97.1%, rgba(92,255,22,1) 103.5% )", false, true),
     new NavbarBackground("linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%)", false, true),
     new NavbarBackground("linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)", true, true),

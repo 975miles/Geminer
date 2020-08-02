@@ -137,4 +137,19 @@
         </div>
     </nav>
 
+    <div id="toastArea" class="position-absolute w-100 d-flex flex-column p-4" style="padding: 0 !important">
+        <div class="toast hide" id="toastElem" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false">
+            <div class="toast-header">
+                <img class="mr-2" height="16" src="/a/i/logo256.png">
+                <strong class="mr-auto toast-title"></strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body">
+                Hello, world! This is a toast message.
+            </div>
+        </div>
+    </div>
+
     <div class="container-fluid" id="root">

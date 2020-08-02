@@ -1,19 +1,18 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT']."/../start.php";
-require_once $_SERVER['DOCUMENT_ROOT']."/../fn/real_gem_amounts.php";
 gen_top("Convert an image to a collection");
+require_auth();
+require_once $_SERVER['DOCUMENT_ROOT']."/../fn/real_gem_amounts.php";
 
 $reached_maximum = true;
-if ($is_logged_in) {
-    $max_collection_amount = ($user['is_premium'] ? $collection_storage_limit_premium : $collection_storage_limit_free);
+$max_collection_amount = ($user['is_premium'] ? $collection_storage_limit_premium : $collection_storage_limit_free);
 
-    $sth = $dbh->prepare("SELECT COUNT(1) FROM collections WHERE by = ?");
-    $sth->execute([$user['id']]);
-    $collection_amount = $sth->fetchColumn();
+$sth = $dbh->prepare("SELECT COUNT(1) FROM collections WHERE by = ?");
+$sth->execute([$user['id']]);
+$collection_amount = $sth->fetchColumn();
 
-    if ($collection_amount < $max_collection_amount)
-        $reached_maximum = false;
-}
+if ($collection_amount < $max_collection_amount)
+    $reached_maximum = false;
 ?>
 
 <h1>Image converter</h1>
@@ -166,13 +165,10 @@ async function generateImage(sourceImg) {
     let gemsNeeded = $("<p>You will need: <br><br></p>");
     let creatable = !reachedMaximum;
     for (i in gemAmounts) {
-        gemsNeeded.append(`${gemAmounts[i]}px of ${await displayGem(i)}${gemsInfo[i].name}`);
-        if (loggedIn) {
-            let userGemAmount = userGemAmounts[i]/1000;
-            gemsNeeded.append(` - You have ${userGemAmount}px. ${(userGemAmount < gemAmounts[i] ? `You need ${gemAmounts[i]-userGemAmount}px more.` : "You have enough!")}`);
-            if (creatable && userGemAmount < gemAmounts[i])
-                creatable = false;
-        }
+        let userGemAmount = userGemAmounts[i]/1000;
+        gemsNeeded.append(`${gemAmounts[i]}px of ${await displayGem(i)}${gemsInfo[i].name} - You have ${userGemAmount}px. ${(userGemAmount < gemAmounts[i] ? `You need ${gemAmounts[i]-userGemAmount}px more.` : "You have enough!")}`);
+        if (creatable && userGemAmount < gemAmounts[i])
+            creatable = false;
         gemsNeeded.append('<br>')
     }
     div.append($("<hr>"));
@@ -181,14 +177,11 @@ async function generateImage(sourceImg) {
         div.append($('<button class="btn btn-primary" onclick="createCollection()">Create as a collection</button>'));
     else {
         let err;
-        if (loggedIn) {
-            if (reachedMaximum)
-                err = "You've reached your maximum amount of collections.";
-            else
-                err = "You're missing some gems.";
-        } else
-            err = "You need to be logged in to create collections."
-        let btn = $('<button class="btn btn-primary" data-toggle="tooltip" title="'+err+'" disabled>Create as a collection</button>');
+        if (reachedMaximum)
+            err = "You've reached your maximum amount of collections.";
+        else
+            err = "You're missing some gems.";
+        let btn = $('<span class="btn btn-primary disabled" data-toggle="tooltip" title="'+err+'" role="button" aria-disabled="true">Create as a collection</span>');
         div.append(btn);
         btn.tooltip();
     }
@@ -234,17 +227,16 @@ var gemColours = new Promise(async (res, rej) => {
     res();
 });
 
-<?php if ($is_logged_in) { ?>
 var userGemAmounts = JSON.parse("<?=json_encode(get_real_gem_amounts())?>");
-<?php } ?>
 
 var collectionTypes;
 
 $.getJSON("/a/data/collection-types.json", data=>{
     collectionTypes = data;
+    let level = getLevel().level;
     for (i in collectionTypes) {
         let type = collectionTypes[i];
-        if (!(type.premium && (!loggedIn || !user.is_premium)))
+        if (!((type.premium && !user.is_premium) || (type.level != null && type.level > level)))
             $("#sizeSelect").append($(`<option value="${i}">${type.name} - ${type.width}px*${type.height}px</option>`));
     }
 });

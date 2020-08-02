@@ -1,26 +1,61 @@
 [
     {
-        "name": "Square (standard)",
-        "width": 32,
-        "height": 32,
-        "premium": false,
+        "name": "Square (microscopic)",
+        "width": 4,
+        "height": 4,
+        "premium": true,
         "pfp": true
     },
 
     {
-        "name": "Square (small)",
-        "width": 16,
-        "height": 16,
-        "premium": false,
+        "name": "Square (miniscule)",
+        "width": 8,
+        "height": 8,
+        "premium": true,
+        "pfp": true
+    },
+
+    {
+        "name": "Square (teensy)",
+        "width": 12,
+        "height": 12,
+        "premium": true,
         "pfp": true
     },
 
     {
         "name": "Square (tiny)",
-        "width": 8,
-        "height": 8,
-        "premium": true,
+        "width": 16,
+        "height": 16,
+        "premium": false,
+        "level": 0,
         "pfp": true
+    },
+
+    {
+        "name": "Square (small)",
+        "width": 24,
+        "height": 24,
+        "premium": false,
+        "level": 15,
+        "pfp": true
+    },
+
+    {
+        "name": "Square (medium)",
+        "width": 32,
+        "height": 32,
+        "premium": false,
+        "level": 29,
+        "pfp": true
+    },
+
+    {
+        "name": "Square (big)",
+        "width": 48,
+        "height": 48,
+        "premium": true,
+        "pfp": false
     },
 
     {
@@ -30,9 +65,17 @@
         "premium": true,
         "pfp": false
     },
-    
+
     {
         "name": "Square (giant)",
+        "width": 96,
+        "height": 96,
+        "premium": true,
+        "pfp": false
+    },
+    
+    {
+        "name": "Square (huge)",
         "width": 128,
         "height": 128,
         "premium": true,
@@ -48,7 +91,7 @@
     },
 
     {
-        "name": "Square (ginormous)",
+        "name": "Square (colossal)",
         "width": 256,
         "height": 256,
         "premium": true,
@@ -56,23 +99,15 @@
     },
 
     {
-        "name": "Landscape (standard)",
-        "width": 40,
-        "height": 24,
-        "premium": false,
+        "name": "Landscape (microscopic)",
+        "width": 5,
+        "height": 3,
+        "premium": true,
         "pfp": true
     },
 
     {
-        "name": "Landscape (small)",
-        "width": 20,
-        "height": 12,
-        "premium": false,
-        "pfp": true
-    },
-
-    {
-        "name": "Landscape (tiny)",
+        "name": "Landscape (miniscule)",
         "width": 10,
         "height": 6,
         "premium": true,
@@ -80,11 +115,62 @@
     },
 
     {
+        "name": "Landscape (teensy)",
+        "width": 15,
+        "height": 9,
+        "premium": true,
+        "pfp": true
+    },
+
+    {
+        "name": "Landscape (tiny)",
+        "width": 20,
+        "height": 12,
+        "premium": false,
+        "level": 8,
+        "pfp": true
+    },
+
+    {
+        "name": "Landscape (small)",
+        "width": 30,
+        "height": 18,
+        "premium": false,
+        "level": 15,
+        "pfp": true
+    },
+
+    {
+        "name": "Landscape (medium)",
+        "width": 40,
+        "height": 24,
+        "premium": false,
+        "level": 29,
+        "pfp": true
+    },
+
+    {
+        "name": "Landscape (big)",
+        "width": 60,
+        "height": 36,
+        "premium": true,
+        "pfp": false
+    },
+
+    {
         "name": "Landscape (large)",
         "width": 80,
         "height": 48,
         "premium": true,
-        "pfp": true
+        "pfp": false
+    },
+
+    {
+        "name": "Landscape (huge)",
+        "width": 120,
+        "height": 72,
+        "premium": true,
+        "pfp": false
     },
 
     {
@@ -104,7 +190,7 @@
     },
 
     {
-        "name": "Landscape (ginormous)",
+        "name": "Landscape (colossal)",
         "width": 320,
         "height": 192,
         "premium": true,
@@ -112,23 +198,15 @@
     },
 
     {
-        "name": "Portrait (standard)",
-        "width": 24,
-        "height": 40,
-        "premium": false,
-        "pfp": false
-    },
-
-    {
-        "name": "Portrait (small)",
-        "width": 12,
-        "height": 20,
-        "premium": false,
+        "name": "Portrait (microscopic)",
+        "width": 3,
+        "height": 5,
+        "premium": true,
         "pfp": true
     },
 
     {
-        "name": "Portrait (tiny)",
+        "name": "Portrait (miniscule)",
         "width": 6,
         "height": 10,
         "premium": true,
@@ -136,9 +214,60 @@
     },
 
     {
+        "name": "Portrait (teensy)",
+        "width": 9,
+        "height": 15,
+        "premium": true,
+        "pfp": true
+    },
+
+    {
+        "name": "Portrait (tiny)",
+        "width": 12,
+        "height": 20,
+        "premium": false,
+        "level": 8,
+        "pfp": true
+    },
+
+    {
+        "name": "Portrait (small)",
+        "width": 18,
+        "height": 30,
+        "premium": false,
+        "level": 15,
+        "pfp": true
+    },
+
+    {
+        "name": "Portrait (medium)",
+        "width": 24,
+        "height": 40,
+        "premium": false,
+        "level": 29,
+        "pfp": false
+    },
+
+    {
+        "name": "Portrait (big)",
+        "width": 36,
+        "height": 60,
+        "premium": true,
+        "pfp": false
+    },
+
+    {
         "name": "Portrait (large)",
         "width": 48,
         "height": 80,
+        "premium": true,
+        "pfp": false
+    },
+
+    {
+        "name": "Portrait (huge)",
+        "width": 72,
+        "height": 120,
         "premium": true,
         "pfp": false
     },
@@ -160,9 +289,33 @@
     },
 
     {
-        "name": "Portrait (ginormous)",
+        "name": "Portrait (colossal)",
         "width": 192,
         "height": 320,
+        "premium": true,
+        "pfp": false
+    },
+
+    {
+        "name": "Zero-dimensional",
+        "width": 1,
+        "height": 1,
+        "premium": true,
+        "pfp": true
+    },
+
+    {
+        "name": "One-dimensional (short)",
+        "width": 16,
+        "height": 1,
+        "premium": true,
+        "pfp": true
+    },
+
+    {
+        "name": "One-dimensional (long)",
+        "width": 64,
+        "height": 1,
         "premium": true,
         "pfp": false
     }

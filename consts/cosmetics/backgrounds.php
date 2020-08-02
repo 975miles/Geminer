@@ -1,11 +1,12 @@
 <?php
 class ProfileBackground {
-    public function __construct($bg, $premium = false, $dark = false, $is_image = false) {
+    public function __construct($bg, $premium = false, $dark = false, $level = 0) {
         $this->text_colour = ($dark ? "white" : "black");
         $this->bgshort = $bg;
-        $this->bg = $this->bgshort." repeat center center fixed !important".($is_image ? ";-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover" : "");
+        $this->bg = $this->bgshort." repeat center center fixed !important;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover";
         $this->style = $this->bg."; color: ".$this->text_colour;
         $this->premium = $premium;
+        $this->level = $level;
     }
 
     function style_tag() {
@@ -14,26 +15,26 @@ class ProfileBackground {
 }
 
 $profile_backgrounds = [
-    new ProfileBackground("#ff564a", false, false),
-    new ProfileBackground("#5fcfe8", false, false),
-    new ProfileBackground("#eded72", false, false),
-    new ProfileBackground("#54ff8d", false, false),
-    new ProfileBackground("orange", false, false),
-    new ProfileBackground("purple", false, true),
-    new ProfileBackground("#403415", false, true),
-    new ProfileBackground("pink", false, false),
-    new ProfileBackground("#fafafa", false, false),
-    new ProfileBackground("#0f0f0f", false, true),
-    new ProfileBackground("#EEE0E5", false, false),
-    new ProfileBackground("#FF7256", false, false),
-    new ProfileBackground("#CDB5CD", false, false),
-    new ProfileBackground("#C6E2FF", false, false),
-    new ProfileBackground("#00CED1", false, false),
-    new ProfileBackground("#F0FFF0", false, false),
-    new ProfileBackground("#C1FFC1", false, false),
-    new ProfileBackground("#00EE00", false, false),
-    new ProfileBackground("#FFFFE0", false, false),
-    new ProfileBackground("#F4A460", false, false),
+    new ProfileBackground("#ff564a", false, false, 0),
+    new ProfileBackground("#5fcfe8", false, false, 0),
+    new ProfileBackground("#eded72", false, false, 0),
+    new ProfileBackground("#54ff8d", false, false, 0),
+    new ProfileBackground("#fafafa", false, false, 0),
+    new ProfileBackground("#0f0f0f", false, true, 0),
+    new ProfileBackground("orange", false, false, 4),
+    new ProfileBackground("purple", false, true, 4),
+    new ProfileBackground("pink", false, false, 4),
+    new ProfileBackground("#403415", false, true, 4),
+    new ProfileBackground("#EEE0E5", false, false, 17),
+    new ProfileBackground("#FF7256", false, false, 17),
+    new ProfileBackground("#CDB5CD", false, false, 17),
+    new ProfileBackground("#C6E2FF", false, false, 17),
+    new ProfileBackground("#00CED1", false, false, 17),
+    new ProfileBackground("#F0FFF0", false, false, 35),
+    new ProfileBackground("#C1FFC1", false, false, 35),
+    new ProfileBackground("#00EE00", false, false, 35),
+    new ProfileBackground("#FFFFE0", false, false, 35),
+    new ProfileBackground("#F4A460", false, false, 35),
     new ProfileBackground("linear-gradient(120deg, #f093fb 0%, #f5576c 100%)", true, false),
     new ProfileBackground("linear-gradient(to top, #e8198b 0%, #c7eafd 100%)", true, false),
     new ProfileBackground("linear-gradient(to top, #d299c2 0%, #fef9d7 100%)", true, false),

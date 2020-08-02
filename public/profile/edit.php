@@ -1,10 +1,11 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT']."/../start.php";
+require_auth();
 require_once $_SERVER['DOCUMENT_ROOT']."/../consts/cosmetics/backgrounds.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/../consts/cosmetics/navbarbgs.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/../consts/birthstones.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/../fn/user_button.php";
-require_auth();
+$level = get_level($user['shifts_completed']);
 gen_top("Editing profile...");
 
 $min_length = ($user['is_admin'] ? 1 : ($user['is_premium'] ? $min_username_length_premium : $min_username_length_free));
@@ -28,14 +29,20 @@ if (isset($_POST['name'], $_POST['tag_style'], $_POST['profile_background'], $_P
         show_info("That tag background doesn't exist.");
     else if ($tag_styles[$_POST['tag_style']]->premium and !$user['is_premium'])
         show_info("You need to be premium to use that tag background.");
+    else if ($level < $tag_styles[$_POST['tag_style']]->level)
+        show_info("You're the wrong level.");
     else if (!array_key_exists($_POST['tag_font'], $tag_fonts))
         show_info("That tag doesn't exist.");
     else if ($tag_fonts[$_POST['tag_font']]->premium and !$user['is_premium'])
         show_info("You need to be premium to use that tag.");
+    else if ($level < $tag_fonts[$_POST['tag_font']]->level)
+        show_info("You're the wrong level.");
     else if (!array_key_exists($_POST['profile_background'], $profile_backgrounds))
         show_info("That background doesn't exist.");
     else if ($profile_backgrounds[$_POST['profile_background']]->premium and !$user['is_premium'])
         show_info("You need to be premium to use that background.");
+    else if ($level < $profile_backgrounds[$_POST['profile_background']]->level)
+        show_info("You're the wrong level.");
     else if (!is_array($_POST['navbar_backgrounds']))
         show_info("The navbar backgrounds weren't submitted properly");
     else if ($_POST['birth_month'] != 0 and !array_key_exists($_POST['birth_month'], $birthstones))
@@ -50,6 +57,8 @@ if (isset($_POST['name'], $_POST['tag_style'], $_POST['profile_background'], $_P
                 throw_error("That navbar background doesn't exist");
             if ($navbar_backgrounds[$navbar_background]->premium and !$user['is_premium'])
                 throw_error("You need to be premium to use that navbar background.");
+            else if ($level < $navbar_backgrounds[$navbar_background]->level)
+                show_info("You're the wrong level.");
             array_push($selected_navbar_backgrounds, $navbar_background);
         }
         $dbh->prepare("UPDATE users SET name = ?, tag_style = ?, tag_font = ?, profile_background = ?, navbar_backgrounds = ?, birthstone = ? WHERE id = ?")->execute([$_POST['name'], $_POST['tag_style'], $_POST['tag_font'], $_POST['profile_background'], json_encode($selected_navbar_backgrounds), $_POST['birth_month'], $user['id']]);
@@ -68,7 +77,7 @@ if (isset($_POST['name'], $_POST['tag_style'], $_POST['profile_background'], $_P
     <div id="tagBackgrounds">
         <?php
         foreach ($tag_styles as $tag_style_id => $tag_style) {
-            if ($tag_style->premium and !$user['is_premium'])
+            if (($tag_style->premium and !$user['is_premium']) or (isset($tag_style->level) and $level < $tag_style->level))
                 continue;
         ?>
         <div class="form-check form-check-inline">
@@ -88,7 +97,7 @@ if (isset($_POST['name'], $_POST['tag_style'], $_POST['profile_background'], $_P
     <div id="tagFonts">
         <?php
         foreach ($tag_fonts as $tag_font_id => $tag_font) {
-            if ($tag_font->premium and !$user['is_premium'])
+            if (($tag_font->premium and !$user['is_premium']) or (isset($tag_font->level) and $level < $tag_font->level))
                 continue;
         ?>
         <div class="form-check form-check-inline">
@@ -112,7 +121,7 @@ if (isset($_POST['name'], $_POST['tag_style'], $_POST['profile_background'], $_P
     <br>
     <?php
     foreach ($profile_backgrounds as $profile_background_id => $profile_background) {
-        if ($profile_background->premium and !$user['is_premium'])
+        if (($profile_background->premium and !$user['is_premium']) or (isset($profile_background->level) and $level < $profile_background->level))
             continue;
     ?>
     <div class="form-check form-check-inline">
@@ -138,7 +147,7 @@ if (isset($_POST['name'], $_POST['tag_style'], $_POST['profile_background'], $_P
     <?php
     $current_navbar_backgrounds = json_decode($user['navbar_backgrounds']);
     foreach ($navbar_backgrounds as $navbar_background_id => $navbar_background) {
-        if ($navbar_background->premium and !$user['is_premium'])
+        if (($navbar_background->premium and !$user['is_premium']) or (isset($navbar_background->level) and $level < $navbar_background->level))
             continue;
     ?>
     <div class="form-check form-check-inline">

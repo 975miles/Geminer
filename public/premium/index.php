@@ -1,7 +1,6 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT']."/../start.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/../consts/cosmetics/backgrounds.php";
-require_once $_SERVER['DOCUMENT_ROOT']."/../consts/collection-types.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/../fn/user_button.php";
 gen_top("Geminer Premium", "Details about Geminer premium");
 ?>
@@ -31,6 +30,7 @@ gen_top("Geminer Premium", "Details about Geminer premium");
     <br>
 </p>
 
+<hr>
 <h2>Premium features</h2>
 
 <ul>
@@ -49,6 +49,7 @@ gen_top("Geminer Premium", "Details about Geminer premium");
     <li><?=$extra_premium_feature?></li>
     <?php } ?>
 </ul>
+<hr>
 
 <table class="table table-dark">
     <thead class="thead-light">
@@ -65,12 +66,6 @@ gen_top("Geminer Premium", "Details about Geminer premium");
             <th scope="row">Maximum <img src="/a/i/energy.png" class="energy-icon" alt="energy"></th>
             <td><?=$energy_storage_limit_free?></td>
             <td><?=$energy_storage_limit_premium?></td>
-        </tr>
-
-        <tr>
-            <th scope="row">Available collection sizes</th>
-            <td><?=count(array_filter($collection_types, function ($i) {return !$i->premium;}))?></td>
-            <td><?=count($collection_types)?></td>
         </tr>
 
         <tr>
@@ -103,6 +98,7 @@ gen_top("Geminer Premium", "Details about Geminer premium");
             <td><?=$min_username_length_premium?>-<?=$max_username_length_premium?></td>
         </tr>
 
+        <?php /* 
         <tr>
             <th scope="row">Available tag backgrounds</th>
             <td><?=count(array_filter($tag_styles, function ($i) {return !$i->premium;}))?></td>
@@ -132,6 +128,7 @@ gen_top("Geminer Premium", "Details about Geminer premium");
             <td><?=count(array_filter($tag_styles, function ($i) {return !$i->premium;}))*count(array_filter($tag_fonts, function ($i) {return !$i->premium;}))*count(array_filter($profile_backgrounds, function ($i) {return !$i->premium;}))*count(array_filter($navbar_backgrounds, function ($i) {return !$i->premium;}))?></td>
             <td><?=count($tag_styles)*count($tag_fonts)*count($profile_backgrounds)*count($navbar_backgrounds)?></td>
         </tr>
+        */?>
 
         <tr>
             <th scope="row">Coolness level</th>
@@ -140,5 +137,59 @@ gen_top("Geminer Premium", "Details about Geminer premium");
         </tr>
     </tbody>
 </table>
+
+<hr>
+<h3>Collection sizes</h3>
+<p>If the symbol in brackets is a tick (✓), collections of that size can be used as a profile picture.</p>
+<h4>Available to everyone:</h4>
+<ul id="nonPremiumSizes"></ul>
+<h4>Available to premium members only:</h4>
+<ul id="premiumSizes"></ul>
+
+<script>
+$.getJSON("/a/data/collection-types.json", collectionTypes=>{
+    for (let type of collectionTypes)
+        $("#"+(type.premium ? "premiumSizes" : "nonPremiumSizes")).append($(`<li>${type.name} - ${type.width}px*${type.height}px (${type.pfp ? "✓" : "✗"})${type.premium ? "" : ` - unlocks at level ${type.level}`}</li>`));
+});
+</script>
+
+<hr>
+<h3>Premium customisation options</h3>
+<hr>
+<?php if ($is_logged_in) { ?>
+<h4>Tag backgrounds</h4>
+<?php
+foreach ($tag_styles as $tag_style_id => $tag_style) {
+    if ($tag_style->premium) {
+        user_button($user['id'], true, null, "div", $tag_style_id);
+    }
+}
+?>
+<hr>
+<h4>Tag fonts</h4>
+<?php
+foreach ($tag_fonts as $tag_font_id => $tag_font) {
+    if ($tag_font->premium) {
+        user_button($user['id'], true, null, "div", false, $tag_font_id);
+    }
+}
+?>
+<?php } else { ?>
+Login to see tag backgrounds and fonts.
+<?php } ?>
+<hr>
+<h4>Profile backgrounds</h4>
+<?php
+foreach ($profile_backgrounds as $profile_background) {
+    if ($profile_background->premium) { ?>
+    <span class="bg-displayer" style="background: <?=$profile_background->bgshort?>;"></span>
+<?php } } ?>
+<hr>
+<h4>Navbar backgrounds</h4>
+<?php
+foreach ($navbar_backgrounds as $navbar_background) {
+    if ($navbar_background->premium) { ?>
+    <span class="bg-displayer" style="height: 40px; background: <?=$navbar_background->style?>;"></span>
+<?php } } ?>
 
 <?php gen_bottom(); ?>

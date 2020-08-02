@@ -77,6 +77,18 @@ function user_exists($username) {
         return true;
 }
 
+function get_level($shifts) {
+    global $base_shifts_per_level;
+    $shifts_to_level_up = $base_shifts_per_level;
+    $level = 0;
+    while ($shifts >= $shifts_to_level_up) {
+        $level++;
+        $shifts -= $shifts_to_level_up;
+        $shifts_to_level_up += $base_shifts_per_level;
+    }
+    return $level;
+}
+
 function user_background($user_id) {
     global $profile_backgrounds;
     return $profile_backgrounds[get_user_by_id($user_id)['profile_background']]->style_tag();
@@ -111,6 +123,7 @@ function gen_very_top($title = null, $description = null) {
     global $energy_regeneration_interval;
     global $currency_symbol;
     global $mining_energy_cost;
+    global $base_shifts_per_level;
     global $energy_storage_limit_free;
     global $energy_storage_limit_premium;
     $title = ($title == null ? "Geminer" : "Geminer - $title");

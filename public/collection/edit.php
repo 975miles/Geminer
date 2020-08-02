@@ -57,7 +57,7 @@ if (isset($_POST['collection_data'], $_POST['name'], $_POST['mode'])) {
     }
 
     parse_collection();
-    echo "aaa";
+    show_info("Something went wrong, sorry.");
 }
 ?>
 
@@ -65,7 +65,7 @@ if (isset($_POST['collection_data'], $_POST['name'], $_POST['mode'])) {
     <input name="name" class="form-control" value="<?=$collection['name']?>" maxlength=<?=$max_collection_name_length?>>
 </form>
 <p>Right click on any tile to show what gem it is.</p>
-<canvas id="collectionEditor" style="width:100%;"></canvas>
+<canvas id="collectionEditor" style="width:100%;max-height:2000px;"></canvas>
 <div id="gems"></div>
 <hr>
 <button class="btn btn-lg btn-secondary" onclick="submit()">Finish</button>
@@ -85,8 +85,13 @@ if (isset($_POST['collection_data'], $_POST['name'], $_POST['mode'])) {
     var pixelWidth = (collectionWidth * boxWidth) + ((collectionWidth - 1) * gridLineWidth);
     var pixelHeight = (collectionHeight * boxWidth) + ((collectionHeight - 1) * gridLineWidth);
     var canvasObject = $("#collectionEditor");
+    const maxCanvasHeight = 2000;
     var canvasWidth = canvasObject.width();
     var canvasHeight = canvasWidth * (collectionHeight / collectionWidth);
+    if (canvasHeight > maxCanvasHeight) {
+        canvasHeight = maxCanvasHeight;
+        canvasWidth = canvasHeight * (collectionWidth / collectionHeight);
+    }
     canvasObject.removeAttr("style");
     canvasObject.attr("width", canvasWidth);
     canvasObject.attr("height", canvasHeight);

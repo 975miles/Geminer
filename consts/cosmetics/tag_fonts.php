@@ -1,159 +1,165 @@
 <?php
 class TagFont {
-    public function __construct($style, $premium = false) {
+    public function __construct($style, $premium = false, $level = 0) {
         $this->style = "font-family: ".$style.";";
         $this->premium = $premium;
+        $this->level = $level;
     }
 }
 
 $tag_fonts = [
     new TagFont(
-        $style = "'Roboto', sans-serif",
-        $premium = false,
+        "'Roboto', sans-serif",
+        false,
+        0,
     ),
     
     new TagFont(
-        $style = "'Raleway', sans-serif",
-        $premium = false,
+        "'Raleway', sans-serif",
+        false,
+        0,
     ),
 
     new TagFont(
-        $style = "'Maven Pro', sans-serif",
-        $premium = false,
+        "'Maven Pro', sans-serif",
+        false,
+        12,
     ),
 
     new TagFont(
-        $style = "'Balsamiq Sans', cursive",
-        $premium = false,
+        "'Balsamiq Sans', cursive",
+        false,
+        12,
     ),
 
     new TagFont(
-        $style = "'Patrick Hand', cursive",
-        $premium = false,
+        "'Patrick Hand', cursive",
+        false,
+        45,
     ),
     
     new TagFont(
-        $style = "'Playfair Display', serif",
-        $premium = true,
+        "'Playfair Display', serif",
+        true,
     ),
 
     new TagFont(
-        $style = "'Lexend Tera', sans-serif",
-        $premium = true,
+        "'Lexend Tera', sans-serif",
+        true,
     ),
     
     new TagFont(
-        $style = "'Sriracha', cursive",
-        $premium = true,
+        "'Sriracha', cursive",
+        true,
     ),
 
     new TagFont(
-        $style = "'Roboto Mono', monospace",
-        $premium = true,
+        "'Roboto Mono', monospace",
+        true,
     ),
 
     new TagFont(
-        $style = "'Comic Neue', cursive",
-        $premium = true,
+        "'Comic Neue', cursive",
+        true,
     ),
 
     new TagFont(
-        $style = "'Metal Mania', cursive",
-        $premium = true,
+        "'Metal Mania', cursive",
+        true,
     ),
 
     new TagFont(
-        $style = "'Pacifico', cursive",
-        $premium = true,
+        "'Pacifico', cursive",
+        true,
     ),
 
     new TagFont(
-        $style = "'Comfortaa', cursive",
-        $premium = true,
+        "'Comfortaa', cursive",
+        true,
     ),
 
     new TagFont(
-        $style = "'Crimson Text', serif",
-        $premium = true,
+        "'Crimson Text', serif",
+        true,
     ),
 
     new TagFont(
-        $style = "'MuseoModerno', cursive",
-        $premium = true,
+        "'MuseoModerno', cursive",
+        true,
     ),
 
     new TagFont(
-        $style = "'Piedra', cursive",
-        $premium = true,
+        "'Piedra', cursive",
+        true,
     ),
 
     new TagFont(
-        $style = "'Archivo Black', sans-serif",
-        $premium = true,
+        "'Archivo Black', sans-serif",
+        true,
     ),
 
     new TagFont(
-        $style = "'Lobster Two', cursive",
-        $premium = true,
+        "'Lobster Two', cursive",
+        true,
     ),
 
     new TagFont(
-        $style = "'Cinzel', serif",
-        $premium = true,
+        "'Cinzel', serif",
+        true,
     ),
 
     new TagFont(
-        $style = "'Bungee', cursive",
-        $premium = true,
+        "'Bungee', cursive",
+        true,
     ),
 
     new TagFont(
-        $style = "'Righteous', cursive",
-        $premium = true,
+        "'Righteous', cursive",
+        true,
     ),
 
     new TagFont(
-        $style = "'Fredoka One', cursive",
-        $premium = true,
+        "'Fredoka One', cursive",
+        true,
     ),
 
     new TagFont(
-        $style = "'Caveat', cursive",
-        $premium = true,
+        "'Caveat', cursive",
+        true,
     ),
 
     new TagFont(
-        $style = "'Permanent Marker', cursive",
-        $premium = true,
+        "'Permanent Marker', cursive",
+        true,
     ),
 
     new TagFont(
-        $style = "'Amatic SC', cursive",
-        $premium = true,
+        "'Amatic SC', cursive",
+        true,
     ),
 
     new TagFont(
-        $style = "'Holtwood One SC', serif",
-        $premium = true,
+        "'Holtwood One SC', serif",
+        true,
     ),
 
     new TagFont(
-        $style = "'Indie Flower', cursive",
-        $premium = true,
+        "'Indie Flower', cursive",
+        true,
     ),
 
     new TagFont(
-        $style = "'Bebas Neue', cursive",
-        $premium = true,
+        "'Bebas Neue', cursive",
+        true,
     ),
 
     new TagFont(
-        $style = "'Leckerli One', cursive",
-        $premium = true,
+        "'Leckerli One', cursive",
+        true,
     ),
 
     new TagFont(
-        $style = "'Orbitron', sans-serif",
-        $premium = true,
+        "'Orbitron', sans-serif",
+        true,
     ),
 ];

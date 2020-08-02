@@ -7,7 +7,7 @@ if (isset($_POST['id'])) {
     $sth = $dbh->prepare("SELECT * FROM collections WHERE id = ?");
     $sth->execute([$id]);
     $collection = $sth->fetch();
-    if ($collection and $collection['by'] == $user['id'] and $collection['type'] != 3 and !$collection['is_pfp']) {
+    if ($collection and $collection['by'] == $user['id'] and !$collection['is_pfp']) {
         $dbh->prepare("DELETE FROM collections WHERE id = ?")->execute([$id]);
         $dbh->prepare("DELETE FROM collection_ratings WHERE collection = ?")->execute([$id]);
         redirect("/collection/view?id=".dechex($id));
