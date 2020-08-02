@@ -146,7 +146,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="toast-body">
+            <div class="toast-body text-dark">
                 Hello, world! This is a toast message.
             </div>
         </div>
