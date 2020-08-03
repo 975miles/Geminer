@@ -120,6 +120,8 @@ function hover_about($info) {
 function gen_very_top($title = null, $description = null) {
     global $is_logged_in;
     global $user;
+    global $energy_amount_limit;
+    global $energy_storage_per_level;
     global $energy_regeneration_interval;
     global $currency_symbol;
     global $mining_energy_cost;

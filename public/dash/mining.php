@@ -147,6 +147,8 @@ require_once $_SERVER['DOCUMENT_ROOT']."/../fn/real_gem_amounts.php";
                         setXp();
 
                         while (previousLevel++ < currentLevel) {
+                            $("#energyMax").html(Number($("#energyMax").html()) + maxEnergyPerLevel);
+                            maxEnergy += maxEnergyPerLevel;
                             await $.getJSON("/a/data/level-rewards.json", levelRewards => {
                                 let message = `You've reached level ${previousLevel}!`;
                                 let reward = levelRewards[previousLevel];

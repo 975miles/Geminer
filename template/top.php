@@ -23,7 +23,8 @@
                 user.is_premium = (user.is_premium == "1" ? true : false)
                 user.is_admin = (user.is_admin == "1" ? true : false)
             }
-            const maxEnergy = <?=$is_logged_in ? ($user['is_premium'] ? $energy_storage_limit_premium : $energy_storage_limit_free) : "null"?>;
+            var maxEnergy = <?=$is_logged_in ? $energy_amount_limit : "null"?>;
+            const maxEnergyPerLevel = <?=$energy_storage_per_level?>;
             const currencySymbol = "<?=$currency_symbol?>";
         </script>
         <script src="/a/js/geminer.js"></script>

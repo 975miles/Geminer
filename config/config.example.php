@@ -39,10 +39,12 @@ $moving_energy_cost = 3;
 
 $base_shifts_per_level = 1;
 
+$energy_storage_per_level = 10;
+
 $max_veins_per_mine_free = 5;
 $max_veins_per_mine_premium = 11;
 
-$energy_storage_limit_free = 500;
+$energy_storage_limit_free = 250;
 $energy_storage_limit_premium = 50000;
 
 $collection_storage_limit_free = 10;
