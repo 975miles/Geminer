@@ -59,9 +59,10 @@ if (isset($_GET['user'])) {
         <?php } if ($user_found['is_premium']) { ?>
         <img src="/a/i/profile-badges/premium.png" class="profile-badge" id="profile-badge-premium" data-toggle="tooltip" data-html="true">
         <tooltipcontent for="profile-badge-premium"><?=htmlentities($user_found['name'])?> has been a premium member of Geminer since <span class='unix-ts'><?=$user_found['date_became_premium']?></span>.</tooltipcontent>
+        <?php } ?>
         <img src="/a/i/profile-badges/member.png" class="profile-badge" id="profile-badge-member" data-toggle="tooltip" data-html="true">
         <tooltipcontent for="profile-badge-member"><?=htmlentities($user_found['name'])?> has been a member of Geminer since <span class='unix-ts'><?=$user_found['date_signed_up']?></span>.</tooltipcontent>
-        <?php } if (true) { ?>
+        <?php if (true) { ?>
         <img src="/a/i/profile-badges/hidden.png" class="profile-badge" data-toggle="tooltip" title="<?=htmlentities($user_found['name'])?> is a real hidden gem!">
         <?php } if ($user_found['birthstone'] != 0) { $birthstone = $birthstones[$user_found['birthstone']]; ?>
         <img src="/a/i/gem/<?=$birthstone->gem->id?>.png" class="profile-badge pixels rounded-circle border border-dark" data-toggle="tooltip" title="<?=htmlentities($user_found['name'])?> was born in <?=$birthstone->month?> - their birthstone is <?=$birthstone->gem->name?>.">

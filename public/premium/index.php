@@ -63,7 +63,7 @@ gen_top("Geminer Premium", "Details about Geminer premium");
 
     <tbody>
         <tr>
-            <th scope="row">Maximum <img src="/a/i/energy.png" class="energy-icon" alt="energy"></th>
+            <th scope="row">Base maximum <img src="/a/i/energy.png" class="energy-icon" alt="energy"></th>
             <td><?=$energy_storage_limit_free?></td>
             <td><?=$energy_storage_limit_premium?></td>
         </tr>

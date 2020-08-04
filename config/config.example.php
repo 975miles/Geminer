@@ -41,6 +41,9 @@ $base_shifts_per_level = 1;
 
 $energy_storage_per_level = 10;
 
+$board_place_min_price = 1;
+$board_place_max_price = 200;
+
 $max_veins_per_mine_free = 5;
 $max_veins_per_mine_premium = 11;
 

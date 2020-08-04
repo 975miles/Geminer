@@ -36,6 +36,15 @@
                         <a class="dropdown-item" href="/collection/imgconverter">Image converter</a>
                     </div>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="collectionsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Gem boards
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="collectionsDropdown">
+                        <a class="dropdown-item" href="/board?id=0">Main</a>
+                        <a class="dropdown-item" href="/board/top">Top</a>
+                    </div>
+                </li>
             </ul>
             <?php if ($is_logged_in) { ?>
             

@@ -71,7 +71,8 @@ function replaceScript(scriptTag, html) {
 
 async function genCollectionImage(data, fillPage = false) {
     await gemsInfo;
-    data = JSON.parse(data);
+    if (typeof data == "string")
+        data = JSON.parse(data);
     let height = data.length;
     let width = data[0].length;
     let canvas = $(`<canvas width=${width} height=${height}></canvas>`)[0];
