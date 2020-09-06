@@ -1,5 +1,6 @@
 #modules
 vendor
+composer.lock
 
 #config
 config/config.php
