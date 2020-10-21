@@ -1,0 +1,30 @@
+.swirly {
+    position: absolute;
+    width: 96%;
+    height: auto;
+    background-image: url(/a/i/swirly.png);
+    background-size: 100%;
+    animation: spin 4.5s linear infinite;
+}
+
+.swirly:before {
+	content: "";
+	float: left;
+	padding-top: 100%; 	/* initial ratio of 1:1*/
+}
+
+@keyframes spin {
+    100% {
+        transform: rotate(60deg);
+    }
+}
+
+.swirly-contents {
+    position: relative;
+    display: inline-block;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+    width: 50%;
+    margin: 25%;
+}

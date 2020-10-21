@@ -1,0 +1,926 @@
+[
+    [
+        {
+            "type": "crate",
+            "data": 1
+        },
+
+        {
+            "type": "money",
+            "data": 995
+        },
+
+        {
+            "type": "money",
+            "data": 996
+        },
+
+        {
+            "type": "money",
+            "data": 997
+        },
+
+        {
+            "type": "money",
+            "data": 998
+        },
+
+        {
+            "type": "money",
+            "data": 999
+        },
+
+        {
+            "type": "money",
+            "data": 1000
+        },
+
+        {
+            "type": "money",
+            "data": 1001
+        },
+
+        {
+            "type": "money",
+            "data": 1002
+        },
+
+        {
+            "type": "money",
+            "data": 1003
+        },
+
+        {
+            "type": "money",
+            "data": 1004
+        },
+
+        {
+            "type": "money",
+            "data": 1005
+        },
+
+        {
+            "type": "gems",
+            "data": {
+                "gem": 0,
+                "amount": 1 
+            }
+        },
+
+        {
+            "type": "gems",
+            "data": {
+                "gem": 1,
+                "amount": 1 
+            }
+        },
+
+        {
+            "type": "gems",
+            "data": {
+                "gem": 2,
+                "amount": 1 
+            }
+        },
+
+        {
+            "type": "gems",
+            "data": {
+                "gem": 3,
+                "amount": 1 
+            }
+        },
+
+        {
+            "type": "gems",
+            "data": {
+                "gem": 4,
+                "amount": 1 
+            }
+        },
+
+        {
+            "type": "gems",
+            "data": {
+                "gem": 5,
+                "amount": 1 
+            }
+        },
+
+        {
+            "type": "gems",
+            "data": {
+                "gem": 6,
+                "amount": 1 
+            }
+        },
+
+        {
+            "type": "gems",
+            "data": {
+                "gem": 7,
+                "amount": 1 
+            }
+        },
+
+        {
+            "type": "gems",
+            "data": {
+                "gem": 8,
+                "amount": 1 
+            }
+        },
+
+        {
+            "type": "gems",
+            "data": {
+                "gem": 9,
+                "amount": 1 
+            }
+        },
+
+        {
+            "type": "modifier",
+            "data": 0
+        },
+
+        {
+            "type": "modifier",
+            "data": 0
+        },
+
+        {
+            "type": "modifier",
+            "data": 0
+        },
+        
+        {
+            "type": "modifier",
+            "data": 2
+        },
+        
+        {
+            "type": "modifier",
+            "data": 2
+        },
+        
+        {
+            "type": "modifier",
+            "data": 2
+        },
+        
+        {
+            "type": "pickaxe",
+            "data": {
+                "handle": 0,
+                "head": 1,
+                "binding": 2,
+                "name": "Boring"
+            }
+        }
+    ],
+
+    [
+        {
+            "type": "crate",
+            "data": 0
+        },
+
+        {
+            "type": "crate",
+            "data": 2
+        },
+
+        {
+            "type": "money",
+            "data": 2395
+        },
+
+        {
+            "type": "money",
+            "data": 2396
+        },
+
+        {
+            "type": "money",
+            "data": 2397
+        },
+
+        {
+            "type": "money",
+            "data": 2398
+        },
+
+        {
+            "type": "money",
+            "data": 2399
+        },
+
+        {
+            "type": "money",
+            "data": 2400
+        },
+
+        {
+            "type": "money",
+            "data": 2401
+        },
+
+        {
+            "type": "money",
+            "data": 2402
+        },
+
+        {
+            "type": "money",
+            "data": 2403
+        },
+
+        {
+            "type": "money",
+            "data": 2404
+        },
+
+        {
+            "type": "money",
+            "data": 2405
+        },
+
+        {
+            "type": "gems",
+            "data": {
+                "gem": 10,
+                "amount": 1 
+            }
+        },
+
+        {
+            "type": "gems",
+            "data": {
+                "gem": 11,
+                "amount": 1 
+            }
+        },
+
+        {
+            "type": "gems",
+            "data": {
+                "gem": 12,
+                "amount": 1 
+            }
+        },
+
+        {
+            "type": "gems",
+            "data": {
+                "gem": 13,
+                "amount": 1 
+            }
+        },
+
+        {
+            "type": "gems",
+            "data": {
+                "gem": 14,
+                "amount": 1 
+            }
+        },
+
+        {
+            "type": "gems",
+            "data": {
+                "gem": 15,
+                "amount": 1 
+            }
+        },
+
+        {
+            "type": "gems",
+            "data": {
+                "gem": 16,
+                "amount": 1 
+            }
+        },
+
+        {
+            "type": "gems",
+            "data": {
+                "gem": 17,
+                "amount": 1 
+            }
+        },
+
+        {
+            "type": "gems",
+            "data": {
+                "gem": 18,
+                "amount": 1 
+            }
+        },
+
+        {
+            "type": "gems",
+            "data": {
+                "gem": 19,
+                "amount": 1 
+            }
+        },
+        
+        {
+            "type": "modifier",
+            "data": 1
+        },
+        
+        {
+            "type": "modifier",
+            "data": 1
+        },
+        
+        {
+            "type": "modifier",
+            "data": 1
+        },
+        
+        {
+            "type": "modifier",
+            "data": 5
+        },
+        
+        {
+            "type": "modifier",
+            "data": 5
+        },
+        
+        {
+            "type": "modifier",
+            "data": 5
+        },
+        
+        {
+            "type": "pickaxe",
+            "data": {
+                "handle": 3,
+                "head": 4,
+                "binding": 5,
+                "name": "Good"
+            }
+        }
+    ],
+
+    [
+        {
+            "type": "crate",
+            "data": 1
+        },
+
+        {
+            "type": "crate",
+            "data": 3
+        },
+
+        {
+            "type": "money",
+            "data": 5995
+        },
+
+        {
+            "type": "money",
+            "data": 5996
+        },
+
+        {
+            "type": "money",
+            "data": 5997
+        },
+
+        {
+            "type": "money",
+            "data": 5998
+        },
+
+        {
+            "type": "money",
+            "data": 5999
+        },
+
+        {
+            "type": "money",
+            "data": 6000
+        },
+
+        {
+            "type": "money",
+            "data": 6001
+        },
+
+        {
+            "type": "money",
+            "data": 6002
+        },
+
+        {
+            "type": "money",
+            "data": 6003
+        },
+
+        {
+            "type": "money",
+            "data": 6004
+        },
+
+        {
+            "type": "money",
+            "data": 6005
+        },
+
+        {
+            "type": "gems",
+            "data": {
+                "gem": 0,
+                "amount": 1 
+            }
+        },
+
+        {
+            "type": "gems",
+            "data": {
+                "gem": 21,
+                "amount": 1 
+            }
+        },
+
+        {
+            "type": "gems",
+            "data": {
+                "gem": 22,
+                "amount": 1 
+            }
+        },
+
+        {
+            "type": "gems",
+            "data": {
+                "gem": 23,
+                "amount": 1 
+            }
+        },
+
+        {
+            "type": "gems",
+            "data": {
+                "gem": 24,
+                "amount": 1 
+            }
+        },
+
+        {
+            "type": "gems",
+            "data": {
+                "gem": 25,
+                "amount": 1 
+            }
+        },
+
+        {
+            "type": "gems",
+            "data": {
+                "gem": 26,
+                "amount": 1 
+            }
+        },
+
+        {
+            "type": "gems",
+            "data": {
+                "gem": 27,
+                "amount": 1 
+            }
+        },
+
+        {
+            "type": "gems",
+            "data": {
+                "gem": 28,
+                "amount": 1 
+            }
+        },
+
+        {
+            "type": "gems",
+            "data": {
+                "gem": 29,
+                "amount": 1 
+            }
+        },
+        
+        {
+            "type": "modifier",
+            "data": 3
+        },
+        
+        {
+            "type": "modifier",
+            "data": 3
+        },
+        
+        {
+            "type": "modifier",
+            "data": 3
+        },
+        
+        {
+            "type": "modifier",
+            "data": 9
+        },
+        
+        {
+            "type": "modifier",
+            "data": 9
+        },
+        
+        {
+            "type": "modifier",
+            "data": 9
+        },
+        
+        {
+            "type": "pickaxe",
+            "data": {
+                "handle": 6,
+                "head": 7,
+                "binding": 8,
+                "name": "Esteemed"
+            }
+        }
+    ],
+
+    [
+        {
+            "type": "crate",
+            "data": 2
+        },
+
+        {
+            "type": "crate",
+            "data": 4
+        },
+        
+        {
+            "type": "money",
+            "data": 14995
+        },
+        
+        {
+            "type": "money",
+            "data": 14996
+        },
+        
+        {
+            "type": "money",
+            "data": 14997
+        },
+        
+        {
+            "type": "money",
+            "data": 14998
+        },
+        
+        {
+            "type": "money",
+            "data": 14999
+        },
+        
+        {
+            "type": "money",
+            "data": 15000
+        },
+        
+        {
+            "type": "money",
+            "data": 15001
+        },
+        
+        {
+            "type": "money",
+            "data": 15002
+        },
+        
+        {
+            "type": "money",
+            "data": 15003
+        },
+        
+        {
+            "type": "money",
+            "data": 15004
+        },
+        
+        {
+            "type": "money",
+            "data": 15005
+        },
+
+        {
+            "type": "gems",
+            "data": {
+                "gem": 30,
+                "amount": 1 
+            }
+        },
+
+        {
+            "type": "gems",
+            "data": {
+                "gem": 31,
+                "amount": 1 
+            }
+        },
+
+        {
+            "type": "gems",
+            "data": {
+                "gem": 32,
+                "amount": 1 
+            }
+        },
+
+        {
+            "type": "gems",
+            "data": {
+                "gem": 33,
+                "amount": 1 
+            }
+        },
+
+        {
+            "type": "gems",
+            "data": {
+                "gem": 34,
+                "amount": 1 
+            }
+        },
+
+        {
+            "type": "gems",
+            "data": {
+                "gem": 35,
+                "amount": 1 
+            }
+        },
+
+        {
+            "type": "gems",
+            "data": {
+                "gem": 36,
+                "amount": 1 
+            }
+        },
+
+        {
+            "type": "gems",
+            "data": {
+                "gem": 37,
+                "amount": 1 
+            }
+        },
+
+        {
+            "type": "gems",
+            "data": {
+                "gem": 38,
+                "amount": 1 
+            }
+        },
+
+        {
+            "type": "gems",
+            "data": {
+                "gem": 39,
+                "amount": 1 
+            }
+        },
+        
+        {
+            "type": "modifier",
+            "data": 6
+        },
+        
+        {
+            "type": "modifier",
+            "data": 6
+        },
+        
+        {
+            "type": "modifier",
+            "data": 6
+        },
+        
+        {
+            "type": "modifier",
+            "data": 7
+        },
+        
+        {
+            "type": "modifier",
+            "data": 7
+        },
+        
+        {
+            "type": "modifier",
+            "data": 7
+        },
+        
+        {
+            "type": "pickaxe",
+            "data": {
+                "handle": 9,
+                "head": 10,
+                "binding": 11,
+                "name": "Distinguished"
+            }
+        }
+    ],
+
+    [
+        {
+            "type": "crate",
+            "data": 3
+        },
+
+        {
+            "type": "money",
+            "data": 59995
+        },
+
+        {
+            "type": "money",
+            "data": 59996
+        },
+
+        {
+            "type": "money",
+            "data": 59997
+        },
+
+        {
+            "type": "money",
+            "data": 59998
+        },
+
+        {
+            "type": "money",
+            "data": 59999
+        },
+
+        {
+            "type": "money",
+            "data": 60000
+        },
+
+        {
+            "type": "money",
+            "data": 60001
+        },
+
+        {
+            "type": "money",
+            "data": 60002
+        },
+
+        {
+            "type": "money",
+            "data": 60003
+        },
+
+        {
+            "type": "money",
+            "data": 60004
+        },
+
+        {
+            "type": "money",
+            "data": 60005
+        },
+
+        {
+            "type": "gems",
+            "data": {
+                "gem": 40,
+                "amount": 1 
+            }
+        },
+
+        {
+            "type": "gems",
+            "data": {
+                "gem": 41,
+                "amount": 1 
+            }
+        },
+
+        {
+            "type": "gems",
+            "data": {
+                "gem": 42,
+                "amount": 1 
+            }
+        },
+
+        {
+            "type": "gems",
+            "data": {
+                "gem": 43,
+                "amount": 1 
+            }
+        },
+
+        {
+            "type": "gems",
+            "data": {
+                "gem": 44,
+                "amount": 1 
+            }
+        },
+
+        {
+            "type": "gems",
+            "data": {
+                "gem": 45,
+                "amount": 1 
+            }
+        },
+
+        {
+            "type": "gems",
+            "data": {
+                "gem": 46,
+                "amount": 1 
+            }
+        },
+
+        {
+            "type": "gems",
+            "data": {
+                "gem": 47,
+                "amount": 1 
+            }
+        },
+
+        {
+            "type": "gems",
+            "data": {
+                "gem": 48,
+                "amount": 1 
+            }
+        },
+
+        {
+            "type": "gems",
+            "data": {
+                "gem": 49,
+                "amount": 1 
+            }
+        },
+
+        {
+            "type": "modifier",
+            "data": 4
+        },
+
+        {
+            "type": "modifier",
+            "data": 4
+        },
+
+        {
+            "type": "modifier",
+            "data": 4
+        },
+
+        {
+            "type": "modifier",
+            "data": 8
+        },
+
+        {
+            "type": "modifier",
+            "data": 8
+        },
+
+        {
+            "type": "modifier",
+            "data": 8
+        },
+        
+        {
+            "type": "pickaxe",
+            "data": {
+                "handle": 12,
+                "head": 13,
+                "binding": 14,
+                "name": "Fabled"
+            }
+        }
+    ]
+]

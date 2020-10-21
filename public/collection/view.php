@@ -67,7 +67,7 @@ function switchDrawMode() {
 var mode = "<?=$collection['mode'] == 0 ? "gem" : "colour"?>";
 var data = "<?=$collection['data']?>";
 (async ()=> {
-    $("h1").prepend(`<img class="collection-img" style="height:1em" src="${await genCollectionImage(data)}"> `);
+    //$("h1").prepend(`<img class="collection-img" style="height:1em;max-width:2em" src="${await genCollectionImage(data)}"> `);
 })();
 data = JSON.parse(data);
 const height = data.length;
@@ -94,19 +94,59 @@ drawCollection(mode);
 <span>, putting it in position <b><?=$leaderboard_position?></b> on the <a href="/collection/leaderboard">leaderboard</a>.</span>
 
 <script>
-    function rate(isPositive) {
-        let collectionId = parseInt(new URLSearchParams(window.location.search).get("id"), 16);
+function rate(isPositive) {
+    let collectionId = parseInt(new URLSearchParams(window.location.search).get("id"), 16);
 
-        if ($(`#rate-${isPositive}`).attr("value") == "false")
-            $.post("/api/do/rate-collection/add.php", {
-                collection: collectionId,
-                is_positive: isPositive
-            }, () => location.reload());
-        else
-            $.post("/api/do/rate-collection/remove.php", {
-                collection: collectionId
-            }, () => location.reload());
+    if ($(`#rate-${isPositive}`).attr("value") == "false")
+        $.post("/api/do/rate-collection/add.php", {
+            collection: collectionId,
+            is_positive: isPositive
+        }, () => location.reload());
+    else
+        $.post("/api/do/rate-collection/remove.php", {
+            collection: collectionId
+        }, () => location.reload());
+}
+</script>
+
+<hr>
+<div id="collectionInfo">
+    <h3>Gems in this collection</h3>
+</div>
+
+<script>
+(async () => {
+    let gemAmounts = {};
+    for (let y of data)
+        for (let x of y) {
+            if (gemAmounts[x] != null)
+                gemAmounts[x]++;
+            else
+                gemAmounts[x] = 1;
+        }
+    
+    let sortedAmounts = [];
+    for (let i in gemAmounts)
+        sortedAmounts.push([i, gemAmounts[i]]);
+
+    sortedAmounts.sort(function(a, b) {
+        return b[1] - a[1];
+    });
+
+    let infoDiv = $("#collectionInfo");
+    let priceDisplay = $("<p>")
+    infoDiv.prepend(priceDisplay);
+    let price = 0;
+    
+    await gemsInfo;
+    for (let i of sortedAmounts) {
+        let currentGemPrice = gemsInfo[i[0]].value * (i[1] * 1000);
+        price += currentGemPrice;
+        infoDiv.append($(`<p>${i[1]}px of ${await displayGem(i[0])}${gemsInfo[i[0]].name} (worth ${displayMoney(currentGemPrice)}).</p>`));
     }
+
+    priceDisplay.html(`This collection is worth ${displayMoney(price)}.`);
+})()
 </script>
 
 <?php if ($is_logged_in and $collection['by'] == $user['id']) { ?>

@@ -1,0 +1,36 @@
+[
+    {
+        "name": "Boring",
+        "filter": "invert(58%)sepia(88%)saturate(6%)hue-rotate(55deg)brightness(89%)contrast(97%)",
+        "chance": 60,
+        "price": 2000
+    },
+
+    {
+        "name": "Good",
+        "filter": "invert(28%)sepia(98%)saturate(517%)hue-rotate(66deg)brightness(92%)contrast(88%)",
+        "chance": 25,
+        "price": 4800
+    },
+
+    {
+        "name": "Esteemed",
+        "filter": "invert(78%)sepia(7%)saturate(230%)hue-rotate(61deg)brightness(99%)contrast(104%)",
+        "chance": 10,
+        "price": 12000
+    },
+
+    {
+        "name": "Distinguished",
+        "filter": "invert(84%)sepia(37%)saturate(549%)hue-rotate(90deg)brightness(99%)contrast(105%)",
+        "chance": 4,
+        "price": 30000
+    },
+
+    {
+        "name": "Fabled",
+        "filter": "invert(90%)sepia(100%)saturate(506%)hue-rotate(325deg)brightness(100%)contrast(104%)",
+        "chance": 1,
+        "price": 120000
+    }
+]

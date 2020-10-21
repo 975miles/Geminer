@@ -18,11 +18,6 @@
             const baseShiftsPerLevel = <?=$base_shifts_per_level?>;
             const loggedIn = <?=$is_logged_in ? "true" : "false"?>;
             var user = <?=$is_logged_in ? json_encode($user) : "null"?>;
-            if (loggedIn) {
-                user.shifts_completed = Number(user.shifts_completed);
-                user.is_premium = (user.is_premium == "1" ? true : false)
-                user.is_admin = (user.is_admin == "1" ? true : false)
-            }
             var maxEnergy = <?=$is_logged_in ? $energy_amount_limit : "null"?>;
             const maxEnergyPerLevel = <?=$energy_storage_per_level?>;
             const currencySymbol = "<?=$currency_symbol?>";

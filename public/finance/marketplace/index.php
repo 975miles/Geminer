@@ -75,7 +75,7 @@ $listing_count = $sth->fetchColumn();
 <hr>
 <?php
 if ($listing_count > 0) {
-    foreach($listings as $listing) {
+    foreach ($listings as $listing) {
         $gem = $all_gems[$listing['gem']];
         $bg = $profile_backgrounds[get_user_by_id($listing['user'])['profile_background']];
         ?>

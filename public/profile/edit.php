@@ -49,7 +49,7 @@ if (isset($_POST['name'], $_POST['tag_style'], $_POST['profile_background'], $_P
         show_info("That month doesn't exist.");
     else {
         $selected_navbar_backgrounds = Array();
-        foreach($_POST['navbar_backgrounds'] as $navbar_background) {
+        foreach ($_POST['navbar_backgrounds'] as $navbar_background) {
             $navbar_background = intval($navbar_background);
             if (in_array($navbar_background, $selected_navbar_backgrounds))
                 throw_error("You've put the same background more than once.");
@@ -76,8 +76,14 @@ if (isset($_POST['name'], $_POST['tag_style'], $_POST['profile_background'], $_P
     <br>
     <div id="tagBackgrounds">
         <?php
+        $unlock_level = null;
         foreach ($tag_styles as $tag_style_id => $tag_style) {
-            if (($tag_style->premium and !$user['is_premium']) or (isset($tag_style->level) and $level < $tag_style->level))
+            if (isset($tag_style->level) and $level < $tag_style->level) {
+                if ($unlock_level == null)
+                    $unlock_level = $tag_style->level;
+                continue;
+            }
+            if ($tag_style->premium and !$user['is_premium'])
                 continue;
         ?>
         <div class="form-check form-check-inline">
@@ -88,7 +94,9 @@ if (isset($_POST['name'], $_POST['tag_style'], $_POST['profile_background'], $_P
         </div>
         <?php } ?>
     </div>
-    <?php if (!$user['is_premium']) { ?>
+    <?php if ($unlock_level != null) { ?>
+    <p>More tag backgrounds will unlock at level <?=$unlock_level?>.</p>
+    <?php } if (!$user['is_premium']) { ?>
     <p><a href="/premium">Get premium</a> to access more styles.</p>
     <?php } ?>
     <hr>
@@ -96,8 +104,14 @@ if (isset($_POST['name'], $_POST['tag_style'], $_POST['profile_background'], $_P
     <br>
     <div id="tagFonts">
         <?php
+        $unlock_level = null;
         foreach ($tag_fonts as $tag_font_id => $tag_font) {
-            if (($tag_font->premium and !$user['is_premium']) or (isset($tag_font->level) and $level < $tag_font->level))
+            if (isset($tag_font->level) and $level < $tag_font->level) {
+                if ($unlock_level == null)
+                    $unlock_level = $tag_font->level;
+                continue;
+            }
+            if ($tag_font->premium and !$user['is_premium'])
                 continue;
         ?>
         <div class="form-check form-check-inline">
@@ -108,7 +122,9 @@ if (isset($_POST['name'], $_POST['tag_style'], $_POST['profile_background'], $_P
         </div>
         <?php } ?>
     </div>
-    <?php if (!$user['is_premium']) { ?>
+    <?php if ($unlock_level != null) { ?>
+    <p>More tag fonts will unlock at level <?=$unlock_level?>.</p>
+    <?php } if (!$user['is_premium']) { ?>
     <p><a href="/premium">Get premium</a> to access more fonts.</p>
     <?php } ?>
     <hr>
@@ -120,8 +136,14 @@ if (isset($_POST['name'], $_POST['tag_style'], $_POST['profile_background'], $_P
     </p>
     <br>
     <?php
+    $unlock_level = null;
     foreach ($profile_backgrounds as $profile_background_id => $profile_background) {
-        if (($profile_background->premium and !$user['is_premium']) or (isset($profile_background->level) and $level < $profile_background->level))
+        if (isset($profile_background->level) and $level < $profile_background->level) {
+            if ($unlock_level == null)
+                $unlock_level = $profile_background->level;
+            continue;
+        }
+        if ($profile_background->premium and !$user['is_premium'])
             continue;
     ?>
     <div class="form-check form-check-inline">
@@ -130,6 +152,8 @@ if (isset($_POST['name'], $_POST['tag_style'], $_POST['profile_background'], $_P
             <span class="bg-displayer" style="background: <?=$profile_background->bgshort?>;"></span>
         </label>
     </div>
+    <?php } if ($unlock_level != null) { ?>
+    <p>More profile backgrounds will unlock at level <?=$unlock_level?>.</p>
     <?php } if (!$user['is_premium']) { ?>
     <p><a href="/premium">Get premium</a> to access more backgrounds.</p>
     <?php } ?>
@@ -145,9 +169,15 @@ if (isset($_POST['name'], $_POST['tag_style'], $_POST['profile_background'], $_P
     <br>
     <div id="navbarBackgrounds">
     <?php
+    $unlock_level = null;
     $current_navbar_backgrounds = json_decode($user['navbar_backgrounds']);
     foreach ($navbar_backgrounds as $navbar_background_id => $navbar_background) {
-        if (($navbar_background->premium and !$user['is_premium']) or (isset($navbar_background->level) and $level < $navbar_background->level))
+        if (isset($navbar_background->level) and $level < $navbar_background->level) {
+            if ($unlock_level == null)
+                $unlock_level = $navbar_background->level;
+            continue;
+        }
+        if ($navbar_background->premium and !$user['is_premium'])
             continue;
     ?>
     <div class="form-check form-check-inline">
@@ -158,7 +188,9 @@ if (isset($_POST['name'], $_POST['tag_style'], $_POST['profile_background'], $_P
     </div>
     <?php } ?>
     </div>
-    <?php if (!$user['is_premium']) { ?>
+    <?php if ($unlock_level != null) { ?>
+    <p>More navbar backgrounds will unlock at level <?=$unlock_level?>.</p>
+    <?php } if (!$user['is_premium']) { ?>
     <p><a href="/premium">Get premium</a> to access more backgrounds.</p>
     <?php } ?>
     <hr>

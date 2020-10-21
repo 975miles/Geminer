@@ -1,7 +1,6 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT']."/../start.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/../consts/gems.php";
-require_once $_SERVER['DOCUMENT_ROOT']."/../fn/real_gem_amounts.php";
 
 
 if (!$is_logged_in)
@@ -28,21 +27,21 @@ if (isset($_POST['board'], $_POST['x'], $_POST['y'], $_POST['gem'])) {
     if ($y < 0 or $y > $board_size-1)
         die("false");
 
-    if (get_real_gem_amounts()[$gem] < 1000)
+    if ($user[$gem] < 1000)
         die("false");
 
     $sth = $dbh->prepare("SELECT gem, user FROM board_placements WHERE board = ? AND x = ? AND y = ?");
     $sth->execute([$board_id, $x, $y]);
     $placement = $sth->fetchAll();
     if (count($placement) == 0)
-        $dbh->prepare("INSERT INTO board_placements (board, x, y, gem, user) VALUES (?, ?, ?, ?, ?)")
-            ->execute([$board_id, $x, $y, $gem, $user['id']]);
+        $dbh->prepare("INSERT INTO board_placements (board, x, y, gem, user, placed_at) VALUES (?, ?, ?, ?, ?, ?)")
+            ->execute([$board_id, $x, $y, $gem, $user['id'], time()]);
     else {
         if ($placement[0]['user'] == $user['id'] and $placement[0]['gem'] == $gem)
             die("false");
         else
-            $dbh->prepare("UPDATE board_placements SET gem = ?, user = ? WHERE board = ? AND x = ? AND y = ?")
-                ->execute([$gem, $user['id'], $board_id, $x, $y]);
+            $dbh->prepare("UPDATE board_placements SET gem = ?, user = ?, placed_at = ? WHERE board = ? AND x = ? AND y = ?")
+                ->execute([$gem, $user['id'], time(), $board_id, $x, $y]);
     }
 
     $dbh->prepare("UPDATE users SET money = money - ?, `$gem` = `$gem` - 1000 WHERE id = ?")

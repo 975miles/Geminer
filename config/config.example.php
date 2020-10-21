@@ -23,6 +23,7 @@ $extra_premium_features = [
 ];
 
 $max_collection_name_length = 32;
+$max_pick_name_length = 48;
 
 $valid_username_characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_~*^!|:;()[]{}";
 
@@ -41,14 +42,17 @@ $base_shifts_per_level = 1;
 
 $energy_storage_per_level = 10;
 
+$alloy_cast_price = 1000;
+$alloy_cast_time = 86400;
+$alloy_cast_time_string = "24 hours";
+
+$alloy_cast_speed_up_energy_price = 1;
+
 $board_place_min_price = 1;
 $board_place_max_price = 200;
 
-$max_veins_per_mine_free = 5;
-$max_veins_per_mine_premium = 11;
-
 $energy_storage_limit_free = 250;
-$energy_storage_limit_premium = 50000;
+$energy_storage_limit_premium = 1500;
 
 $collection_storage_limit_free = 10;
 $collection_storage_limit_premium = 1000;

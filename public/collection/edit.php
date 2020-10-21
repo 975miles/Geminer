@@ -2,62 +2,77 @@
 require_once $_SERVER['DOCUMENT_ROOT']."/../start.php";
 require_auth();
 require_once $_SERVER['DOCUMENT_ROOT']."/../consts/collection-types.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/../consts/gems.php";
 gen_top("Editing a collection...");
 require_once $_SERVER['DOCUMENT_ROOT']."/../fn/get_collection.php";
-require_once $_SERVER['DOCUMENT_ROOT']."/../fn/real_gem_amounts.php";
 
 if ($collection['by'] != $user['id'])
     throw_error("This collection isn't yours.");
 
-$gem_amounts = get_real_gem_amounts($exclude=$collection['id']);
-
 if (isset($_POST['collection_data'], $_POST['name'], $_POST['mode'])) {
     function parse_collection() {
         global $max_collection_name_length;
+        global $all_gems;
         global $collection_types;
         global $collection;
-        global $gem_amounts;
         global $user;
         global $dbh;
+        echo "a";
         if (mb_strlen($_POST['name']) > $max_collection_name_length) {
-            show_info("Collection name must be at most $max_collection_name_length characters.");
-            return;
-        } else if (mb_strlen($_POST['name']) <= 0) {
-            show_info("Collection name can't be empty.");
-            return;
-        }
+            return "Collection name must be at most $max_collection_name_length characters.";
+        } else if (mb_strlen($_POST['name']) <= 0)
+            $_POST['name'] = "Unnamed collection";
 
-        $gem_amounts_parsing = $gem_amounts;
+        foreach (json_decode($collection['data']) as $row)
+            foreach ($row as $tile)
+                if ($tile != -1)
+                    $user[$tile] += 1000;
+
+        echo "b";
+        $temp_user = $user;
         $collection_data = json_decode($_POST['collection_data'], true);
         $collection_type = $collection_types[$collection['type']];
         if (gettype($collection_data) != "array")
             return;
         if (count($collection_data) != $collection_type->height)
             return;
+        echo "c";
         
-        foreach($collection_data as $row) {
+        foreach ($collection_data as $row) {
             if (gettype($row) != "array")
                 return;
             if (count($row) != $collection_type->width)
                 return;
-            foreach($row as $tile) {
+            foreach ($row as $tile) {
                 if (gettype($tile) != "integer")
                     return;
-                if (isset($gem_amounts_parsing[$tile])) {
-                    if ($gem_amounts_parsing[$tile] < 1000)
+                if (isset($temp_user[$tile]) and array_key_exists($tile, $all_gems)) {
+                    $temp_user[$tile] -= 1000;
+                    if ($temp_user[$tile] < 0)
                         return;
-                    $gem_amounts_parsing[$tile] -= 1000;
                 } else if ($tile != -1)
                     return;
             }
         }
+        echo "d";
+
+        foreach ($collection_data as $row)
+            foreach ($row as $tile)
+                if ($tile != -1)
+                    $user[$tile] -= 1000;
+        echo "e";
+        
+        foreach ($all_gems as $gem => $gem_data)
+            $dbh->prepare("UPDATE users SET `".$gem."` = ? WHERE id = ?;")
+                ->execute([$user[$gem], $user['id']]);
+
         $dbh->prepare("UPDATE collections SET data = ?, name = ?, mode = ? WHERE id = ?;")
             ->execute([json_encode($collection_data), $_POST['name'], ($_POST['mode'] == "colour" ? 1 : 0), $collection['id']]);
         redirect("/collection/view?id=".dechex($collection['id']));
     }
 
-    parse_collection();
-    show_info("Something went wrong, sorry.");
+    $err = parse_collection();
+    show_info($err == null ? "Something went wrong, sorry" : $err);
 }
 ?>
 
@@ -75,11 +90,9 @@ if (isset($_POST['collection_data'], $_POST['name'], $_POST['mode'])) {
     var gridLineWidth = 1;
     var hoverTime = 1000;
     var boxWidthFull = boxWidth + gridLineWidth;
-    var firstRender = true;
     var mode = "<?=$collection['mode'] == 0 ? "gem" : "colour"?>";
     var collectionData = JSON.parse("<?=$collection['data']?>");
-    var gemAmounts = Object.assign({}, JSON.parse("<?=json_encode($gem_amounts)?>"));
-    gemAmounts["-1"] = Infinity;
+    user["-1"] = Infinity;
     var collectionWidth = collectionData[0].length;
     var collectionHeight = collectionData.length;
     var pixelWidth = (collectionWidth * boxWidth) + ((collectionWidth - 1) * gridLineWidth);
@@ -153,11 +166,14 @@ if (isset($_POST['collection_data'], $_POST['name'], $_POST['mode'])) {
         if (mouseOnTile && selectedGem != null) {
             gemRemoving = collectionData[mousePos.y][mousePos.x];
             gemRemovingAmount = $(`#gem_${gemRemoving}_amount`);
-            gemAmounts[gemRemoving] += 1000;
-            gemRemovingAmount.html((gemAmounts[gemRemoving]/1000).toFixed(3));
+            console.log(gemRemoving);
+            console.log(user[gemRemoving])
+            user[gemRemoving] += 1000;
+            console.log(user[gemRemoving])
+            gemRemovingAmount.html((user[gemRemoving]/1000).toFixed(3));
             gemPlacingAmount = $(`#gem_${selectedGem}_amount`);
-            gemAmounts[selectedGem] -= 1000;
-            gemPlacingAmount.html((gemAmounts[selectedGem]/1000).toFixed(3));
+            user[selectedGem] -= 1000;
+            gemPlacingAmount.html((user[selectedGem]/1000).toFixed(3));
 
             collectionData[mousePos.y][mousePos.x] = selectedGem;
 
@@ -231,9 +247,6 @@ if (isset($_POST['collection_data'], $_POST['name'], $_POST['mode'])) {
             for (let column = 0; column < collectionWidth; column++) {
                 let tile = collectionData[row][column];
                 drawTile(tile, column, row);
-
-                if (firstRender)
-                    gemAmounts[tile] -= 1000;
             }
     }
 
@@ -246,7 +259,7 @@ if (isset($_POST['collection_data'], $_POST['name'], $_POST['mode'])) {
             if (mode == "colour")
                 gemDisplayer.css({"background-image": "none"});
             $("#gems").append(gemDisplayer);
-            $("#gems").append($(`<button id="gem_${gemsInfo[i.id].id}_button" class="btn btn-primary" onclick="selectGem(${gemsInfo[i.id].id})">${gemsInfo[i.id].name}: <span id="gem_${gemsInfo[i.id].id}_amount">${(gemAmounts[i.id]/1000).toFixed(3)}</span><span id="gem_${gemsInfo[i.id].id}_unit">px</button>"`));
+            $("#gems").append($(`<button id="gem_${gemsInfo[i.id].id}_button" class="btn btn-primary" onclick="selectGem(${gemsInfo[i.id].id})">${gemsInfo[i.id].name}: <span id="gem_${gemsInfo[i.id].id}_amount">${(user[i.id]/1000).toFixed(3)}</span><span id="gem_${gemsInfo[i.id].id}_unit">px</button>"`));
             correctAvailabilityClass(gemsInfo[i.id].id);
             $("#gems").append($("<br>"));
         }
@@ -292,7 +305,6 @@ if (isset($_POST['collection_data'], $_POST['name'], $_POST['mode'])) {
     }
     
     function switchDrawMode() {
-        firstRender = false;
         mode = (mode == "gem" ? "colour" : "gem");
         drawCollection();
     }

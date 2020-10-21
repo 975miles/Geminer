@@ -1,13 +1,14 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT']."/../start.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/../fn/user_button.php";
-require_once $_SERVER['DOCUMENT_ROOT']."/../fn/real_gem_amounts.php";
 
 $board_id = (isset($_GET['id']) ? intval($_GET['id']) : 0);
 srand($board_id);
 $board_size = rand(1, 256);
 $place_price = rand($board_place_min_price, $board_place_max_price);
-gen_top("Board ".$board_id, "A gem board of size".$board_size."px*".$board_size."px");
+gen_top("Board ".$board_id, "A gem board of size ".$board_size."px*".$board_size."px");
+
+$time = time();
 $board_gems = [];
 for ($y = 0; $y < $board_size; $y++) {
     $row = [];
@@ -27,6 +28,14 @@ foreach ($placements as $placement) {
 <div id="stage-parent">
     <div id="board"></div>
 </div>
+<div class="custom-control custom-checkbox custom-control-inline">
+    <input class="custom-control-input" type="checkbox" value="true" id="autoUpdateCheck" checked>
+    <label class="custom-control-label" for="autoUpdateCheck">
+        Auto-update
+    </label>
+</div>
+<button class="btn btn-sm btn-primary" onclick="toggleGrid()">Toggle gridlines</button>
+<button class="btn btn-sm btn-primary" onclick="createBoard()">Re-render board</button>
 <?php if ($is_logged_in) { ?>
 <hr>
 <div class="form-group">
@@ -46,7 +55,7 @@ $n = 0;
 foreach ($sth->fetchAll() as $placer) {
     $n++;
     ?>
-    <p><?=$n?>: <?=user_button($placer['user'])?> with <?=$placer['placements']?> gems</p>
+    <p><?=$n?>: <?=user_button($placer['user'])?> with <?=$placer['placements']?> gem<?=$placer['placements'] == 1 ? "" : "s"?></p>
 <?php } ?>
 
 
@@ -55,9 +64,7 @@ foreach ($sth->fetchAll() as $placer) {
 var boardId = <?=$board_id?>;
 var boardGems = <?=json_encode($board_gems)?>;
 var placePrice = <?=$place_price?>;
-<?php if ($is_logged_in) { ?>
-var userGems = <?=json_encode(get_real_gem_amounts())?>;
-<?php } ?>
+var fromTime = <?=$time?>;
 </script>
 <script src="/a/js/boardcontrols.js"></script>
 

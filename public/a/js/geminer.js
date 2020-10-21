@@ -1,3 +1,10 @@
+if (loggedIn) {
+    user.shifts_completed = Number(user.shifts_completed);
+    user.money = Number(user.money);
+    user.is_premium = (user.is_premium == "1" ? true : false)
+    user.is_admin = (user.is_admin == "1" ? true : false)
+}
+
 function loadGems(includeEmptite=true) {
     return new Promise((res, rej) => 
         $.getJSON("/a/data/gems.json", data => {
@@ -5,7 +12,7 @@ function loadGems(includeEmptite=true) {
                 data["-1"] = {
                     "id": -1,
                     "name": "emptite",
-                    "type": "image",
+                    "value": 0,
                     "colour": "f2e3ce"
                 };
             res(data)
@@ -16,6 +23,12 @@ function loadGems(includeEmptite=true) {
 var gemsInfo = new Promise(async res => {
     let tempGemsInfo = await loadGems();
     gemsInfo = tempGemsInfo;
+    if (loggedIn) {
+        for (let i in gemsInfo)
+            if (user[i] != undefined)
+                user[i] = Number(user[i]);
+        user["-1"] = Infinity;
+    }
     res();
 });
 
@@ -26,23 +39,28 @@ var sortedGems = new Promise(async res => {
     res();
 });
 
-function showInfo(error="Unknown error occurred.", title="Error!", removable = true) {
-    $("#infoBoxTitle").html(title);
-    $("#infoBoxContents").html(error);
-    footerExists = $("#infoBox").find(".modal-footer").length > 0 ? true : false;
-    let backdrop;
-    if (removable) {
-        backdrop = "true";
-        if (!footerExists)
-            $("#infoBox").find(".modal-content").append($(`<div class="modal-footer"><button class="btn btn-secondary" type="button" data-dismiss="modal">Dismiss (esc)</button></div>`));
-    } else {
-        backdrop = "static";
-        if (footerExists)
-            $("#infoBox").find(".modal-footer").remove();
-    }
-    //$("#infoBox").attr("data-backdrop", backdrop);
-    $("#infoBox").modal(); //show modal on page
-    $("#infoBox").data("bs.modal")._config.backdrop = backdrop;
+function showInfo(error="An error occurred.", title="Error!", removable = true) {
+    return new Promise((res, rej) => { 
+        $(document).ready(()=>{
+            $("#infoBoxTitle").html(title);
+            $("#infoBoxContents").html(error);
+            footerExists = $("#infoBox").find(".modal-footer").length > 0 ? true : false;
+            let backdrop;
+            if (removable) {
+                backdrop = "true";
+                if (!footerExists)
+                    $("#infoBox").find(".modal-content").append($(`<div class="modal-footer"><button class="btn btn-secondary" type="button" data-dismiss="modal">Dismiss (esc)</button></div>`));
+            } else {
+                backdrop = "static";
+                if (footerExists)
+                    $("#infoBox").find(".modal-footer").remove();
+            }
+            //$("#infoBox").attr("data-backdrop", backdrop);
+            $("#infoBox").modal(); //show modal on page
+            $("#infoBox").data("bs.modal")._config.backdrop = backdrop;
+            res();
+        });
+    });
 }
 
 function createToast(body="", title="!") {
@@ -53,6 +71,16 @@ function createToast(body="", title="!") {
     $("#toastArea").append(toast);
     toast.toast("show");
     return toast;
+}
+
+function timeLeft(n) {
+    let output = "";
+    if (n >= 86400)
+        output += Math.floor(n / 86400)+":";
+    if (n >= 3600)
+        output += (Math.floor((n / 3600) % 24)).toString().padStart(2, "0")+":";
+    output += (Math.floor((n / 60) % 60)).toString().padStart(2, "0")+":"+(n % 60).toString().padStart(2, "0");
+    return output;
 }
 
 //stole this from https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb oops
@@ -69,7 +97,7 @@ function replaceScript(scriptTag, html) {
     scriptTag.replaceWith(html);
 };
 
-async function genCollectionImage(data, fillPage = false) {
+async function genCollectionImage(data) {
     await gemsInfo;
     if (typeof data == "string")
         data = JSON.parse(data);
@@ -98,7 +126,7 @@ async function placeCollectionImage(scriptTag, data, fillPage = false) {
     replaceScript(scriptTag, `<img class="collection-img${(fillPage ? " fill-page" : "")}" src="${await genCollectionImage(data, fillPage)}">`);
 }
 
-async function displayGem(gemId, size=null) {
+async function displayGem(gemId, size=null, image = true) {
     await gemsInfo;
     let gem = gemsInfo[gemId];
 
@@ -106,14 +134,17 @@ async function displayGem(gemId, size=null) {
     if (size != null)
         elemClass += " gem-displayer-" + size;
 
-    let style = `background-color: #${gem.colour};background-image: url(/a/i/gem/${gem.id}.png);`;
+    let style = `background-color: #${gem.colour};${image ? `background-image: url(/a/i/gem/${gem.id}.png)` : ""};`;
 
     return `<span class="${elemClass}" style="${style}"></span>`;
 }
 
 function displayMoney(amount, extraDecimals = 0, round = "round") {
     let mult = 10 ** (extraDecimals);
-    return String(Math[round](amount*mult)/(mult*100))+currencySymbol;
+    return (Math[round](amount*mult)/(mult*100))
+        .toFixed(2+extraDecimals)
+        .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")
+        +currencySymbol;
 }
 
 function getLevel() {
@@ -133,11 +164,7 @@ function getLevel() {
     };
 };
 
-$.extend({
-    getQueryParameters : function(str = window.location.search) {
-        return str.replace(/(^\?)/,'').split("&").map(function(n){return n = n.split("="),this[n[0]] = n[1],this}.bind({}))[0];
-    }  
-});
+var query = window.location.search.replace(/(^\?)/,'').split("&").map(function(n){return n = n.split("="),this[n[0]] = n[1],this}.bind({}))[0];
 
 $(document).ready(()=>{
     $(".unix-ts").each((i, e)=>{

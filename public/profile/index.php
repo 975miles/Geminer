@@ -38,7 +38,7 @@ if (isset($_GET['user'])) {
                     show_info("You can't interact with this user. They might have blocked you or you might have interacted with them too much recently.");
             }
         }
-        gen_top($user_found['name']."'s profile");
+        gen_top(htmlentities($user_found['name'])."'s profile");
         ?>
         <?=user_background($user_found['id'])?>
         <h1>

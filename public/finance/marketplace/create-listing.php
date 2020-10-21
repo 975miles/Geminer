@@ -2,15 +2,11 @@
 require_once $_SERVER['DOCUMENT_ROOT']."/../start.php";
 gen_top("Creating a marketplace listing...");
 require_auth();
-require_once $_SERVER['DOCUMENT_ROOT']."/../fn/real_gem_amounts.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/../consts/gems.php";
-
-$real_gem_amounts = get_real_gem_amounts();
 
 function validate() {
     global $dbh;
     global $all_gems;
-    global $real_gem_amounts;
     global $user;
     $type = intval($_POST['type']);
     $amount = intval($_POST['amount']);
@@ -23,7 +19,7 @@ function validate() {
             $price = floor($price / 1000);
             //fallthrough
         case 2:
-            if ($real_gem_amounts[$gem] < $amount) return;
+            if ($user[$gem] < $amount) return;
             $dbh->prepare("UPDATE users SET `$gem` = `$gem` - ? WHERE id = ?")
                 ->execute([$amount, $user['id']]);
             break;
@@ -105,12 +101,10 @@ else if (isset($_POST['type'], $_POST['gem'], $_POST['amount'], $_POST['price'])
 <button onclick="submit()" class="btn btn-lg btn-primary">Create</button>
 
 <script>
-    var gemAmounts = JSON.parse("<?=json_encode($real_gem_amounts)?>");
-
     $(document).ready(async ()=>{
         await sortedGems;
         for (gem of sortedGems)
-            $("#gemSelect").append($(`<option style="color:#${gem.colour}" value=${gem.id}>${gem.name} - ${gemAmounts[gem.id]}mpx</option>`));
+            $("#gemSelect").append($(`<option style="color:#${gem.colour}" value=${gem.id}>${gem.name} - ${user[gem.id]}mpx</option>`));
     });
 
     function fullPrice(up, string = true) {
@@ -154,7 +148,7 @@ else if (isset($_POST['type'], $_POST['gem'], $_POST['amount'], $_POST['price'])
         switch (Number(values.type)) {
             case 2:
             case 0:
-                if (gemAmounts[values.gem] < Number(values.amount))
+                if (user[values.gem] < Number(values.amount))
                     return showInfo("You don't have enough of that gem to sell that amount.");
                 break;
             

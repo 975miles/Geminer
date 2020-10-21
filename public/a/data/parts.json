@@ -1,0 +1,28 @@
+{
+    "handle": {
+        "price": 200000,
+        "stats": [
+            "toughness",
+            "roughness"
+        ],
+        "weightModifier": 3
+    },
+
+    "head": {
+        "price": 500000,
+        "stats": [
+            "durability",
+            "strength"
+        ],
+        "weightModifier": 5
+    },
+
+    "binding": {
+        "price": 100000,
+        "stats": [
+            "hardness",
+            "luck"
+        ],
+        "weightModifier": 2
+    }
+}

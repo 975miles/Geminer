@@ -2,7 +2,6 @@
 require_once $_SERVER['DOCUMENT_ROOT']."/../start.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/../fn/user_button.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/../fn/gem_displayer.php";
-require_once $_SERVER['DOCUMENT_ROOT']."/../fn/real_gem_amounts.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/../fn/inbox/msgs_left_to_send.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/../fn/inbox/send_msg.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/../consts/gems.php";
@@ -22,7 +21,7 @@ if (isset($_GET['id'])) {
         $gem_name = $all_gems[$gem]->name;
         
         if ($is_logged_in) {
-            $user_gem_amount = get_real_gem_amounts()[$listing['gem']];
+            $user_gem_amount = $user[$listing['gem']];
         }
 
         if (isset($_POST['buy'])) {

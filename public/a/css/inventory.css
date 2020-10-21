@@ -1,0 +1,46 @@
+#inventory {
+    border: 1px solid grey;
+    background: #0e0e0e;
+    padding: 3px;
+    border-radius: 10px;
+}
+
+.inventory-item {
+    display: inline-block;
+    width: 102px;
+    height: 102px;
+    border: 1px solid white;
+    background-color: #494949;
+    padding: 0;
+    margin: 3px;
+    border-radius: 5px;
+}
+
+.inventory-item:hover {
+    background-color: #555555;
+}
+
+.inventory-item:active {
+    background-color: #646464;
+}
+
+.inventory-item-image {
+    width: 100%;
+}
+
+.inventory-item.selected {
+    background-color: #aaaaaa;
+}
+
+.inventory-item.selected:hover {
+    background-color: #c7c7c7;
+}
+
+.inventory-item.selected:active {
+    background-color: #e9e9e9;
+}
+
+.starred {
+    background-image: url(/a/i/starred.png);
+    background-size: cover;
+}

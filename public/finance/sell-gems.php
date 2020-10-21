@@ -3,10 +3,7 @@ require_once $_SERVER['DOCUMENT_ROOT']."/../start.php";
 $title = "TVWIEMWYTGI";
 $desc = "The volcano which erupts money when you throw in gems";
 require_auth();
-require_once $_SERVER['DOCUMENT_ROOT']."/../fn/real_gem_amounts.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/../consts/gems.php";
-
-$real_gem_amounts = get_real_gem_amounts();
 
 $max_marketplace_listings = ($user['is_premium'] ? $max_marketplace_listings_premium : $max_marketplace_listings_free);
 $sth = $dbh->prepare("SELECT COUNT(*) FROM marketplace_listings WHERE user = ?");
@@ -20,7 +17,7 @@ else if (isset( $_POST['gem'], $_POST['amount'])) {
         show_info("You can't throw in that much!");
     else if (!array_key_exists($gem, $all_gems))
         show_info("That gem... doesn't exist..?");
-    else if ($amount > $real_gem_amounts[$gem])
+    else if ($amount > $user[$gem])
         show_info("You don't have enough of that gem");
     else {
         $profit = floor($all_gems[$gem]->value * $amount);
@@ -28,7 +25,6 @@ else if (isset( $_POST['gem'], $_POST['amount'])) {
             ->execute([$amount, $profit, $user['id']]);
         $user['money'] += $profit;
         $user[$gem] -= $amount;
-        $real_gem_amounts[$gem] -= $amount;
         gen_top($title, $desc);
         show_info("You throw ${amount}mpx of ".$all_gems[$gem]->name." into the volcano, and it inexplicably erupts ".display_money($profit)."!", "How?!");
     }
@@ -62,8 +58,6 @@ gen_top($title, $desc);
 
 <br>
 <script>
-    var gemAmounts = JSON.parse("<?=json_encode($real_gem_amounts)?>");
-
     async function showProfit() {
         await gemsInfo;
         let gem = $("#gemSelect").val();
@@ -79,7 +73,7 @@ gen_top($title, $desc);
     $(document).ready(async ()=>{
         await sortedGems;
         for (gem of sortedGems)
-            $("#gemSelect").append($(`<option style="color:#${gem.colour}" value=${gem.id}>${gem.name} (${displayMoney(gem.value, 3)}/mpx) - you have ${gemAmounts[gem.id]}mpx</option>`));
+            $("#gemSelect").append($(`<option style="color:#${gem.colour}" value=${gem.id}>${gem.name} (${displayMoney(gem.value, 3)}/mpx) - you have ${user[gem.id]}mpx</option>`));
     });
 </script>
 

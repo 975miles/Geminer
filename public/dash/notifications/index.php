@@ -31,15 +31,28 @@ if (count($notifications) > 0) {
         $message = explode(",", $notification['message']);
         $msgs_left = msgs_left_to_send($user['id'], $notification['sender']);
         $msgs_left_from = msgs_left_to_send($notification['sender'], $user['id']);
-        if ($notification['type'] == 0)
-            $action = "sent you a message";
-        else if ($notification['type'] == 1)
-            $action = "gave you ".display_money($message[0]);
-        else if ($notification['type'] == 2)
-            //dechex($id), $listing['type'], $listing['amount'], $listing['gem'], $listing['price']
-            $action = "bought your marketplace listing (id $message[0]). ".($message[1] == 0 ? display_money($message[4]) : "$message[2]mpx of ".gem_displayer($message[3]).$all_gems[$message[3]]->name)." was ".($message[1] == 0 ? "credited" : "added")." to your account";
-        else if ($notification['type'] == 3)
-            $action = "your marketplace listing (id $message[0]) which was ".($message[1] == 2 ? "a shop selling " : "collecting ").gem_displayer($message[2]).$all_gems[$message[2]]->name.($message[1] == 2 ? " ran out of stock" : " finished collecting");
+        switch ($notification['type']) {
+            case 0:
+                $action = "sent you a message";
+                break;
+            
+            case 1:
+                $action = "gave you ".display_money($message[0]);
+                break;
+            
+            case 2:
+                //dechex($id), $listing['type'], $listing['amount'], $listing['gem'], $listing['price']
+                $action = "bought your marketplace listing (id $message[0]). ".($message[1] == 0 ? display_money($message[4]) : "$message[2]mpx of ".gem_displayer($message[3]).$all_gems[$message[3]]->name)." was ".($message[1] == 0 ? "credited" : "added")." to your account";
+                break;
+            
+            case 3:
+                $action = "your marketplace listing (id $message[0]) which was ".($message[1] == 2 ? "a shop selling " : "collecting ").gem_displayer($message[2]).$all_gems[$message[2]]->name.($message[1] == 2 ? " ran out of stock" : " finished collecting");
+                break;
+            
+            case 7:
+                $action = "entered your username as their referrer, and you both got ".display_money($message[0]);
+                break;
+        }
         ?>
         <div class="container-fluid rounded border border-dark" style="padding: 1em; overflow: hidden;<?php if ($notification['sender'] != 0) { ?> background: <?=$bg->bgshort?>; color: <?=$bg->text_colour?>;<?php } ?>">
             <div class="row ml-1">

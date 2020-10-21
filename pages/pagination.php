@@ -33,7 +33,6 @@
 
 <script>
 function goToPage(pageNum) {
-    let query = $.getQueryParameters();
     query.page = pageNum;
     window.location = window.location.pathname+"?"+$.param(query);
 }

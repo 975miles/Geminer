@@ -57,7 +57,7 @@ function get_user_by_id($user_id) {
 
 function valid_username($username) {
     global $valid_username_characters;
-    foreach(str_split($username) as $username_character)
+    foreach (str_split($username) as $username_character)
         if(strpos($valid_username_characters, $username_character) === false)
             return false;
 
@@ -103,7 +103,7 @@ function show_info($error="Unknown error occurred.", $title="Error!") {
     gen_top();
     ?>
     <script>
-        $(document).ready(()=>showInfo("<?=$error?>", "<?=$title?>")); 
+        $(document).ready(async ()=>showInfo("<?=$error?>", "<?=$title?>")); 
     </script>
     <?php
 }
@@ -128,7 +128,7 @@ function gen_very_top($title = null, $description = null) {
     global $base_shifts_per_level;
     global $energy_storage_limit_free;
     global $energy_storage_limit_premium;
-    $title = ($title == null ? "Geminer" : "Geminer - $title");
+    $title = ($title == null ? "Geminer" : "$title - Geminer");
     $page_info = Array (
         'title' => $title,
         'description' => $description,

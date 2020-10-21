@@ -68,9 +68,8 @@ $.getJSON("/a/data/collection-types.json", types => {
     let level = getLevel().level;
     for (let i in types) {
         let type = types[i];
+        let underleveled = type.level != null && type.level > level;
         if (type.premium && !user.is_premium)
-            continue;
-        if (type.level != null && type.level > level)
             continue;
         let canvas = $('<canvas id="'+i+'">')[0];
         canvas.width = type.width * fullWidth + lineWidth;
@@ -79,19 +78,20 @@ $.getJSON("/a/data/collection-types.json", types => {
         let ctx = canvas.getContext("2d");
         ctx.fillStyle = "black";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = "white";
+        ctx.fillStyle = underleveled ? "grey" : "white";
         for (let x = 0; x < canvas.width; x += fullWidth) {
             for (let y = 0; y < canvas.height; y += fullWidth) {
                 ctx.fillRect(x+lineWidth, y+lineWidth, tileWidth, tileWidth);
             }
         }
 
-        let typeDisplay = `${type.name} - ${type.width}px*${type.height}px`;
+        let typeDisplay = `${type.name} - ${type.width}px*${type.height}px${underleveled ? " - unlocks at level "+type.level : ""}`;
         let div = $(`<div><label>${typeDisplay}</label><br></div>`)
         div.append($(canvas));
         div.append("<br><br>");
         $("#sizes").append(div);
-        $("#typeSelect").append($(`<option value="${i}">${typeDisplay}</option>`));
+        if (!underleveled)
+            $("#typeSelect").append($(`<option value="${i}">${typeDisplay}</option>`));
     }
 });
 </script>

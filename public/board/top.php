@@ -26,7 +26,7 @@ foreach ($boards as $board) {
 <?php } ?>
 <hr>
 <?php
-$sth = $dbh->prepare("SELECT COUNT(1) FROM board_placements GROUP BY board");
+$sth = $dbh->prepare("SELECT COUNT(1) FROM (SELECT COUNT(1) FROM board_placements GROUP BY board)");
 $sth->execute();
 $paginator = new Paginator($sth->fetchColumn(), $boards_shown_per_page, $page_number, "(:num)");
 require $_SERVER['DOCUMENT_ROOT']."/../pages/pagination.php";

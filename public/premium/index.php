@@ -21,7 +21,7 @@ gen_top("Geminer Premium", "Details about Geminer premium");
         You already have Geminer premium.
     </h3>
     <?php } else { ?>
-        To get Geminer premium, <a class="btn btn-sm btn-primary" href="<?=$premium_purchase_url?>">buy</a> a code then <a class="btn btn-sm btn-primary" href="redeem">redeem</a> it.
+        To get Geminer premium, <a class="btn btn-sm btn-primary" href="<?=$premium_purchase_url?>">buy</a> a code then <a class="btn btn-sm btn-primary" href="/redeem">redeem</a> it.
     </h3>
     Oh? You want to know what it is you're buying before you buy what you're buying?<br>
     Fine, here.
@@ -34,17 +34,10 @@ gen_top("Geminer Premium", "Details about Geminer premium");
 <h2>Premium features</h2>
 
 <ul>
-    <?php
-    function vein_average($n) {
-        $output = 0;
-        for ($i = 1; $i <= $n; $i++)
-            $output+= $i;
-        return $output/$n;
-    }
-    ?>
-    <li>Approximately <?=vein_average($max_veins_per_mine_premium)/vein_average($max_veins_per_mine_free)?>x the amount of gems per mining shift</li>
+    <li>+<?=$energy_storage_limit_premium-$energy_storage_limit_free?></td> maximum <img src="/a/i/energy.png" class="energy-icon" alt="energy"></li>
+    <li>15 redemption codes for various items</li>
     <li>Profile badge showing when you supported Geminer</li>
-    <li>No more link nagging you to get premium in your top-right profile dropdown.</li>
+    <li>No more link nagging you to get premium in your top-right profile dropdown</li>
     <?php foreach ($extra_premium_features as $extra_premium_feature) { ?>
     <li><?=$extra_premium_feature?></li>
     <?php } ?>
@@ -63,12 +56,6 @@ gen_top("Geminer Premium", "Details about Geminer premium");
 
     <tbody>
         <tr>
-            <th scope="row">Base maximum <img src="/a/i/energy.png" class="energy-icon" alt="energy"></th>
-            <td><?=$energy_storage_limit_free?></td>
-            <td><?=$energy_storage_limit_premium?></td>
-        </tr>
-
-        <tr>
             <th scope="row">Maximum collections</th>
             <td><?=$collection_storage_limit_free?></td>
             <td><?=$collection_storage_limit_premium?></td>
@@ -84,6 +71,12 @@ gen_top("Geminer Premium", "Details about Geminer premium");
             <th scope="row">Maximum inbox size (messages stored)</th>
             <td><?=$max_inbox_size_free?></td>
             <td><?=$max_inbox_size_premium?></td>
+        </tr>
+
+        <tr>
+            <th scope="row">Maximum number of messages in inbox from each person</th>
+            <td><?=$max_messages_per_person_free?></td>
+            <td><?=$max_messages_per_person_premium?></td>
         </tr>
 
         <tr>

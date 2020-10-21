@@ -13,7 +13,10 @@
                 <a class="dropdown-item" href="/">Home</a>
                 <a class="dropdown-item" href="/announcements">Announcements</a>
                 <a class="dropdown-item" href="/contact">Contact</a>
-                <a class="dropdown-item" href="<?=$repo_url?>"><img src="/a/i/github.png"></a>
+                <a class="dropdown-item" href="/mining-masters">Mining masters</a>
+                <a class="dropdown-item" href="/gem-masters">Gem masters</a>
+                <a class="dropdown-item" href="<?=$repo_url?>"><img src="/a/i/github.png" height="32"></a>
+                <a class="dropdown-item" href="https://discord.gg/QZXyPDH"><img src="https://discord.com/assets/41484d92c876f76b20c7f746221e8151.svg" height="32"></a>
             </div>
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,22 +61,15 @@
                 <div class="dropdown-menu" aria-labelledby="dashDropdown">
                     <a class="dropdown-item" href="/dash/mining">Go to mine</a>
                     <a class="dropdown-item" href="/dash/location">All of the mines</a>
+                    <a class="dropdown-item" href="/dash/alloying">Alloying</a>
+                    <a class="dropdown-item" href="/dash/pickaxes">Pickaxes</a>
+                    <a class="dropdown-item" href="/dash/crates">Crates</a>
                     <div class="dropdown-divider"></div>
-                    <span class="dropdown-item" id="timeUntilNextRegeneration">loading...</span>
-                    <span class="dropdown-item" id="timeUntilFullRegeneration">loading...</span>
+                    <span class="dropdown-item" id="timeUntilNextRegeneration"><div class="spinner-border spinner-border-sm" role="status"><span class="sr-only"></span></div></span>
+                    <span class="dropdown-item" id="timeUntilFullRegeneration"><div class="spinner-border spinner-border-sm" role="status"><span class="sr-only"></span></div></span>
                 </div>
             </div>
             <script>
-                function toTime(n) {
-                    let output = "";
-                    if (n > 86400)
-                        output += Math.floor(n / 86400)+":";
-                    if (n > 3600)
-                        output += (Math.floor((n / 3600) % 24)).toString().padStart(2, "0")+":";
-                    output += (Math.floor((n / 60) % 60)).toString().padStart(2, "0")+":"+(n % 60).toString().padStart(2, "0");
-                    return output;
-                }
-
                 $("#energyAmount").html(user.energy);
                 $("#energyMax").html(maxEnergy);
                 $.get({
@@ -86,15 +82,15 @@
                                 var serverTime = Number(data);
                                 var secondsUntilNextEnergyRegeneration = nextEnergyRegeneration - serverTime;
                                 setInterval(() => {
-                                    if (--secondsUntilNextEnergyRegeneration == 0) {
-                                        secondsUntilNextEnergyRegeneration = energyRegenerationInterval;
+                                    if (--secondsUntilNextEnergyRegeneration < 0) {
+                                        secondsUntilNextEnergyRegeneration = energyRegenerationInterval + secondsUntilNextEnergyRegeneration;
                                         if (user.energy < maxEnergy)
                                             user.energy++;
                                         $("#energyAmount").html(user.energy);
                                     }
-                                    $('#timeUntilNextRegeneration').html("Next regeneration: "+toTime(secondsUntilNextEnergyRegeneration));
+                                    $('#timeUntilNextRegeneration').html("Next regeneration: "+timeLeft(secondsUntilNextEnergyRegeneration));
                                     secondsUntilFull = user.energy < maxEnergy ? ((energyRegenerationInterval * (maxEnergy - user.energy - 1)) + secondsUntilNextEnergyRegeneration) : 0;
-                                    $('#timeUntilFullRegeneration').html("Full regeneration: "+toTime(secondsUntilFull));
+                                    $('#timeUntilFullRegeneration').html("Full regeneration: "+timeLeft(secondsUntilFull));
                                 }, 1000);
                             }
                         });
@@ -109,6 +105,7 @@
                 <div class="dropdown-menu" aria-labelledby="financeDropdown">
                     <a class="dropdown-item" href="/finance/marketplace">Marketplace</a>
                     <a class="dropdown-item" href="/finance/sell-gems">TVWIEMWYTGI</a>
+                    <a class="dropdown-item" href="/finance/leaderboard">Leaderboard</a>
                 </div>
             </div>
             <div class="dropdown">
@@ -133,6 +130,10 @@
                     <?php } ?>
                     <?php if (!$user['is_premium']) { ?>
                     <a class="dropdown-item" href="/premium">Upgrade to a premium account</a>
+                    <?php } ?>
+                    <a class="dropdown-item" href="/redeem">Redeem code</a>
+                    <?php if (is_null($user['referred_by'])) { ?>
+                    <a class="dropdown-item" href="/about/welcome">Referral</a>
                     <?php } ?>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="/log/out?redirect_back_to=<?=$_SERVER['REQUEST_URI']?>">Logout</a>

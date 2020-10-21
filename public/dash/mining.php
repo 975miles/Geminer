@@ -3,24 +3,33 @@ require_once $_SERVER['DOCUMENT_ROOT']."/../start.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/../consts/locations.php";
 gen_top($is_logged_in ? $locations[$user['location']]->name : "The mines", "You can mine gems here");
 require_auth();
-require_once $_SERVER['DOCUMENT_ROOT']."/../fn/real_gem_amounts.php";
+
+$sth = $dbh->prepare("SELECT id, handle, head, binding, modifiers, uses, name FROM pickaxes WHERE owner = ? AND starred = 1");
+$sth->execute([$user['id']]);
+$starred_picks = $sth->fetchAll();
 ?>
+
+<link rel="stylesheet" href="/a/css/inventory.css">
 
 <h1>The Mine</h1>
 <p>You're currently in <b><?=$locations[$user['location']]->name?></b>. <a href="/dash/location">Move</a></p>
 
 <hr>
 <div style="display: inline-block">
-    <button class="btn btn-secondary" onclick="mine();">Mine</button>
-    <input id="timesToMine" style="max-width:4em" type="number" name="amount" min="1" max="1000000000" value="1" onchange="$('#miningEnergyCost').html(this.value * miningEnergyCost)">
-    <p style="display: inline-block">times (costs <span id="miningEnergyCost"><?=$mining_energy_cost?></span> <img src="/a/i/energy.png" class="energy-icon">)</p>
+    Mine
+    <input id="timesToMine" style="max-width:4em" type="number" name="amount" min="1" max="1000000000" value="1" onchange="showEnergyCost()">
+    <p style="display: inline-block">times (costs <span id="miningEnergyCost"><span class="spinner-border spinner-border-sm" role="status"><span class="sr-only"></span></span></span> <img src="/a/i/energy.png" class="energy-icon">)</p>
+    <br>
     <div class="custom-control custom-checkbox custom-control-inline">
-        <input class="custom-control-input" type="checkbox" value="true" id="animationCheck" checked>
+        <input class="custom-control-input" type="checkbox" value="true" id="animationCheck">
         <label class="custom-control-label" for="animationCheck">
             Play animation
         </label>
     </div>
 </div>
+<br>
+<br>
+<div id="inventory"></div>
 <hr>
 
 <center><h4>Level <span id="levelNum">...</span></h4></center>
@@ -39,129 +48,11 @@ require_once $_SERVER['DOCUMENT_ROOT']."/../fn/real_gem_amounts.php";
     <a class="btn btn-primary" href="/finance/sell-gems" style="margin-bottom: 0.8em">Sell gems</a>
 </div>
 
+<script src="/a/js/pickconsts.js"></script>
+<script src="/a/js/pickaxe.js"></script>
 <script>
-    var gemAmounts = JSON.parse("<?=json_encode(get_real_gem_amounts())?>");
-
-    function setXp() {
-        var level = getLevel();
-        $("#levelNum").html(level.level);
-        currentPercentage = level.shiftsInCurrentLevel / level.shiftsToNextLevel * 100;
-        $("#currentXp").css("width", currentPercentage + "%");
-        $("#currentXp").html(level.shiftsInCurrentLevel + "xp");
-        $("#xpLeft").css("width", (100 - currentPercentage) + "%");
-        $("#xpLeft").html((level.shiftsToNextLevel - level.shiftsInCurrentLevel) + "xp to level " + (level.level + 1));
-    }
-
-    $(document).ready(async ()=>{
-        setXp();
-
-        $.getJSON("/a/data/locations.json", async locations => {
-            await sortedGems;
-            var currentLocationGems = [];
-            for (i of locations[user.location].gems)
-                currentLocationGems.push(i.id);
-            let div = $("<div>");
-            let currentMineGems = $("<div id=\"currentMineGems\">");
-            currentMineGems.append("<p><button class=\"btn btn-sm btn-secondary\" onclick=\"$('#currentMineGems').slideUp()\">Hide</button>   Gems available in the current mine:</p>")
-            div.append(currentMineGems);
-            let allGems = $("<div>");
-            div.append(allGems);
-            for (i of sortedGems) {
-                let gemAmountDisplay = `<p style="display:inline-block">${await displayGem(i.id)}${i.name}: <span class="gem_${i.id}_amount">${gemAmounts[i.id]}</span>mpx&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</p>`;
-                allGems.append(gemAmountDisplay);
-                if (currentLocationGems.includes(i.id)) 
-                    currentMineGems.append(gemAmountDisplay);
-            }
-            currentMineGems.append("<hr>")
-            currentMineGems.append("<p>All gems:</p>")
-            $("#gems").html(div.html());
-        })
-    });
-
-    const miningSlides = [
-        {
-            img: "/a/i/minecart1.png",
-            title: "Travelling to mine..."
-        },
-        {
-            img: "/a/i/loading.png",
-            title: "Mining..."
-        },
-        {
-            img: "/a/i/minecart2.png",
-            title: "Returning from mine..."
-        }
-    ];
-    const defaultSlideDelay = 1500;
-    function showSlide(slideNum) {
-        let slide = miningSlides[slideNum];
-        showInfo("<img src=\""+slide.img+"\" style=\"width:5em\">", slide.title, false);
-    }
-
-    async function mine() {
-        await gemsInfo;
-        let timesToMine = Number($("#timesToMine").val());
-        if (Number($('#miningEnergyCost').html()) > user.energy)
-            return showInfo("You don't have enough energy to do that.", "Hey, wait a minute!");
-        
-        let slideDelay = $("#animationCheck").prop("checked") ? defaultSlideDelay : 0;
-        let i;
-        for (i = 0; i < miningSlides.length; i++) {
-            setTimeout(showSlide.bind(null, i), i * slideDelay);
-        }
-        
-        setTimeout(()=>{
-            $.get(
-                {
-                    url: "/api/do/mine.php?times="+timesToMine,
-                    success: async data => {
-                        data = JSON.parse(data);
-                        if (typeof data == "string")
-                            return showInfo(data);
-                        
-                        let output = "";
-                        for (i in data) {
-                            output += `${data[i]}mpx of ${await displayGem(i, "sm")}${gemsInfo[i].name}<br>`
-                            $(`.gem_${i}_amount`).each((index, e) => {
-                                e = $(e);
-                                $({ Counter: Number(e.html()) }).animate({ Counter: Number(e.html()) + data[i] }, {
-                                    duration: 200,
-                                    easing: 'swing',
-                                    step: now => e.html(Math.ceil(now))
-                                });
-                            });
-                        }
-                        let previousLevel = getLevel().level;
-                        user.shifts_completed += timesToMine;
-                        let title = "Yields of shift";
-                        if (timesToMine == 1)
-                            title += " #" + user.shifts_completed;
-                        else
-                            title += "s #" + (user.shifts_completed - (timesToMine - 1)) + "-" + user.shifts_completed
-                        
-                        showInfo(output, title);
-                        user.energy -= miningEnergyCost * timesToMine;
-                        $("#energyAmount").html(user.energy);
-                        
-                        let currentLevel = getLevel().level;
-                        setXp();
-
-                        while (previousLevel++ < currentLevel) {
-                            $("#energyMax").html(Number($("#energyMax").html()) + maxEnergyPerLevel);
-                            maxEnergy += maxEnergyPerLevel;
-                            await $.getJSON("/a/data/level-rewards.json", levelRewards => {
-                                let message = `You've reached level ${previousLevel}!`;
-                                let reward = levelRewards[previousLevel];
-                                if (reward != null)
-                                    message += "<hr>"+reward;
-                                createToast(message, "Level up!");
-                            });
-                        }
-                    }
-                }
-            );
-        }, i * slideDelay);
-    }
+var starredPicks = <?=json_encode($starred_picks)?>;
 </script>
+<script src="/a/js/dash/mining.js"></script>
 
 <?php gen_bottom(); ?>

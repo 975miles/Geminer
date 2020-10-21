@@ -1,0 +1,134 @@
+[
+    {
+        "gem": 59,
+        "contents": [
+            {
+                "gem": 49,
+                "amount": 1
+            },
+            
+            {
+                "gem": 52,
+                "amount": 1
+            }
+        ],
+        "produces": 2
+    },
+    
+    {
+        "gem": 60,
+        "contents": [
+            {
+                "gem": 51,
+                "amount": 4
+            },
+            
+            {
+                "gem": 58,
+                "amount": 1
+            }
+        ],
+        "produces": 5
+    },
+    
+    {
+        "gem": 61,
+        "contents": [
+            {
+                "gem": 50,
+                "amount": 2
+            },
+            
+            {
+                "gem": 57,
+                "amount": 1
+            }
+        ],
+        "produces": 3
+    },
+    
+    {
+        "gem": 62,
+        "contents": [
+            {
+                "gem": 53,
+                "amount": 1
+            },
+            
+            {
+                "gem": 58,
+                "amount": 3
+            }
+        ],
+        "produces": 4
+    },
+    
+    {
+        "gem": 63,
+        "contents": [
+            {
+                "gem": 56,
+                "amount": 10
+            },
+            
+            {
+                "gem": 55,
+                "amount": 3
+            },
+            
+            {
+                "gem": 51,
+                "amount": 2
+            }
+        ],
+        "produces": 15
+    },
+    
+    {
+        "gem": 64,
+        "contents": [
+            {
+                "gem": 51,
+                "amount": 2
+            },
+            
+            {
+                "gem": 57,
+                "amount": 1
+            }
+        ],
+        "produces": 3
+    },
+    
+    {
+        "gem": 65,
+        "contents": [
+            {
+                "gem": 51,
+                "amount": 9
+            },
+            
+            {
+                "gem": 55,
+                "amount": 3
+            },
+
+            {
+                "gem": 56,
+                "amount": 3
+            },
+            
+            {
+                "gem": 58,
+                "amount": 1
+            }
+        ],
+        "produces": 15
+    },
+    
+    {
+        "gem": 254,
+        "contents": [{"gem":0,"amount":1},{"gem":1,"amount":1},{"gem":2,"amount":1},{"gem":3,"amount":1},{"gem":4,"amount":1},{"gem":5,"amount":1},{"gem":6,"amount":1},{"gem":7,"amount":1},{"gem":8,"amount":1},{"gem":9,"amount":1},{"gem":10,"amount":1},{"gem":11,"amount":1},{"gem":12,"amount":1},{"gem":13,"amount":1},{"gem":14,"amount":1},{"gem":15,"amount":1},{"gem":16,"amount":1},{"gem":17,"amount":1},{"gem":18,"amount":1},{"gem":19,"amount":1},{"gem":20,"amount":1},{"gem":21,"amount":1},{"gem":22,"amount":1},{"gem":23,"amount":1},{"gem":24,"amount":1},{"gem":25,"amount":1},{"gem":26,"amount":1},{"gem":27,"amount":1},{"gem":28,"amount":1},{"gem":29,"amount":1},{"gem":30,"amount":1},{"gem":31,"amount":1},{"gem":32,"amount":1},{"gem":33,"amount":1},{"gem":34,"amount":1},{"gem":35,"amount":1},{"gem":36,"amount":1},{"gem":37,"amount":1},{"gem":38,"amount":1},{"gem":39,"amount":1},{"gem":40,"amount":1},{"gem":41,"amount":1},{"gem":42,"amount":1},{"gem":43,"amount":1},{"gem":44,"amount":1},{"gem":45,"amount":1},{"gem":46,"amount":1},{"gem":47,"amount":1},{"gem":48,"amount":1},{"gem":49,"amount":1},{"gem":50,"amount":1},{"gem":51,"amount":1},{"gem":52,"amount":1},{"gem":53,"amount":1},{"gem":54,"amount":1},{"gem":55,"amount":1},{"gem":56,"amount":1},{"gem":57,"amount":1},{"gem":58,"amount":1},{"gem":59,"amount":1},{"gem":60,"amount":1},{"gem":61,"amount":1},{"gem":62,"amount":1},{"gem":63,"amount":1},{"gem":64,"amount":1},{"gem":65,"amount":1},{"gem":66,"amount":1},{"gem":67,"amount":1},{"gem":68,"amount":1},{"gem":69,"amount":1},{"gem":70,"amount":1},{"gem":71,"amount":1},{"gem":72,"amount":1},{"gem":73,"amount":1},{"gem":74,"amount":1},{"gem":75,"amount":1},{"gem":76,"amount":1},{"gem":77,"amount":1},{"gem":78,"amount":1},{"gem":79,"amount":1},{"gem":80,"amount":1},{"gem":81,"amount":1},{"gem":82,"amount":1},{"gem":83,"amount":1},{"gem":84,"amount":1},{"gem":85,"amount":1},{"gem":86,"amount":1},{"gem":87,"amount":1},{"gem":88,"amount":1},{"gem":89,"amount":1},{"gem":90,"amount":1},{"gem":91,"amount":1},{"gem":92,"amount":1},{"gem":93,"amount":1},{"gem":94,"amount":1},{"gem":95,"amount":1},{"gem":96,"amount":1},{"gem":97,"amount":1},{"gem":98,"amount":1},{"gem":99,"amount":1},{"gem":100,"amount":1},{"gem":101,"amount":1},{"gem":102,"amount":1},{"gem":103,"amount":1},{"gem":104,"amount":1},{"gem":105,"amount":1},{"gem":106,"amount":1},{"gem":107,"amount":1},{"gem":108,"amount":1},{"gem":109,"amount":1},{"gem":110,"amount":1},{"gem":111,"amount":1},{"gem":112,"amount":1},{"gem":113,"amount":1},{"gem":114,"amount":1},{"gem":115,"amount":1},{"gem":116,"amount":1},{"gem":117,"amount":1},{"gem":118,"amount":1},{"gem":119,"amount":1},{"gem":120,"amount":1},{"gem":121,"amount":1},{"gem":122,"amount":1},{"gem":123,"amount":1},{"gem":124,"amount":1},{"gem":125,"amount":1},{"gem":126,"amount":1},{"gem":127,"amount":1},{"gem":128,"amount":1},{"gem":129,"amount":1},{"gem":130,"amount":1},{"gem":131,"amount":1},{"gem":132,"amount":1},{"gem":133,"amount":1},{"gem":134,"amount":1},{"gem":135,"amount":1},{"gem":136,"amount":1},{"gem":137,"amount":1},{"gem":138,"amount":1},{"gem":139,"amount":1},{"gem":140,"amount":1},{"gem":141,"amount":1},{"gem":142,"amount":1},{"gem":143,"amount":1},{"gem":144,"amount":1},{"gem":145,"amount":1},{"gem":146,"amount":1},{"gem":147,"amount":1},{"gem":148,"amount":1},{"gem":149,"amount":1},{"gem":150,"amount":1},{"gem":151,"amount":1},{"gem":152,"amount":1},{"gem":153,"amount":1},{"gem":154,"amount":1},{"gem":155,"amount":1},{"gem":156,"amount":1},{"gem":157,"amount":1},{"gem":158,"amount":1},{"gem":159,"amount":1},{"gem":160,"amount":1},{"gem":161,"amount":1},{"gem":162,"amount":1},{"gem":163,"amount":1},{"gem":164,"amount":1},{"gem":165,"amount":1},{"gem":166,"amount":1},{"gem":167,"amount":1},{"gem":168,"amount":1},{"gem":169,"amount":1},{"gem":170,"amount":1},{"gem":171,"amount":1},{"gem":172,"amount":1},{"gem":173,"amount":1},{"gem":174,"amount":1},{"gem":175,"amount":1},{"gem":176,"amount":1},{"gem":177,"amount":1},{"gem":178,"amount":1},{"gem":179,"amount":1},{"gem":180,"amount":1},{"gem":181,"amount":1},{"gem":182,"amount":1},{"gem":183,"amount":1},{"gem":184,"amount":1},{"gem":185,"amount":1},{"gem":186,"amount":1},{"gem":187,"amount":1},{"gem":188,"amount":1},{"gem":189,"amount":1},{"gem":190,"amount":1},{"gem":191,"amount":1},{"gem":192,"amount":1},{"gem":193,"amount":1},{"gem":194,"amount":1},{"gem":195,"amount":1},{"gem":196,"amount":1},{"gem":197,"amount":1},{"gem":198,"amount":1},{"gem":199,"amount":1},{"gem":200,"amount":1},{"gem":201,"amount":1},{"gem":202,"amount":1},{"gem":203,"amount":1},{"gem":204,"amount":1},{"gem":205,"amount":1},{"gem":206,"amount":1},{"gem":207,"amount":1},{"gem":208,"amount":1},{"gem":209,"amount":1},{"gem":210,"amount":1},{"gem":211,"amount":1},{"gem":212,"amount":1},{"gem":213,"amount":1},{"gem":214,"amount":1},{"gem":215,"amount":1},{"gem":216,"amount":1},{"gem":217,"amount":1},{"gem":218,"amount":1},{"gem":219,"amount":1},{"gem":220,"amount":1},{"gem":221,"amount":1},{"gem":222,"amount":1},{"gem":223,"amount":1},{"gem":224,"amount":1},{"gem":225,"amount":1},{"gem":226,"amount":1},{"gem":227,"amount":1},{"gem":228,"amount":1},{"gem":229,"amount":1},{"gem":230,"amount":1},{"gem":231,"amount":1},{"gem":232,"amount":1},{"gem":233,"amount":1},{"gem":234,"amount":1},{"gem":235,"amount":1},{"gem":236,"amount":1},{"gem":237,"amount":1},{"gem":238,"amount":1},{"gem":239,"amount":1},{"gem":240,"amount":1},{"gem":241,"amount":1},{"gem":242,"amount":1},{"gem":243,"amount":1},{"gem":244,"amount":1},{"gem":245,"amount":1},{"gem":246,"amount":1},{"gem":247,"amount":1},{"gem":248,"amount":1},{"gem":249,"amount":1},{"gem":250,"amount":1},{"gem":251,"amount":1},{"gem":252,"amount":1},{"gem":253,"amount":1}],
+        "produces": 1
+    }
+]

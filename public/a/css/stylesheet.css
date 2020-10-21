@@ -123,7 +123,20 @@ a {
     color: black !important;
 }
 
-@keyframes darken {
-    from {filter: brightness(100%);}
-    to {filter: brightness(80%);}
+.card {
+    width: 15em;
+    margin-bottom: 1em;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.card-img-top {
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+}
+
+#toastArea {
+    padding: 0 !important;
+    z-index: 10;
 }

@@ -12,8 +12,9 @@ if ($looking_for > $size_max)
 for ($id = 0; $id < PHP_INT_MAX; $id++) {
     srand($id);
     $board_size = rand($size_min, $size_max);
+    //$place_price = rand($board_place_min_price, $board_place_max_price);
     if ($board_size == $looking_for)
-        die($id);
+        die(print_r($id));
     srand(-$id);
     $board_size = rand($size_min, $size_max);
     if ($board_size == $looking_for)

@@ -1,22 +1,24 @@
 # [Geminer](https://pastebin.com/raw/9gJBUfGp)
 ### Geminer is a number simulator where users mine, sell, and decorate virtual canvases with gems.
 
-**Note**: The code on this repository may be ahead of what you see on [the main site](https://pastebin.com/raw/9gJBUfGp), but [the PTR](https://geminer-ptr.flynna.uk) will most likely be up-to-date with this repository.
+**Note**: This ain't out yet. Check out the [beta](https://geminer-ptr.flynna.uk) for a demo.
 
 Below are instructions on how to set up Geminer for testing purposes or whatever else.
 
 # Setup
 ## Requirements
 I dunno lol
-- php 7 or something i think with pdo-sqlite and maybe some more stuff idk
-- composer
+- php 7.3+
+- [composer](https://getcomposer.org/)
 - sqlite3
+- pdo-sqlite3
+- [mbstring](https://www.php.net/manual/en/mbstring.installation.php)
 
 ## Instructions
 Do these and you'll be good to go.
 1. Navigate to the Geminer directory
 2. Copy `config/config.example.php` to `config/config.php` and edit whatever you need within the file
-3. [Run `composer install`](https://getcomposer.org/)
+3. Run `composer install`
 4. Run `sqlite3 data.db` then do `.read createdb.sql`
 5. Set up a web server using the `public` directory as the root
 6. Configure the web server so that php files can be accessed without the ".php" extension (e.g. `/announcements.php` can be viewed from `/announcements`)

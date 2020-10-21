@@ -33,15 +33,6 @@ if (isset($_POST['location']) and $is_logged_in and $user['location'] != $_POST[
     <?php }?>
 </p>
 
-<style>
-    .card {
-        width: 18rem;
-        margin-bottom: 1em;
-        display: inline-block;
-        vertical-align: top;
-    }
-</style>
-
 <div id="locations">
     <div class="spinner-border" role="status"><span class="sr-only"></span></div>
 </div>
@@ -66,7 +57,7 @@ if (isset($_POST['location']) and $is_logged_in and $user['location'] != $_POST[
                 locationCardBody.append('<hr style="margin:0">');
                 locationCardBody.append(await displayGem(gem.id, "sm"));
                 let percentage = 100 * gem.chance / totalGemChance;
-                locationCardBody.append(`<span>${gemsInfo[gem.id].name} (${percentage.toFixed(2)}%)</span>`);
+                locationCardBody.append(`<span>${gemsInfo[gem.id].name} (${percentage.toFixed(2)}%) - L${gem.level}</span>`);
             }
             if (loggedIn) {
                 locationCardBody.append('<hr style="margin-top:0">');

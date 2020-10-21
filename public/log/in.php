@@ -53,7 +53,7 @@ if (count($results) == 0) {
         ->execute([$id, $name]);
 
     $user_id_found = $dbh->lastInsertId();
-    $_GET['redirect_back_to'] = "/about/welcome.php";
+    $_GET['redirect_back_to'] = "/about/welcome";
 } else
     $user_id_found = $results[0]['id'];
 
