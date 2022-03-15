@@ -1,7 +1,7 @@
 # [Geminer](https://pastebin.com/raw/9gJBUfGp)
 ### Geminer is a number simulator where users mine, sell, and decorate virtual canvases with gems.
 
-**Note**: This ain't out yet. Check out the [beta](https://geminer-ptr.flynna.uk) for a demo.
+**Note**: This ain't out yet. Check out the [beta](https://geminer-beta.ocean.lol) for a demo.
 
 Below are instructions on how to set up Geminer for testing purposes or whatever else.
 
